@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns="http://www.w3.org/1999/xhtml"
+  version="3.0" exclude-result-prefixes="xs rng">
+  
+  <xsl:output method="xhtml"/>
+
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>RNG List</title>
+        <meta charset="utf-8"/>
+      </head>
+      <body>
+        <xsl:variable name="element-defines" as="element(rng:define)*"
+          select="descendant::rng:define[rng:element]
+                                        [not(starts-with(@name, 'mml.'))
+                                         or
+                                         @name = 'mml.math']"/>
+        <h2>Elements</h2>
+        <ul>
+          <xsl:apply-templates select="$element-defines" mode="li">
+            <xsl:sort select="rng:normalize-sortkey(@name)"/>
+          </xsl:apply-templates>
+        </ul>
+        <h2>Attributes</h2>
+        <ul>
+          <xsl:for-each-group select="descendant::rng:attribute[not(contains(base-uri(), '/mathml'))]" group-by="@name">
+            <xsl:sort select="rng:normalize-sortkey(current-grouping-key())"/>
+            <xsl:apply-templates select="." mode="li"/>
+          </xsl:for-each-group>
+        </ul>
+        <h2>Parameter Entities</h2>
+        <ul>
+          <xsl:variable name="ents" as="element(html:li)*">
+            <xsl:apply-templates 
+              select="descendant::rng:define[empty(rng:element)]
+                                            [not(ends-with(@name, '-attlist'))]
+                                            [not(contains(@name, 'mml'))]
+                                            [not(contains(base-uri(), '/mathml'))]" mode="li">
+<!--              <xsl:sort select="lower-case(@name)"/>-->
+              <xsl:sort select="replace(lower-case(@name), '\.', '-')"/>
+<!--              <xsl:sort select="generate-id()"/>-->
+<!--              <xsl:sort select="rng:normalize-sortkey(@name)"/>-->
+              <xsl:with-param name="prefix" as="xs:string" select="'%'"/>
+            </xsl:apply-templates>  
+          </xsl:variable>
+          <xsl:sequence select="$ents"/>
+          <xsl:result-document href="parameter-entities.txt" method="text">
+            <xsl:sequence select="string-join($ents, '&#xa;')"/>
+          </xsl:result-document>
+        </ul>
+      </body>
+    </html>
+  </xsl:template>
+  
+  <xsl:function name="rng:normalize-sortkey" as="xs:string">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="replace(
+                            lower-case($input),
+                            '\p{P}',
+                            ''
+                          )"/>
+  </xsl:function>
+  
+  <xsl:template match="rng:define" mode="li">
+    <xsl:param name="prefix" as="xs:string?"/>
+    <li>
+      <xsl:value-of select="$prefix || @name"/>
+    </li>
+  </xsl:template>
+  
+  <xsl:template match="rng:attribute" mode="li">
+    <li>
+      <xsl:value-of select="'@' || @name"/>
+    </li>
+  </xsl:template>
+
+</xsl:stylesheet>
