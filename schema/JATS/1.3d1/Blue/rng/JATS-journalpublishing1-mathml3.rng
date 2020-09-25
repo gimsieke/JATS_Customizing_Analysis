@@ -377,13 +377,13 @@
   <start>
     <choice>
       <ref name="article"/>
-      <ref name="rp"/>
+      <!--<ref name="rp"/>
       <ref name="overline-start"/>
       <ref name="unstructured-kwd-group"/>
       <ref name="underline-end"/>
       <ref name="underline-start"/>
       <ref name="x"/>
-      <ref name="overline-end"/>
+      <ref name="overline-end"/>-->
     </choice>
   </start>
 </grammar>
