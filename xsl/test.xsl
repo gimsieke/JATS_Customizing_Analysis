@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:jats="http://jats.nlm.nih.gov"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   exclude-result-prefixes="#all">
@@ -14,20 +15,68 @@
       select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[1]"/>
     <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>
-    <customizings>
-      <xsl:for-each select="$element-lists">
-        <xsl:variable name="outer" as="element(xhtml:ul)" select="."/>
-        <customizing name="{xhtml:notdir(base-uri($outer))}" element-count="{count(xhtml:li)}">
-          <xsl:for-each select="$element-lists except $outer">
-            <xsl:variable name="inner" as="element(xhtml:ul)" select="."/>
-            <elements not-in="{xhtml:notdir(base-uri($inner))}">
-              <xsl:value-of select="$outer/xhtml:li[not(. = $inner/xhtml:li)]"/>
-            </elements>
-          </xsl:for-each>  
-        </customizing>
-      </xsl:for-each>
-    </customizings>
+    <xsl:variable name="customizations" as="document-node(element(customizations))">
+      <xsl:document>
+        <customizations>
+          <xsl:for-each select="$element-lists">
+            <xsl:variable name="outer" as="element(xhtml:ul)" select="."/>
+            <customization name="{xhtml:notdir(base-uri($outer))}" element-count="{count(xhtml:li)}">
+              <xsl:for-each select="$element-lists except $outer">
+                <xsl:variable name="inner" as="element(xhtml:ul)" select="."/>
+                <xsl:variable name="not-in" as="element(xhtml:li)*" select="$outer/xhtml:li[not(. = $inner/xhtml:li)]"/>
+                <elements not-in="{xhtml:notdir(base-uri($inner))}" count="{count($not-in)}">
+                  <xsl:value-of select="$not-in"/>
+                </elements>
+              </xsl:for-each>
+            </customization>
+          </xsl:for-each>
+        </customizations>
+      </xsl:document>  
+    </xsl:variable>
+    <xsl:apply-templates select="$customizations" mode="compute"/>
+    <!--<xsl:variable name="element-additions" as="map(xs:string, xs:integer)">
+      <xsl:apply-templates select="$customizations" mode="additions-map">
+        <xsl:with-param name="type" as="xs:string" tunnel="yes" select="'elements'"/>
+      </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:value-of select="serialize($element-additions, map{'method':'json'})"/>-->
+  </xsl:template>
+  
+  <xsl:mode name="compute" on-no-match="shallow-copy"/>
+  
+  <xsl:key name="ij" match="customization/*[@not-in]" use="string-join((@not-in, ../@name), ',')"></xsl:key>
     
+  <xsl:template match="customization/*[@not-in]" mode="compute">
+    <xsl:variable name="a_ij" as="xs:integer" select="@count"/>
+    <xsl:variable name="a_ji" as="xs:integer" select="key('ij', string-join((../@name, @not-in), ','))/@count"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:variable name="distance" select="$a_ij + $a_ji" as="xs:integer"/>
+      <xsl:attribute name="distance" select="$distance"/>
+      <xsl:if test="$distance gt 0">
+        <xsl:variable name="supersetticity1" select="$a_ji - $a_ij" as="xs:integer"/>
+        <xsl:variable name="supersetticity2" select="$a_ji div (1 + $a_ij)" as="xs:double"/>
+        <xsl:variable name="q1" as="xs:double" select="$supersetticity1 div $distance"/>
+        <xsl:variable name="q2" as="xs:double" select="$supersetticity2 div $distance"/>
+        <xsl:attribute name="s1" select="$supersetticity1"/>
+        <xsl:attribute name="s2" select="format-number($supersetticity2, '.##')"/>
+        <xsl:attribute name="q1" select="format-number($q1, '.##')"/>
+        <xsl:attribute name="q2" select="format-number($q2, '.##')"/>
+      </xsl:if>
+      <xsl:apply-templates mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  
+  <xsl:template match="customizations" mode="additions-map">
+    <xsl:param name="type" as="xs:string" tunnel="yes"/>
+    <xsl:map>
+      <xsl:apply-templates select="customization/*[name() = $type]" mode="#current"/>
+    </xsl:map>
+  </xsl:template>
+  
+  <xsl:template match="elements" mode="additions-map">
+    <xsl:map-entry key="@not-in || ',' || ../@name" select="xs:integer(@count)"/>
   </xsl:template>
   
   <xsl:function name="xhtml:notdir" as="xs:string">
