@@ -17,7 +17,7 @@
         <customizations>
           <xsl:for-each select="$element-lists">
             <xsl:variable name="outer" as="element(xhtml:ul)" select="."/>
-            <customization name="{xhtml:notdir(base-uri($outer))}" elements="{count(xhtml:li)}">
+            <customization name="{xhtml:notdir(base-uri($outer))}" items="{count(xhtml:li)}">
               <xsl:for-each select="$element-lists except $outer">
                 <xsl:variable name="inner" as="element(xhtml:ul)" select="."/>
                 <xsl:variable name="not-in" as="element(xhtml:li)*" select="$outer/xhtml:li[not(. = $inner/xhtml:li)]"/>
@@ -42,13 +42,14 @@
       <!-- Elements of the current customization that are not in the customization referenced by @not-in.
       If this is 0, then the @not-in customization is a superset of the current. -->
     </xsl:variable>
-    <xsl:variable name="a_ji" as="xs:integer" select="key('ij', string-join((../@name, @not-in), ','))/@count"/>
+    <xsl:variable name="ji" as="element(*)" select="key('ij', string-join((../@name, @not-in), ','))"/>
+    <xsl:variable name="a_ji" as="xs:integer" select="$ji/@count"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:variable name="distance" select="$a_ij + $a_ji" as="xs:integer"/>
       <xsl:attribute name="distance" select="$distance"/>
       <xsl:if test="$distance gt 0">
-        <xsl:variable name="total" as="xs:double" select="../@*[name() = name(current())]">
+        <xsl:variable name="total" as="xs:double" select="../@items">
           <!-- ../@elements for name(current()) = 'elements' -->
         </xsl:variable>
         <xsl:variable name="r_ij" as="xs:double" select="$a_ij"/>
@@ -83,7 +84,7 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
 
   <xsl:function name="xhtml:notdir" as="xs:string">
     <xsl:param name="uri" as="xs:string"/>
-    <xsl:sequence select="tokenize($uri, '/')[last()] => replace('_expanded', '')"/>
+    <xsl:sequence select="tokenize($uri, '/')[last()] => replace('_expanded', '') => replace('\.xhtml', '')"/>
   </xsl:function>
 
 </xsl:stylesheet>
