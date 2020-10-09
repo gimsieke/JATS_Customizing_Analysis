@@ -18,9 +18,9 @@
       <body>
         <xsl:variable name="element-defines" as="element(rng:define)*"
           select="descendant::rng:define[rng:element]
-                                        [not(starts-with(@name, 'mml.'))
+                                        (:[not(starts-with(@name, 'mml.'))
                                          or
-                                         @name = 'mml.math']"/>
+                                         @name = 'mml.math']:)"/>
         <h2>Elements</h2>
         <ul>
           <xsl:apply-templates select="$element-defines" mode="li">
@@ -66,6 +66,13 @@
                             ''
                           )"/>
   </xsl:function>
+  
+  <xsl:template match="rng:define[rng:element]" mode="li">
+    <xsl:param name="prefix" as="xs:string?"/>
+    <li>
+      <xsl:value-of select="$prefix || rng:element/@name"/>
+    </li>
+  </xsl:template>
   
   <xsl:template match="rng:define" mode="li">
     <xsl:param name="prefix" as="xs:string?"/>
