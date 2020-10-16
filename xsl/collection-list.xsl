@@ -10,8 +10,11 @@
   <xsl:param name="base-dir-uri" as="xs:string"/>
 
   <xsl:template name="main">
+    <xsl:message select="'UUUUUUUUUUUUUUUU ', uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')[16]
+      "></xsl:message>
     <xsl:variable name="xml-docs" as="document-node()*"
-      select="collection($base-dir-uri || '?recurse=yes;select=*.xml')"/>
+      select="uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')[position() = (16 to 17)] 
+                ! (unparsed-text(.) => replace('&lt;!DOCTYPE.+?>', ' ', 's') => replace('&amp;\i\c*;', '') => parse-xml())"/>
     <html>
       <head>
         <title>Collection analysis of
