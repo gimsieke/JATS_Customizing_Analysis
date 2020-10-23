@@ -16,14 +16,19 @@
       <xsl:document>
         <customizations>
           <xsl:for-each select="$element-lists">
-            <xsl:variable name="outer" as="element(xhtml:ul)" select="."/>
-            <customization name="{xhtml:notdir(base-uri($outer))}" items="{count(xhtml:li)}">
-              <xsl:for-each select="$element-lists except $outer">
-                <xsl:variable name="inner" as="element(xhtml:ul)" select="."/>
-                <xsl:variable name="not-in" as="element(xhtml:li)*" select="$outer/xhtml:li[not(. = $inner/xhtml:li)]"/>
-                <elements not-in="{xhtml:notdir(base-uri($inner))}" count="{count($not-in)}">
+            <xsl:variable name="outer-element-list" as="element(xhtml:ul)" select="."/>
+            <xsl:variable name="outer-attribute-list" as="element(xhtml:ul)" select="$outer-element-list/following-sibling::xhtml:ul[1]"/>
+            <customization name="{xhtml:notdir(base-uri($outer-element-list))}" items="{count(xhtml:li)}">
+              <xsl:for-each select="$element-lists except $outer-element-list">
+                <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
+                <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/following-sibling::xhtml:ul[1]"/>
+                <xsl:variable name="not-in" as="element(xhtml:li)*" 
+                  select="$outer-element-list/xhtml:li[not(. = $inner-element-list/xhtml:li)]
+                          union
+                          $outer-attribute-list/xhtml:li[not(. = $inner-attribute-list/xhtml:li)]"/>
+                <items not-in="{xhtml:notdir(base-uri($inner-element-list))}" count="{count($not-in)}">
                   <xsl:value-of select="$not-in"/>
-                </elements>
+                </items>
               </xsl:for-each>
             </customization>
           </xsl:for-each>
@@ -35,6 +40,9 @@
     </xsl:variable>
     <xsl:result-document href="{$base-dir-uri}/customizations.xml">
       <xsl:sequence select="$computed-s-q"/>
+    </xsl:result-document>
+    <xsl:result-document href="{$base-dir-uri}/customizations0.xml">
+      <xsl:sequence select="$customizations"/>
     </xsl:result-document>
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$computed-s-q" mode="html-table"/>
@@ -61,7 +69,6 @@
       <xsl:attribute name="distance" select="$distance"/>
       <xsl:if test="$distance gt 0">
         <xsl:variable name="total" as="xs:double" select="../@items">
-          <!-- ../@elements for name(current()) = 'elements' -->
         </xsl:variable>
         <xsl:variable name="r_ij" as="xs:double" select="$a_ij"/>
         <xsl:variable name="r_ji" as="xs:double" select="$a_ji div $distance"/>
@@ -152,8 +159,8 @@ td, th {
                 </th>
                 <xsl:for-each select="$all-customizings">
                   <xsl:variable name="inner" as="xs:string" select="."/>
-                  <xsl:variable name="stats-item" as="element(elements)?" 
-                    select="$context/customization[@name = $outer]/elements[@not-in = $inner]"/>
+                  <xsl:variable name="stats-item" as="element(items)?" 
+                    select="$context/customization[@name = $outer]/items[@not-in = $inner]"/>
                   <td>
                     <p>
                       <xsl:value-of select="'s5=' || $stats-item/@s5"/>
