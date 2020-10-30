@@ -13,7 +13,7 @@
     <xsl:message select="'UUUUUUUUUUUUUUUU ', uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')[16]
       "></xsl:message>
     <xsl:variable name="xml-docs" as="document-node()*"
-      select="uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')[position() = (16 to 17)] 
+      select="uri-collection($base-dir-uri || '?recurse=yes;select=*.xml') 
                 ! (unparsed-text(.) => replace('&lt;!DOCTYPE.+?>', ' ', 's') => replace('&amp;\i\c*;', '') => parse-xml())"/>
     <html>
       <head>
@@ -35,7 +35,7 @@
         <ul>
           <xsl:for-each select="sort(distinct-values($xml-docs//@*/name()))">
             <li>
-              <xsl:value-of select="."/>
+              <xsl:value-of select="'@' || ."/>
             </li>
           </xsl:for-each>
         </ul>
