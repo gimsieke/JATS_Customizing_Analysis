@@ -35,17 +35,23 @@
         </customizations>
       </xsl:document>
     </xsl:variable>
+    <xsl:result-document href="{$base-dir-uri}/debug/0_customizations.xml">
+      <xsl:sequence select="$customizations"/>
+    </xsl:result-document>
     <xsl:variable name="computed-s-q" as="document-node(element(customizations))">
       <xsl:apply-templates select="$customizations" mode="compute"/>
     </xsl:variable>
-    <xsl:result-document href="{$base-dir-uri}/customizations.xml">
+    <xsl:result-document href="{$base-dir-uri}/debug/1_computed-s-q.xml">
       <xsl:sequence select="$computed-s-q"/>
     </xsl:result-document>
-    <xsl:result-document href="{$base-dir-uri}/customizations0.xml">
-      <xsl:sequence select="$customizations"/>
+    <xsl:variable name="minmax" as="document-node(element(customizations))">
+      <xsl:apply-templates select="$computed-s-q" mode="minmax"/>
+    </xsl:variable>
+    <xsl:result-document href="{$base-dir-uri}/debug/2_minmax.xml">
+      <xsl:sequence select="$minmax"/>
     </xsl:result-document>
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
-      <xsl:apply-templates select="$computed-s-q" mode="html-table"/>
+      <xsl:apply-templates select="$minmax" mode="html-table"/>
     </xsl:variable>
     <xsl:result-document href="{$base-dir-uri}/customizations.xhtml" method="xhtml">
       <xsl:sequence select="$html-table"/>
@@ -53,6 +59,8 @@
   </xsl:template>
 
   <xsl:mode name="compute" on-no-match="shallow-copy"/>
+
+  <xsl:mode name="minmax" on-no-match="shallow-copy"/>
 
   <xsl:key name="ij" match="customization/*[@not-in]" use="string-join((@not-in, ../@name), ',')"/>
 
@@ -98,6 +106,11 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
       <xsl:apply-templates mode="#current"/>
     </xsl:copy>
   </xsl:template>
+  
+  <xsl:template match="customization/@name" mode="minmax">
+    <xsl:next-match/>
+    <xsl:attribute name="max_q5" select="max(../items/@q5)"/>
+  </xsl:template>
 
   <xsl:function name="xhtml:notdir" as="xs:string">
     <xsl:param name="uri" as="xs:string"/>
@@ -136,6 +149,9 @@ table {
 td, th {
   border: 1px solid black;
 }
+.max {
+  background-color: #9f9;
+}
           </style>
         </head>
         <body>
@@ -154,14 +170,20 @@ td, th {
             <xsl:for-each select="$all-customizings">
               <tr>
                 <xsl:variable name="outer" select="." as="xs:string"/>
+                <xsl:variable name="outer-customization" as="element(customization)" 
+                  select="$context/customization[@name = $outer]"/>
+                <xsl:variable name="max-q5" as="xs:string" select="$outer-customization/@max_q5"/>
                 <th>
                   <xsl:value-of select="."/>
                 </th>
                 <xsl:for-each select="$all-customizings">
                   <xsl:variable name="inner" as="xs:string" select="."/>
                   <xsl:variable name="stats-item" as="element(items)?" 
-                    select="$context/customization[@name = $outer]/items[@not-in = $inner]"/>
+                    select="$outer-customization/items[@not-in = $inner]"/>
                   <td>
+                    <xsl:if test="$stats-item/@q5 = $max-q5">
+                      <xsl:attribute name="class" select="'max'"/>
+                    </xsl:if>
                     <p>
                       <xsl:value-of select="'s5=' || $stats-item/@s5"/>
                     </p>
