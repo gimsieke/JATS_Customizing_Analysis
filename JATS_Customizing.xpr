@@ -14,127 +14,7 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3_expanded_expanded.xhtml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>rng-list</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3_expanded_expanded.rng</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>rng-list</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/rng-list.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>rng-expand-includes</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>rng-expand-includes</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/test.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>test</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/collection-list.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>collection-list</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3_expanded.rng</String>
+                                    <String>schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3_expanded.rng</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -174,11 +54,151 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>xsl/test.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>test</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3_expanded_expanded.rng</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-list</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3_expanded.rng</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-expand-refs</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-expand-includes</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/rng-list.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-expand-includes</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/collection-list.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>collection-list</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>xsl/rng-expand-refs.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
                                         <String>rng-expand-refs</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3_expanded_expanded.xhtml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-list</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -279,26 +299,6 @@
                                 <field name="scenarioIds">
                                     <list>
                                         <String>rng-list</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3_expanded.rng</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>rng-expand-refs</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -962,6 +962,7 @@
     <projectTree name="JATS_Customizing.xpr">
         <folder masterFiles="true" name="Master Files">
             <file name="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng"/>
+            <file name="schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng"/>
         </folder>
         <folder path="."/>
     </projectTree>
