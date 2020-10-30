@@ -29,7 +29,7 @@
         </ul>
         <h2>Attributes</h2>
         <ul>
-          <xsl:for-each-group select="descendant::rng:attribute[not(contains(base-uri(), '/mathml'))]" group-by="@name">
+          <xsl:for-each-group select="descendant::rng:attribute" group-by="@name">
             <xsl:sort select="rng:normalize-sortkey(current-grouping-key())"/>
             <xsl:apply-templates select="." mode="li"/>
           </xsl:for-each-group>
