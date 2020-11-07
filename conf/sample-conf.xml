@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customization-stats>
+  <rng uri="schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng" name="Blue"/>
+  <rng uri="schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3.rng" name="Green"/>
+  <rng uri="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng" name="Pumpkin"/>
+  <collection uri="../SO-plus-degruyter/" name="ScienceOpen-plus-deGruyter-sample"/>
+  <collection uri="../SO-plus-degruyter/WdG/" name="deGruyter-sample"/>
+  <collection uri="../SO-plus-degruyter/SO/Humanities_SocialSciences/" name="ScienceOpen_Humanities_Social"/>
+  <collection uri="../SO-plus-degruyter/SO/Science/" name="ScienceOpen_Science"/>
+</customization-stats>
