@@ -9,11 +9,20 @@
   
   <xsl:output method="xhtml"/>
 
+  <xsl:param name="name" as="xs:string?"/>
+  <xsl:param name="storage-location" as="xs:string?"/>
+
   <xsl:template match="/">
     <html>
       <head>
         <title>RNG List</title>
         <meta charset="utf-8"/>
+        <xsl:if test="$name">
+          <meta name="customization-name" content="{$name}"/>
+        </xsl:if>
+        <xsl:if test="$storage-location">
+          <meta name="storage-location" content="{$storage-location}"/>
+        </xsl:if>
       </head>
       <body>
         <xsl:variable name="element-defines" as="element(rng:define)*"

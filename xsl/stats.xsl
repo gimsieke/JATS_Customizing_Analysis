@@ -5,11 +5,12 @@
 
   <xsl:output indent="yes" method="xml"/>
 
-  <xsl:param name="base-dir-uri" as="xs:string"/>
+  <xsl:param name="base-dir-uri" as="xs:string?"/>
+
+  <xsl:param name="html-docs" as="document-node()*"
+    select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
 
   <xsl:template name="main">
-    <xsl:variable name="html-docs" as="document-node()*"
-      select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[1]"/>
     <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>
     <xsl:variable name="customizations" as="document-node(element(customizations))">

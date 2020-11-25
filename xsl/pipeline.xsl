@@ -14,7 +14,7 @@
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
       <xsl:apply-templates select="*"/>
     </xsl:variable>
-    <xsl:for-each select="$html-lists">
+    <xsl:for-each select="$html-lists[empty(html:html/html:head/html:meta">
       <xsl:result-document method="xhtml" 
         href="{replace(//html:meta[@name='storage-location']/@content, '(.+/)', '$1/')}">
         <!-- trick saxon into writing the html doc (that it potentially read as input) 
@@ -51,14 +51,11 @@
                       'source-node':$expand-refs, 
                       'stylesheet-location': 'rng-list.xsl',
                       'stylesheet-params': map{
-                                             QName('', 'name'): @name,
-                                             QName('', 'storage-location'): $html-list-uri
+                                             xs:QName('name'): @name,
+                                             xs:QName('storage-location'): $html-list-uri
                                            }
                     }
                   )?output"/>
-        <!--<xsl:result-document href="{$html-list-uri}" method="xhtml">
-          <xsl:sequence select="$html-list"/>
-        </xsl:result-document>-->
         <xsl:sequence select="$html-list"/>
       </xsl:otherwise>
     </xsl:choose>
