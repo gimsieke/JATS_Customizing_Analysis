@@ -8,6 +8,9 @@
   <xsl:output indent="yes" method="xhtml"/>
 
   <xsl:param name="base-dir-uri" as="xs:string"/>
+  <xsl:param name="name" as="xs:string?"/>
+  <xsl:param name="storage-location" as="xs:string?"/>
+  <xsl:param name="cached" as="xs:boolean?"/>
 
   <xsl:template name="main">
     <xsl:message select="'UUUUUUUUUUUUUUUU ', uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')[16]
@@ -21,6 +24,16 @@
           <xsl:value-of select="xhtml:notdir($base-dir-uri)"/>
         </title>
         <meta charset="utf-8"/>
+        <xsl:if test="$name">
+          <meta name="customization-name" content="{$name}"/>
+        </xsl:if>
+        <xsl:if test="$storage-location">
+          <meta name="storage-location" content="{$storage-location}"/>
+        </xsl:if>
+        <xsl:if test="$cached">
+          <meta name="cached" content="{$cached}"/>
+        </xsl:if>
+
       </head>
       <body>
         <h2>Elements</h2>

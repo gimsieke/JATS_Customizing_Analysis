@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:jats="http://jats.nlm.nih.gov"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
+<xsl:stylesheet 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns:jats="http://jats.nlm.nih.gov"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   exclude-result-prefixes="#all">
 
   <xsl:output indent="yes" method="xml"/>
@@ -19,7 +22,8 @@
           <xsl:for-each select="$element-lists">
             <xsl:variable name="outer-element-list" as="element(xhtml:ul)" select="."/>
             <xsl:variable name="outer-attribute-list" as="element(xhtml:ul)" select="$outer-element-list/following-sibling::xhtml:ul[1]"/>
-            <customization name="{xhtml:notdir(base-uri($outer-element-list))}" items="{count(xhtml:li)}">
+            <customization name="{xhtml:notdir(root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)}" 
+              items="{count(xhtml:li)}">
               <xsl:for-each select="$element-lists except $outer-element-list">
                 <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
                 <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/following-sibling::xhtml:ul[1]"/>
@@ -27,7 +31,8 @@
                   select="$outer-element-list/xhtml:li[not(. = $inner-element-list/xhtml:li)]
                           union
                           $outer-attribute-list/xhtml:li[not(. = $inner-attribute-list/xhtml:li)]"/>
-                <items not-in="{xhtml:notdir(base-uri($inner-element-list))}" count="{count($not-in)}">
+                <items not-in="{xhtml:notdir(root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)}"
+                  count="{count($not-in)}">
                   <xsl:value-of select="$not-in"/>
                 </items>
               </xsl:for-each>
@@ -36,6 +41,7 @@
         </customizations>
       </xsl:document>
     </xsl:variable>
+    
     <xsl:result-document href="{$base-dir-uri}/debug/0_customizations.xml">
       <xsl:sequence select="$customizations"/>
     </xsl:result-document>
@@ -54,9 +60,9 @@
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$minmax" mode="html-table"/>
     </xsl:variable>
-    <xsl:result-document href="{$base-dir-uri}/customizations.xhtml" method="xhtml">
+<!--    <xsl:result-document href="{$base-dir-uri}/customizations.xhtml" method="xhtml">-->
       <xsl:sequence select="$html-table"/>
-    </xsl:result-document>
+    <!--</xsl:result-document>-->
   </xsl:template>
 
   <xsl:mode name="compute" on-no-match="shallow-copy"/>
@@ -70,7 +76,11 @@
       <!-- Elements of the current customization that are not in the customization referenced by @not-in.
       If this is 0, then the @not-in customization is a superset of the current. -->
     </xsl:variable>
-    <xsl:variable name="ji" as="element(*)" select="key('ij', string-join((../@name, @not-in), ','))"/>
+    <xsl:message select="'JJJJJJJJJJJJJ ', string-join((../@name, @not-in), ',')"/>
+    <xsl:variable name="ji" as="element(*)*" select="key('ij', string-join((../@name, @not-in), ','))"/>
+    <xsl:if test="count($ji) gt 1">
+      <xsl:message select="'IIIIIIIIIIIII ', ../.."></xsl:message>
+    </xsl:if>
     <xsl:variable name="a_ji" as="xs:integer" select="$ji/@count"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>

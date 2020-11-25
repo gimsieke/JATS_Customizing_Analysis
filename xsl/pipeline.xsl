@@ -10,19 +10,31 @@
 
   <xsl:param name="cache" as="xs:boolean" select="true()"/>
 
+  <xsl:mode name="mark-as-cached" on-no-match="shallow-copy"/>
+
   <xsl:template match="/customization-stats">
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
       <xsl:apply-templates select="*"/>
     </xsl:variable>
-    <xsl:for-each select="$html-lists[empty(html:html/html:head/html:meta">
+    <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = 'true')]">
       <xsl:result-document method="xhtml" 
-        href="{replace(//html:meta[@name='storage-location']/@content, '(.+/)', '$1/')}">
-        <!-- trick saxon into writing the html doc (that it potentially read as input) 
-          by duplicating the last slash in the uri -->
-        <xsl:sequence select="."/>
+        href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
+        <xsl:apply-templates select="." mode="mark-as-cached"/>
       </xsl:result-document>
     </xsl:for-each>
-    <xsl:message select="count($html-lists), $html-lists ! (.//html:meta[@name='customization-name']/@content, count(.//html:li))"></xsl:message>
+    <xsl:sequence select="transform(map{
+                                         'stylesheet-location': 'stats.xsl',
+                                         'initial-template': xs:QName('main'),
+                                         'stylesheet-params': map{
+                                                                   xs:QName('html-docs'): $html-lists,
+                                                                   xs:QName('base-dir-uri'): $base-dir-uri
+                                                                 }
+                                       })?output"/>
+  </xsl:template>
+  
+  <xsl:template match="html:head/html:meta[last()]" mode="mark-as-cached">
+    <xsl:next-match/>
+    <meta xmlns="http://www.w3.org/1999/xhtml" name="cached" content="true"/>
   </xsl:template>
   
   <xsl:template match="rng">
@@ -54,6 +66,31 @@
                                              xs:QName('name'): @name,
                                              xs:QName('storage-location'): $html-list-uri
                                            }
+                    }
+                  )?output"/>
+        <xsl:sequence select="$html-list"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="collection">
+    <xsl:variable name="dir-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
+    <xsl:variable name="html-list-uri" as="xs:string" select="replace($dir-uri, '^(.+?/([^/]+))/*$', '$1/$2.xhtml')"/>
+    <xsl:choose>
+      <xsl:when test="doc-available($html-list-uri)">
+        <xsl:sequence select="doc($html-list-uri)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="html-list" as="document-node(element(html:html))"
+          select="transform(
+                    map{
+                      'initial-template': xs:QName('main'), 
+                      'stylesheet-location': 'collection-list.xsl',
+                      'stylesheet-params': map{
+                                                xs:QName('base-dir-uri'): $dir-uri,
+                                                xs:QName('name'): @name,
+                                                xs:QName('storage-location'): $html-list-uri
+                                              }
                     }
                   )?output"/>
         <xsl:sequence select="$html-list"/>
