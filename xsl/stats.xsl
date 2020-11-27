@@ -192,7 +192,7 @@ td, th {
                   <xsl:variable name="stats-item" as="element(items)?" 
                     select="$outer-customization/items[@not-in = $inner]"/>
                   <td>
-                    <xsl:if test="$stats-item/@q5 = $max-q5">
+                    <xsl:if test="number($stats-item/@q5) = number($max-q5)">
                       <xsl:attribute name="class" select="'max'"/>
                     </xsl:if>
                     <p>
