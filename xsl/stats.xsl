@@ -87,8 +87,6 @@
       <xsl:variable name="distance" select="$a_ij + $a_ji" as="xs:integer"/>
       <xsl:attribute name="distance" select="$distance"/>
       <xsl:if test="$distance gt 0">
-        <xsl:variable name="total" as="xs:double" select="../@items">
-        </xsl:variable>
         <xsl:variable name="r_ij" as="xs:double" select="$a_ij"/>
         <xsl:variable name="r_ji" as="xs:double" select="$a_ji div $distance"/>
         <xsl:variable name="supersetticity1" select="$a_ji - $a_ij" as="xs:integer"/>

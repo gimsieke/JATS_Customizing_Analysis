@@ -13,11 +13,12 @@
   <xsl:param name="cached" as="xs:boolean?"/>
 
   <xsl:template name="main">
-    <xsl:message select="'UUUUUUUUUUUUUUUU ', uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')[16]
-      "></xsl:message>
+    <xsl:variable name="uris" as="xs:anyURI*" select="uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')"/>
     <xsl:variable name="xml-docs" as="document-node()*"
-      select="uri-collection($base-dir-uri || '?recurse=yes;select=*.xml') 
-                ! (unparsed-text(.) => replace('&lt;!DOCTYPE.+?>', ' ', 's') => replace('&amp;\i\c*;', '') => parse-xml())"/>
+      select="$uris 
+                ! (unparsed-text(.) 
+                  => replace('&lt;!DOCTYPE.+?>', ' ', 's') 
+                  => replace('&amp;\i\c*;', '') => parse-xml())"/>
     <html>
       <head>
         <title>Collection analysis of
@@ -36,6 +37,12 @@
 
       </head>
       <body>
+        <dl>
+          <dt>URIs</dt>
+          <dd><xsl:value-of select="count($uris)"/></dd>
+          <dt>XMLs</dt>
+          <dd><xsl:value-of select="count($xml-docs)"/></dd>
+        </dl>
         <h2>Elements</h2>
         <ul>
           <xsl:for-each select="sort(distinct-values($xml-docs//*/name()))">
