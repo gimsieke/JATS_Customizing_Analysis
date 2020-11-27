@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customization-stats>
+  <rng uri="schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng" name="Blue"/>
+  <rng uri="schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3.rng" name="Green"/>
+  <rng uri="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng" name="Pumpkin"/>
+  <collection uri="articles/Science_DeGruyter/" name="Science_DeGruyter"/>
+  <collection uri="articles/DeGruyter/" name="DeGruyter"/>
+  <collection uri="articles/Humanities_SocialSciences/" name="Humanities_SocialSciences"/>
+  <collection uri="articles/Science/" name="Science"/>
+  <collection uri="articles/Medicine/" name="Medicine"/>
+</customization-stats>
