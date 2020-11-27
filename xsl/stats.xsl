@@ -22,7 +22,11 @@
           <xsl:for-each select="$element-lists">
             <xsl:variable name="outer-element-list" as="element(xhtml:ul)" select="."/>
             <xsl:variable name="outer-attribute-list" as="element(xhtml:ul)" select="$outer-element-list/following-sibling::xhtml:ul[1]"/>
-            <customization name="{xhtml:notdir(root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)}" 
+            <customization 
+              name="{(
+                       root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='customization-name']/@content,
+                       xhtml:notdir(root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)
+                     )[1]}" 
               items="{count(xhtml:li) + count($outer-attribute-list/xhtml:li)}">
               <xsl:for-each select="$element-lists except $outer-element-list">
                 <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
@@ -31,7 +35,10 @@
                   select="$outer-element-list/xhtml:li[not(. = $inner-element-list/xhtml:li)]
                           union
                           $outer-attribute-list/xhtml:li[not(. = $inner-attribute-list/xhtml:li)]"/>
-                <items not-in="{xhtml:notdir(root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)}"
+                <items not-in="{(
+                                  root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='customization-name']/@content,
+                                  xhtml:notdir(root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)
+                                )[1]}"
                   count="{count($not-in)}">
                   <xsl:value-of select="$not-in"/>
                 </items>
