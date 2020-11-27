@@ -3,6 +3,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:map="http://www.w3.org/2005/xpath-functions/map"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   exclude-result-prefixes="#all">
 
@@ -22,14 +23,21 @@
         <xsl:apply-templates select="." mode="mark-as-cached"/>
       </xsl:result-document>
     </xsl:for-each>
-    <xsl:sequence select="transform(map{
-                                         'stylesheet-location': 'stats.xsl',
-                                         'initial-template': xs:QName('main'),
-                                         'stylesheet-params': map{
-                                                                   xs:QName('html-docs'): $html-lists,
-                                                                   xs:QName('base-dir-uri'): $base-dir-uri
-                                                                 }
-                                       })?output"/>
+    <xsl:variable name="stats" as="map(xs:string, item())" 
+      select="transform(map{
+                             'stylesheet-location': 'stats.xsl',
+                             'initial-template': xs:QName('main'),
+                             'stylesheet-params': map{
+                                                       xs:QName('html-docs'): $html-lists,
+                                                       xs:QName('base-dir-uri'): $base-dir-uri
+                                                     }
+                           })"/>
+    <xsl:for-each select="map:keys($stats)[not(. = 'output')]">
+      <xsl:result-document href="{.}">
+        <xsl:sequence select="$stats(.)"/>
+      </xsl:result-document>
+    </xsl:for-each>
+    <xsl:sequence select="$stats?output"/>
   </xsl:template>
   
   <xsl:template match="html:head/html:meta[last()]" mode="mark-as-cached">
