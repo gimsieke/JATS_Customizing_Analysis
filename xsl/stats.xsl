@@ -23,7 +23,7 @@
             <xsl:variable name="outer-element-list" as="element(xhtml:ul)" select="."/>
             <xsl:variable name="outer-attribute-list" as="element(xhtml:ul)" select="$outer-element-list/following-sibling::xhtml:ul[1]"/>
             <customization name="{xhtml:notdir(root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)}" 
-              items="{count(xhtml:li)}">
+              items="{count(xhtml:li) + count($outer-attribute-list/xhtml:li)}">
               <xsl:for-each select="$element-lists except $outer-element-list">
                 <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
                 <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/following-sibling::xhtml:ul[1]"/>
