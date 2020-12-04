@@ -9,6 +9,7 @@
 
   <xsl:param name="base-dir-uri" as="xs:string"/>
   <xsl:param name="name" as="xs:string?"/>
+  <xsl:param name="content-class" as="xs:string?"/>
   <xsl:param name="storage-location" as="xs:string?"/>
   <xsl:param name="cached" as="xs:boolean?"/>
 
@@ -37,6 +38,9 @@
 
       </head>
       <body>
+        <xsl:if test="$content-class">
+          <xsl:attribute name="class" select="$content-class"/>
+        </xsl:if>
         <dl>
           <dt>URIs</dt>
           <dd><xsl:value-of select="count($uris)"/></dd>
@@ -44,7 +48,7 @@
           <dd><xsl:value-of select="count($xml-docs)"/></dd>
         </dl>
         <h2>Elements</h2>
-        <ul>
+        <ul id="elements">
           <xsl:for-each select="sort(distinct-values($xml-docs//*/name()))">
             <li>
               <xsl:value-of select="."/>
@@ -52,7 +56,7 @@
           </xsl:for-each>
         </ul>
         <h2>Attributes</h2>
-        <ul>
+        <ul id="attributes">
           <xsl:for-each select="sort(distinct-values($xml-docs//@*/name()))">
             <li>
               <xsl:value-of select="'@' || ."/>

@@ -3,8 +3,19 @@
   <rng uri="schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng" name="Blue"/>
   <rng uri="schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3.rng" name="Green"/>
   <rng uri="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng" name="Pumpkin"/>
-  <collection uri="../SO-plus-degruyter/" name="ScienceOpen-plus-deGruyter-sample"/>
-  <collection uri="../SO-plus-degruyter/WdG/" name="deGruyter-sample"/>
-  <collection uri="../SO-plus-degruyter/SO/Humanities_SocialSciences/" name="ScienceOpen_Humanities_Social"/>
-  <collection uri="../SO-plus-degruyter/SO/Science/" name="ScienceOpen_Science"/>
+  <collection uri="articles/SO_plus_DeGruyter/" name="SO_plus_DeGruyter"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/biol.2020.15.issue-1" name="DeGruyterBiol" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/cclm.ahead-of-print" name="DeGruyterCCLM" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/chem.2020.18.issue-1" name="DeGruyterChem" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/epoly.2020.20.issue-1" name="DeGruyterEPoly" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/jnet.ahead-of-print" name="DeGruyterJNet" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/med.2020.15.issue-1" name="DeGruyterMed" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/polyeng.ahead-of-print" name="DeGruyterPolyEng" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/prhz.ahead-of-print" name="DeGruyterPRHZ" class="HUM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/zfsoz.2020.49.issue-1" name="DeGruyterZfSoz" class="HUM"/>
+  <collection uri="articles/SO_plus_DeGruyter/ScienceOpen/" name="ScienceOpen"/>
+  <collection uri="articles/SO_plus_DeGruyter/ScienceOpen/SO_Humanities_SocialSciences/" name="SO_Humanities_SocialSciences"
+    class="HUM"/>
+  <collection uri="articles/SO_plus_DeGruyter/ScienceOpen/SO_Science/" name="SO_Science" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/ScienceOpen/SO_Medicine/" name="SO_Medicine" class="STEM"/>
 </customization-stats>

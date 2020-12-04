@@ -24,20 +24,20 @@
           <meta name="storage-location" content="{$storage-location}"/>
         </xsl:if>
       </head>
-      <body>
+      <body class="schema">
         <xsl:variable name="element-defines" as="element(rng:define)*"
           select="descendant::rng:define[rng:element]
                                         (:[not(starts-with(@name, 'mml.'))
                                          or
                                          @name = 'mml.math']:)"/>
         <h2>Elements</h2>
-        <ul>
+        <ul id="elements">
           <xsl:apply-templates select="$element-defines" mode="li">
             <xsl:sort select="rng:normalize-sortkey(@name)"/>
           </xsl:apply-templates>
         </ul>
         <h2>Attributes</h2>
-        <ul>
+        <ul id="attributes">
           <xsl:for-each-group select="descendant::rng:attribute" group-by="@name">
             <xsl:sort select="rng:normalize-sortkey(current-grouping-key())"/>
             <xsl:apply-templates select="." mode="li"/>

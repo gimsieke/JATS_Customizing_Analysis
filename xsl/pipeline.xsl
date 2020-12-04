@@ -12,11 +12,21 @@
   <xsl:param name="cache" as="xs:boolean" select="true()"/>
 
   <xsl:mode name="mark-as-cached" on-no-match="shallow-copy"/>
+  <xsl:mode name="create-content-class-lists" on-no-match="shallow-copy"/>
 
   <xsl:template match="/customization-stats">
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
       <xsl:apply-templates select="*"/>
     </xsl:variable>
+    <!--<xsl:variable name="html-lists" as="document-node(element(html:html))*">
+      <xsl:sequence select="$html-lists"/>
+      <xsl:for-each-group select="$html-lists[html:html/html:body[@class[not(. = 'schema')]]]" 
+        group-by="html:html/html:body/@class">
+        <xsl:apply-templates select="." mode="create-content-class-lists">
+          <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="current-group()" tunnel="yes"/>
+        </xsl:apply-templates>
+      </xsl:for-each-group>
+    </xsl:variable>-->
     <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = 'true')]">
       <xsl:result-document method="xhtml" 
         href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
@@ -48,6 +58,7 @@
   <xsl:template match="rng">
     <xsl:variable name="file-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
     <xsl:variable name="html-list-uri" as="xs:string" select="replace($file-uri, '\.rng$', '.xhtml')"/>
+    <xsl:message select="'UUUUUUUUUUUU ', $html-list-uri"></xsl:message>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
@@ -97,7 +108,8 @@
                       'stylesheet-params': map{
                                                 xs:QName('base-dir-uri'): $dir-uri,
                                                 xs:QName('name'): @name,
-                                                xs:QName('storage-location'): $html-list-uri
+                                                xs:QName('storage-location'): $html-list-uri,
+                                                xs:QName('content-class'): @class
                                               }
                     }
                   )?output"/>
@@ -105,4 +117,11 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  
+  
+  <xsl:template match="html:meta[@name='storage-location']/@content" mode="create-content-class-lists">
+    <xsl:message select="'RRRRRRRRRRRR ', replace(., '^(.+)/(.+)(\.xhtml)', concat('$1/', ../../../html:body/@class, '$3'))"/>
+    <xsl:attribute name="{name()}" select="replace(., '^(.+)/(.+)(\.xhtml)', concat('$1/', ../../../html:body/@class, '$3'))"/>
+  </xsl:template>
+  
 </xsl:stylesheet>
