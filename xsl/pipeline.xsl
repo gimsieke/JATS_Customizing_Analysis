@@ -18,15 +18,16 @@
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
       <xsl:apply-templates select="*"/>
     </xsl:variable>
-    <!--<xsl:variable name="html-lists" as="document-node(element(html:html))*">
+    <xsl:variable name="html-lists" as="document-node(element(html:html))*">
       <xsl:sequence select="$html-lists"/>
       <xsl:for-each-group select="$html-lists[html:html/html:body[@class[not(. = 'schema')]]]" 
         group-by="html:html/html:body/@class">
         <xsl:apply-templates select="." mode="create-content-class-lists">
           <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="current-group()" tunnel="yes"/>
+          <xsl:with-param name="customization-name" as="xs:string" select="current-grouping-key()" tunnel="yes"/>
         </xsl:apply-templates>
       </xsl:for-each-group>
-    </xsl:variable>-->
+    </xsl:variable>
     <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = 'true')]">
       <xsl:result-document method="xhtml" 
         href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
@@ -58,7 +59,6 @@
   <xsl:template match="rng">
     <xsl:variable name="file-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
     <xsl:variable name="html-list-uri" as="xs:string" select="replace($file-uri, '\.rng$', '.xhtml')"/>
-    <xsl:message select="'UUUUUUUUUUUU ', $html-list-uri"></xsl:message>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
@@ -120,8 +120,25 @@
   
   
   <xsl:template match="html:meta[@name='storage-location']/@content" mode="create-content-class-lists">
-    <xsl:message select="'RRRRRRRRRRRR ', replace(., '^(.+)/(.+)(\.xhtml)', concat('$1/', ../../../html:body/@class, '$3'))"/>
-    <xsl:attribute name="{name()}" select="replace(., '^(.+)/(.+)(\.xhtml)', concat('$1/', ../../../html:body/@class, '$3'))"/>
+    <xsl:param name="customization-name" as="xs:string" tunnel="yes"/>
+    <xsl:attribute name="{name()}" select="replace(., '^(.+)/(.+)(\.xhtml)$', concat('$1/', $customization-name, '$3'))"/>
+  </xsl:template>
+  
+  <xsl:template match="html:meta[@name='customization-name']/@content" mode="create-content-class-lists">
+    <xsl:param name="customization-name" as="xs:string" tunnel="yes"/>
+    <xsl:attribute name="{name()}" select="$customization-name"/>
+  </xsl:template>
+  
+  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists"/>
+  
+  <xsl:template match="html:ul[@id = ('attributes', 'elements')]" mode="create-content-class-lists">
+    <xsl:param name="all-lists" as="document-node(element(html:html))+" tunnel="yes"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:for-each-group select="$all-lists//html:ul[@id = current()/@id]/html:li" group-by="string(.)">
+        <xsl:apply-templates select="." mode="#current"/>
+      </xsl:for-each-group>
+    </xsl:copy>
   </xsl:template>
   
 </xsl:stylesheet>

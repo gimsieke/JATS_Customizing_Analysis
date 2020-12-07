@@ -28,6 +28,7 @@
                        xhtml:notdir(root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)
                      )[1]}" 
               items="{count(xhtml:li) + count($outer-attribute-list/xhtml:li)}">
+              <xsl:copy-of select="ancestor::xhtml:body/@class"/>
               <xsl:for-each select="$element-lists except $outer-element-list">
                 <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
                 <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/following-sibling::xhtml:ul[1]"/>
@@ -146,7 +147,8 @@ tr > th {
 }
 tr.colheads > th { 
   transform: rotate(-90deg);
-  transform-origin: 7em 10em;
+<!--  transform-origin: 7em 10em;-->
+  transform-origin: 6em 12em;
   width:6em;
   height:20em;
 }
@@ -172,7 +174,12 @@ td, th {
         </head>
         <body>
           <xsl:variable name="context" as="element(customizations)" select="."/>
-          <xsl:variable name="all-customizings" as="xs:string+" select="sort(customization/@name)"/>
+          <xsl:variable name="all-customizings" as="xs:string+">
+            <xsl:perform-sort select="customization/@name">
+              <xsl:sort select="../@class" order="descending"/>
+              <xsl:sort select="."/>
+            </xsl:perform-sort>
+          </xsl:variable> select="sort()"
           <table>
             <tr class="colheads">
               <th class="origin">“Supersetticity” (s5) and aptness as customization starting point (q5) 
