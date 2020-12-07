@@ -65,8 +65,14 @@
     <xsl:result-document href="{$base-dir-uri}/debug/2_minmax.xml">
       <xsl:sequence select="$minmax"/>
     </xsl:result-document>
+    <xsl:variable name="best-fit" as="document-node(element(customizations))">
+      <xsl:apply-templates select="$minmax" mode="best-fit"/>
+    </xsl:variable>
+    <xsl:result-document href="{$base-dir-uri}/debug/3_best-fit.xml">
+      <xsl:sequence select="$best-fit"/>
+    </xsl:result-document>
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
-      <xsl:apply-templates select="$minmax" mode="html-table"/>
+      <xsl:apply-templates select="$best-fit" mode="html-table"/>
     </xsl:variable>
 <!--    <xsl:result-document href="{$base-dir-uri}/customizations.xhtml" method="xhtml">-->
       <xsl:sequence select="$html-table"/>
@@ -76,6 +82,8 @@
   <xsl:mode name="compute" on-no-match="shallow-copy"/>
 
   <xsl:mode name="minmax" on-no-match="shallow-copy"/>
+  
+  <xsl:mode name="best-fit" on-no-match="shallow-copy"/>
 
   <xsl:key name="ij" match="customization/*[@not-in]" use="string-join((@not-in, ../@name), ',')"/>
 
@@ -125,9 +133,29 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
   </xsl:template>
   
   <xsl:template match="customization/@name" mode="minmax">
+    <xsl:param name="max_q5" as="xs:double" tunnel="yes"/>
     <xsl:next-match/>
-    <xsl:attribute name="max_q5" select="max(../items/@q5)"/>
+    <xsl:attribute name="max_q5" select="$max_q5"/>
   </xsl:template>
+  
+  <xsl:template match="customization" mode="minmax">
+    <xsl:next-match>
+      <xsl:with-param name="max_q5" as="xs:double" select="max(items/@q5)" tunnel="yes"/>
+    </xsl:next-match>
+  </xsl:template>
+  
+  <xsl:template match="items/@q5" mode="minmax">
+    <xsl:param name="max_q5" as="xs:double" tunnel="yes"/>
+    <xsl:next-match/>
+    <xsl:attribute name="p5" select="format-number(. div $max_q5 * 100, '.##')"/>
+  </xsl:template>
+  
+  <xsl:template match="customization/@name" mode="best-fit">
+    <xsl:next-match/>
+    <xsl:variable name="p5s" as="attribute(p5)*" select="//items[@not-in = current()]/@p5"/>
+    <xsl:attribute name="average_p5" select="format-number(sum($p5s) div count($p5s), '.##')"/>
+  </xsl:template>
+  
 
   <xsl:function name="xhtml:notdir" as="xs:string">
     <xsl:param name="uri" as="xs:string"/>
@@ -213,10 +241,25 @@ td, th {
                     <p>
                       <xsl:value-of select="'q5=' || $stats-item/@q5"/>
                     </p>
+                    <p>
+                      <xsl:value-of select="'p5=' || $stats-item/@p5"/>
+                    </p>
                   </td>
                 </xsl:for-each>
               </tr>
             </xsl:for-each>
+            <tr class="average_p5">
+              <th>average p5</th>
+              <xsl:for-each select="$all-customizings">
+                <xsl:variable name="customization" as="element(customization)" 
+                  select="$context/customization[@name = current()]"/>
+                <td>
+                  <p>
+                    <xsl:value-of select="$customization/@average_p5"/>
+                  </p>
+                </td>
+              </xsl:for-each>
+            </tr>
           </table>
         </body>
       </html>
