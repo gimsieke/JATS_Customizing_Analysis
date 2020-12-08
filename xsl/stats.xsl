@@ -154,6 +154,11 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
     <xsl:next-match/>
     <xsl:variable name="p5s" as="attribute(p5)*" select="//items[@not-in = current()]/@p5"/>
     <xsl:attribute name="average_p5" select="format-number(sum($p5s) div count($p5s), '.##')"/>
+    <xsl:variable name="s5s" as="attribute(s5)*" select="//items[@not-in = current()]/@s5"/>
+    <xsl:attribute name="average_s5" select="format-number(sum($s5s) div count($s5s), '.##')"/>
+    <xsl:variable name="collection-s5s" as="attribute(s5)*" 
+      select="/customizations/customization[not(@class = 'schema')]/items[@not-in = current()]/@s5"/>
+    <xsl:attribute name="average_collection-s5" select="format-number(sum($collection-s5s) div count($collection-s5s), '.##')"/>
   </xsl:template>
   
 
@@ -197,6 +202,12 @@ td, th {
 }
 .max {
   background-color: #9f9;
+}
+.average {
+  text-decoration: overline;
+}
+tr.summary > * {
+  border-top: 3px solid black;
 }
           </style>
         </head>
@@ -248,14 +259,32 @@ td, th {
                 </xsl:for-each>
               </tr>
             </xsl:for-each>
-            <tr class="average_p5">
-              <th>average p5</th>
+            <tr class="summary">
+              <xsl:variable name="max_s5" as="xs:double" select="max($context/customization/@average_s5)"/>
+              <xsl:variable name="max_collection-s5" as="xs:double" select="max($context/customization/@average_collection-s5)"/>
+              <xsl:variable name="max_p5" as="xs:double" select="max($context/customization/@average_p5)"/>
+              <th>average s5 / collection-only s5 / p5</th>
               <xsl:for-each select="$all-customizings">
                 <xsl:variable name="customization" as="element(customization)" 
                   select="$context/customization[@name = current()]"/>
                 <td>
                   <p>
-                    <xsl:value-of select="$customization/@average_p5"/>
+                    <xsl:if test="number($customization/@average_s5) = $max_s5">
+                      <xsl:attribute name="class" select="'max'"/>
+                    </xsl:if>
+                    <span class="average">s5</span>=<xsl:value-of select="$customization/@average_s5"/>
+                  </p>
+                  <p>
+                    <xsl:if test="number($customization/@average_collection-s5) = $max_collection-s5">
+                      <xsl:attribute name="class" select="'max'"/>
+                    </xsl:if>
+                    <span class="average">s5<sub>coll</sub></span>=<xsl:value-of select="$customization/@average_collection-s5"/>
+                  </p>
+                  <p>
+                    <xsl:if test="number($customization/@average_p5) = $max_p5">
+                      <xsl:attribute name="class" select="'max'"/>
+                    </xsl:if>
+                    <span class="average">p5</span>=<xsl:value-of select="$customization/@average_p5"/>
                   </p>
                 </td>
               </xsl:for-each>
