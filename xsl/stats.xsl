@@ -207,7 +207,7 @@ td, th {
               <xsl:sort select="../@class" order="descending"/>
               <xsl:sort select="."/>
             </xsl:perform-sort>
-          </xsl:variable> select="sort()"
+          </xsl:variable>
           <table>
             <tr class="colheads">
               <th class="origin">“Supersetticity” (s5) and aptness as customization starting point (q5) 
