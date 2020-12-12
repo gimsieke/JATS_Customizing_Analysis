@@ -40,7 +40,8 @@
                              'initial-template': xs:QName('main'),
                              'stylesheet-params': map{
                                                        xs:QName('html-docs'): $html-lists,
-                                                       xs:QName('base-dir-uri'): $base-dir-uri
+                                                       xs:QName('base-dir-uri'): $base-dir-uri,
+                                                       xs:QName('conf-file'): base-uri()
                                                      }
                            })"/>
     <xsl:for-each select="map:keys($stats)[not(. = 'output')]">

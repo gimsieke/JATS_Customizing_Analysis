@@ -2,7 +2,8 @@
 <xsl:stylesheet 
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:jats="http://jats.nlm.nih.gov"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:map="http://www.w3.org/2005/xpath-functions/map"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   exclude-result-prefixes="#all">
 
@@ -12,16 +13,18 @@
 
   <xsl:param name="html-docs" as="document-node()*"
     select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
+  
+  <xsl:param name="conf-file" as="xs:string"/>
 
   <xsl:template name="main">
-    <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[1]"/>
+    <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[@id='elements']"/>
     <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>
     <xsl:variable name="customizations" as="document-node(element(customizations))">
       <xsl:document>
         <customizations>
           <xsl:for-each select="$element-lists">
             <xsl:variable name="outer-element-list" as="element(xhtml:ul)" select="."/>
-            <xsl:variable name="outer-attribute-list" as="element(xhtml:ul)" select="$outer-element-list/following-sibling::xhtml:ul[1]"/>
+            <xsl:variable name="outer-attribute-list" as="element(xhtml:ul)" select="$outer-element-list/../xhtml:ul[@id='attributes']"/>
             <customization 
               name="{(
                        root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='customization-name']/@content,
@@ -31,17 +34,21 @@
               <xsl:copy-of select="ancestor::xhtml:body/@class"/>
               <xsl:for-each select="$element-lists except $outer-element-list">
                 <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
-                <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/following-sibling::xhtml:ul[1]"/>
-                <xsl:variable name="not-in" as="element(xhtml:li)*" 
-                  select="$outer-element-list/xhtml:li[not(. = $inner-element-list/xhtml:li)]
-                          union
-                          $outer-attribute-list/xhtml:li[not(. = $inner-attribute-list/xhtml:li)]"/>
+                <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/../xhtml:ul[@id='attributes']"/>
+                <xsl:variable name="not-in" as="map(xs:string, element(xhtml:li)*)" 
+                  select="map{'elements': $outer-element-list/xhtml:li[not(. = $inner-element-list/xhtml:li)],
+                           'attributes': $outer-attribute-list/xhtml:li[not(. = $inner-attribute-list/xhtml:li)]}"/>
                 <items not-in="{(
                                   root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='customization-name']/@content,
                                   xhtml:notdir(root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)
                                 )[1]}"
-                  count="{count($not-in)}">
-                  <xsl:value-of select="$not-in"/>
+                  count="{count($not-in?elements) + count($not-in?attributes)}">
+                  <xsl:for-each select="map:keys($not-in)">
+                    <xsl:element name="{.}">
+                      <xsl:attribute name="count"  select="count($not-in(.))"/>
+                      <xsl:value-of select="$not-in(.)"/>
+                    </xsl:element>
+                  </xsl:for-each>
                 </items>
               </xsl:for-each>
             </customization>
@@ -74,9 +81,15 @@
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$best-fit" mode="html-table"/>
     </xsl:variable>
-<!--    <xsl:result-document href="{$base-dir-uri}/customizations.xhtml" method="xhtml">-->
+    <xsl:result-document href="{replace($conf-file, '\.xml', '.details.xhtml')}" method="xhtml">
       <xsl:sequence select="$html-table"/>
-    <!--</xsl:result-document>-->
+    </xsl:result-document>
+    <xsl:variable name="html-summary" as="document-node(element(xhtml:html))">
+      <xsl:apply-templates select="$html-table" mode="summary">
+        <xsl:with-param name="customizations" as="document-node(element(customizations))" select="$best-fit" tunnel="yes"/>
+      </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:sequence select="$html-summary"/>
   </xsl:template>
 
   <xsl:mode name="compute" on-no-match="shallow-copy"/>
@@ -84,6 +97,8 @@
   <xsl:mode name="minmax" on-no-match="shallow-copy"/>
   
   <xsl:mode name="best-fit" on-no-match="shallow-copy"/>
+  
+  <xsl:mode name="summary" on-no-match="shallow-copy"/>
 
   <xsl:key name="ij" match="customization/*[@not-in]" use="string-join((@not-in, ../@name), ',')"/>
 
@@ -197,8 +212,21 @@ table {
   table-layout:fixed;
   width:100%;
 }
+table.summary {
+  table-layout: auto;
+}
+table.summary p {
+  margin: 0 0 0 0.3em;
+}
 td, th {
   border: 1px solid black;
+}
+ul {
+  margin-top:0;
+  margin-bottom:0;
+}
+details > details {
+  margin-left: 1em;
 }
 .max {
   background-color: #9f9;
@@ -208,6 +236,9 @@ td, th {
 }
 tr.summary > * {
   border-top: 3px solid black;
+}
+.non-bold {
+  font-weight: normal;
 }
           </style>
         </head>
@@ -236,6 +267,7 @@ tr.summary > * {
                   select="$context/customization[@name = $outer]"/>
                 <xsl:variable name="max-q5" as="xs:string" select="$outer-customization/@max_q5"/>
                 <th>
+                  <xsl:copy-of select="$outer-customization/@class"/>
                   <xsl:value-of select="."/>
                 </th>
                 <xsl:for-each select="$all-customizings">
@@ -260,14 +292,21 @@ tr.summary > * {
               </tr>
             </xsl:for-each>
             <tr class="summary">
+              <xsl:variable name="min_items" as="xs:double" select="min($context/customization/@items)"/>
               <xsl:variable name="max_s5" as="xs:double" select="max($context/customization/@average_s5)"/>
               <xsl:variable name="max_collection-s5" as="xs:double" select="max($context/customization/@average_collection-s5)"/>
               <xsl:variable name="max_p5" as="xs:double" select="max($context/customization/@average_p5)"/>
-              <th>average s5 / collection-only s5 / p5</th>
+              <th>items / average s5 / collection-only s5 / p5</th>
               <xsl:for-each select="$all-customizings">
                 <xsl:variable name="customization" as="element(customization)" 
                   select="$context/customization[@name = current()]"/>
                 <td>
+                  <p>
+                    <xsl:if test="$customization/@items = $min_items">
+                      <xsl:attribute name="class" select="'max'"/>
+                    </xsl:if>
+                    items=<xsl:value-of select="$customization/@items"/>
+                  </p>
                   <p>
                     <xsl:if test="number($customization/@average_s5) = $max_s5">
                       <xsl:attribute name="class" select="'max'"/>
@@ -294,5 +333,134 @@ tr.summary > * {
       </html>
     </xsl:document>
   </xsl:template>
+
+  <xsl:template match="xhtml:table" mode="summary" xmlns="http://www.w3.org/1999/xhtml">
+    <p>
+      <a href="{replace($conf-file, '^.+/(.+)\.xml', '$1.details.xhtml')}">detailed table</a>
+    </p>
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:attribute name="class" select="'summary'"/>
+      <tr>
+        <th>Customization name</th>
+        <th>Best starting point <br/>for this customization</th>
+        <th>Modifications wrt <br/>best starting point</th>
+        <th>Item count</th>
+        <th>Average supersetticity <br/><span class="non-bold">(2.0 is highest)</span></th>
+        <th>Average supersetticity <br/>only for collections</th>
+        <th>Average percentage of aptness <br/>as a starting point <br/><span class="non-bold">relative to the best 
+          starting <br/>point’s aptness, which is 100</span></th>
+      </tr>
+      <xsl:apply-templates select="xhtml:tr except (xhtml:tr[1] union xhtml:tr[last()])" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="xhtml:tr" mode="summary" xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:param name="customizations" as="document-node(element(customizations))" tunnel="yes"/>
+    <xsl:variable name="current-customization-name" as="xs:string" select="*[1]"/>
+    <xsl:variable name="current-pos" as="xs:integer" select="position() + 1"/>
+    <xsl:variable name="max-pos" as="xs:integer" 
+        select="xhtml:index-of(*, xhtml:td[@class = 'max'])[1]"/>
+    <xsl:variable name="starting-point-name" as="xs:string" select="../xhtml:tr[1]/*[position() = $max-pos]"/>
+    <xsl:variable name="aptness-cell" as="element(xhtml:td)" select="../xhtml:tr[last()]/*[position() = $current-pos]"/>
+    <xsl:copy>
+      <xsl:apply-templates select="*[1]" mode="#current"/>
+      <xsl:apply-templates select="(xhtml:td[@class = 'max'])[1]" mode="summary">
+        <xsl:with-param name="derived-from" as="xs:string" select="$starting-point-name" tunnel="yes"/>
+      </xsl:apply-templates>
+      <td>
+        <!-- $additions, $deletions are elements named 'elements' and/or 'attributes': --> 
+        <xsl:variable name="additions" as="element(*)*" 
+          select="$customizations/customizations/customization[@name = $current-customization-name]
+                        /items[@not-in = $starting-point-name]/*[normalize-space()]"/>
+        <xsl:variable name="deletions" as="element(*)*" 
+          select="$customizations/customizations/customization[@name = $starting-point-name]
+                        /items[@not-in = $current-customization-name]/*[normalize-space()]"/>
+        
+        <xsl:if test="exists($additions)">
+          <details open="true">
+            <summary>Additions</summary>
+            <xsl:apply-templates select="$additions" mode="#current"/>
+          </details>
+        </xsl:if>
+        <xsl:if test="exists($deletions)">
+          <details open="true">
+            <summary>Deletions</summary>
+            <xsl:apply-templates select="$deletions" mode="#current"/>
+          </details>
+        </xsl:if>
+      </td>
+      <xsl:for-each select="('items', 's5', 's5coll', 'p5')">
+        <xsl:apply-templates select="$aptness-cell" mode="summary-extract-stats">
+          <xsl:with-param name="quantity-name" as="xs:string" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+      </xsl:for-each>
+      
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="xhtml:th" mode="summary">
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:attribute name="id" select="."/>
+      <xsl:value-of select="."/>
+      <xsl:if test="@class">
+        <span class="non-bold">
+          <xsl:text> (</xsl:text>
+          <xsl:value-of select="@class"/>
+          <xsl:text>)</xsl:text>
+        </span>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="xhtml:td" mode="summary-extract-stats">
+    <xsl:param name="quantity-name" as="xs:string" tunnel="yes"/>
+    <xsl:copy>
+      <xsl:apply-templates select="xhtml:p[starts-with(normalize-space(.), $quantity-name || '=')]" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="xhtml:td/xhtml:p" mode="summary-extract-stats">
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="summary"/>
+      <xsl:value-of select="substring-after(., '=')"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="elements | attributes" mode="summary" xmlns="http://www.w3.org/1999/xhtml">
+    <details>
+      <summary>
+        <xsl:value-of select="local-name()"/> (<xsl:value-of select="@count"/>)
+      </summary>
+      <ul>
+        <xsl:for-each select="tokenize(.)">
+          <li>
+            <xsl:value-of select="."/>
+          </li>
+        </xsl:for-each>
+      </ul>
+    </details>
+  </xsl:template>
+
+  <xsl:template match="xhtml:td" mode="summary" xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:param name="derived-from" as="xs:string" tunnel="yes"/>
+    <xsl:copy>
+      <p>
+        <a href="#{$derived-from}">
+          <xsl:value-of select="$derived-from"/>
+        </a>
+      </p>
+      <xsl:apply-templates mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="xhtml:p[starts-with(., 'p5=')]" mode="summary"/>
+
+  <xsl:function name="xhtml:index-of" as="xs:integer*">
+    <xsl:param name="all-items" as="node()*"/>
+    <xsl:param name="search-items" as="node()*"/>
+    <xsl:sequence select="index-of($all-items ! generate-id(.), $search-items ! generate-id(.))"/>
+  </xsl:function>
 
 </xsl:stylesheet>
