@@ -4,6 +4,7 @@
   <rng uri="schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3.rng" name="Green"/>
   <rng uri="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng" name="Pumpkin"/>
   <collection uri="articles/SO_plus_DeGruyter/" name="SO_plus_DeGruyter"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter" name="DeGruyter"/>
   <collection uri="articles/SO_plus_DeGruyter/DeGruyter/biol.2020.15.issue-1" name="DeGruyterBiol" class="STEM"/>
   <collection uri="articles/SO_plus_DeGruyter/DeGruyter/cclm.ahead-of-print" name="DeGruyterCCLM" class="STEM"/>
   <collection uri="articles/SO_plus_DeGruyter/DeGruyter/chem.2020.18.issue-1" name="DeGruyterChem" class="STEM"/>
