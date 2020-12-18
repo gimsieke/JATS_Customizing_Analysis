@@ -189,6 +189,9 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
           <title>RNG List</title>
           <meta charset="utf-8"/>
           <style>
+body {
+  font-family: sans-serif;
+}
 tr > th {
   width: 20em;
   height: 2em;
