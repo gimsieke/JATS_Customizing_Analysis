@@ -5,15 +5,16 @@
   <rng uri="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng" name="Pumpkin"/>
   <collection uri="articles/SO_plus_DeGruyter/" name="SO_plus_DeGruyter"/>
   <collection uri="articles/SO_plus_DeGruyter/DeGruyter" name="DeGruyter"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/biol.2020.15.issue-1" name="DeGruyterBiol" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/cclm.ahead-of-print" name="DeGruyterCCLM" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/chem.2020.18.issue-1" name="DeGruyterChem" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/epoly.2020.20.issue-1" name="DeGruyterEPoly" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/jnet.ahead-of-print" name="DeGruyterJNet" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/med.2020.15.issue-1" name="DeGruyterMed" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/polyeng.ahead-of-print" name="DeGruyterPolyEng" class="STEM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/prhz.ahead-of-print" name="DeGruyterPRHZ" class="HUM"/>
-  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/zfsoz.2020.49.issue-1" name="DeGruyterZfSoz" class="HUM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/cdbme.2020.6.issue-3" name="DeGruyterBiomedEng" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/comp.2020.11.issue-1" name="DeGruyterOpenCompSci" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/math.2019.17.issue-1" name="DeGruyterOpenMath" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/nanoph.2021.10.issue-3" name="DeGruyterNanoPhot" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/ncrs.2020.235.issue-6" name="DeGruyterNewCryst" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/opar.2019.5.issue-1" name="DeGruyterOpenArch" class="STEM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/openec.2020.3.issue-1" name="DeGruyterOpenEcon" class="ECON"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/opli.2020.6.issue-1" name="DeGruyterOpenLing" class="HUM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/opphil.2020.3.issue-1" name="DeGruyterOpenPhilos" class="HUM"/>
+  <collection uri="articles/SO_plus_DeGruyter/DeGruyter/psych.2020.2.issue-1" name="DeGruyterOpenPsych" class="STEM"/>
   <collection uri="articles/SO_plus_DeGruyter/ScienceOpen/" name="ScienceOpen"/>
   <collection uri="articles/SO_plus_DeGruyter/ScienceOpen/SO_Humanities_SocialSciences/" name="SO_Humanities_SocialSciences"
     class="HUM"/>
