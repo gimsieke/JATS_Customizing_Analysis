@@ -463,7 +463,7 @@ tr.summary > * {
   <xsl:function name="xhtml:index-of" as="xs:integer*">
     <xsl:param name="all-items" as="node()*"/>
     <xsl:param name="search-items" as="node()*"/>
-    <xsl:sequence select="index-of($all-items ! generate-id(.), $search-items ! generate-id(.))"/>
+    <xsl:sequence select="distinct-values(for $s in $search-items return index-of($all-items ! generate-id(.), generate-id($s)))"/>
   </xsl:function>
 
 </xsl:stylesheet>
