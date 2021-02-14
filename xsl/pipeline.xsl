@@ -59,7 +59,7 @@
   
   <xsl:template match="rng">
     <xsl:variable name="file-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
-    <xsl:variable name="html-list-uri" as="xs:string" select="replace($file-uri, '\.rng$', '.xhtml')"/>
+    <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri,$base-dir-uri)"/>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
@@ -93,9 +93,26 @@
     </xsl:choose>
   </xsl:template>
   
+  <xsl:function name="html:cache-uri" as="xs:anyURI">
+    <xsl:param name="uri" as="xs:string"/>
+    <xsl:param name="base-dir-uri" as="xs:string"/>
+    <xsl:if test="contains($uri, '\')">
+      <xsl:message terminate="yes" select="'URI must not contain backslash: ', $uri"/>
+    </xsl:if>
+    <xsl:variable name="relative" as="xs:string" 
+      select="if (starts-with($uri, '/') or contains($uri, ':'))
+              then replace($uri, '^[a-z:/]+', '')
+              else $uri"/>
+    <xsl:variable name="html-file-name" as="xs:string" 
+      select="if (matches($relative, '\.rng$', 'i'))
+              then replace($relative, '\.rng$', '.xhtml')
+              else replace($relative, '(.+?)/*$', '$1.xhtml')"/>
+    <xsl:sequence select="resolve-uri($html-file-name, $base-dir-uri || '/cache/')"/>
+  </xsl:function>
+  
   <xsl:template match="collection">
     <xsl:variable name="dir-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
-    <xsl:variable name="html-list-uri" as="xs:string" select="replace($dir-uri, '^(.+?/([^/]+))/*$', '$1/$2.xhtml')"/>
+    <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri,$base-dir-uri)"/>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
