@@ -41,6 +41,7 @@
                              'stylesheet-params': map{
                                                        xs:QName('html-docs'): $html-lists,
                                                        xs:QName('base-dir-uri'): $base-dir-uri,
+                                                       xs:QName('primary-output-uri'): current-output-uri(),
                                                        xs:QName('conf-file'): base-uri()
                                                      }
                            })"/>

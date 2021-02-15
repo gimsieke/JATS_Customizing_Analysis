@@ -10,6 +10,7 @@
   <xsl:output indent="yes" method="xml"/>
 
   <xsl:param name="base-dir-uri" as="xs:string?"/>
+  <xsl:param name="primary-output-uri" as="xs:string?"/>
 
   <xsl:param name="html-docs" as="document-node()*"
     select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
@@ -18,7 +19,7 @@
 
   <xsl:template name="main">
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[@id='elements']"/>
-    <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>
+<!--    <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>-->
     <xsl:variable name="customizations" as="document-node(element(customizations))">
       <xsl:document>
         <customizations>
@@ -81,7 +82,7 @@
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$best-fit" mode="html-table"/>
     </xsl:variable>
-    <xsl:result-document href="{replace($conf-file, '\.xml', '.details.xhtml')}" method="xhtml">
+    <xsl:result-document href="{replace($primary-output-uri, '(\.[^.]+)$', '.details$1')}" method="xhtml">
       <xsl:sequence select="$html-table"/>
     </xsl:result-document>
     <xsl:variable name="html-summary" as="document-node(element(xhtml:html))">
@@ -107,7 +108,7 @@
       <!-- Elements of the current customization that are not in the customization referenced by @not-in.
       If this is 0, then the @not-in customization is a superset of the current. -->
     </xsl:variable>
-    <xsl:message select="'JJJJJJJJJJJJJ ', string-join((../@name, @not-in), ',')"/>
+<!--    <xsl:message select="'JJJJJJJJJJJJJ ', string-join((../@name, @not-in), ',')"/>-->
     <xsl:variable name="ji" as="element(*)*" select="key('ij', string-join((../@name, @not-in), ','))"/>
     <xsl:if test="count($ji) gt 1">
       <xsl:message select="'IIIIIIIIIIIII ', ../.."></xsl:message>
@@ -339,7 +340,7 @@ tr.summary > * {
 
   <xsl:template match="xhtml:table" mode="summary" xmlns="http://www.w3.org/1999/xhtml">
     <p>
-      <a href="{replace($conf-file, '^.+/(.+)\.xml', '$1.details.xhtml')}">detailed table</a>
+      <a href="{replace($primary-output-uri, '^.+/(.+)(\.[^.]+)$', '$1.details$2')}">detailed table</a>
     </p>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
