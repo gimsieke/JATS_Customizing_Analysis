@@ -32,7 +32,7 @@
         </xsl:apply-templates>
       </xsl:for-each-group>
     </xsl:variable>
-    <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = 'true')]">
+    <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = ('true', 'exclude'))]">
       <xsl:result-document method="xhtml" 
         href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
         <xsl:apply-templates select="." mode="mark-as-cached"/>
@@ -154,7 +154,12 @@
     <xsl:attribute name="{name()}" select="$customization-name"/>
   </xsl:template>
   
-  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists"/>
+  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists" priority="4">
+    <xsl:copy>
+      <xsl:copy-of select="@name"/>
+      <xsl:attribute name="content" select="'exclude'"/>
+    </xsl:copy>
+  </xsl:template>
   
   <xsl:template match="html:ul[@id = ('attributes', 'elements')]" mode="create-content-class-lists">
     <xsl:param name="all-lists" as="document-node(element(html:html))+" tunnel="yes"/>
