@@ -7,7 +7,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   exclude-result-prefixes="#all">
 
-  <xsl:param name="base-dir-uri" as="xs:string"/>
+  <xsl:param name="base-dir-uri" as="xs:string?" />
 
   <xsl:param name="cache" as="xs:boolean" select="true()"/>
 
@@ -15,8 +15,12 @@
   <xsl:mode name="create-content-class-lists" on-no-match="shallow-copy"/>
 
   <xsl:template match="/customization-stats">
+    <xsl:variable name="base-dir-uri2" as="xs:string" 
+      select="($base-dir-uri, current-output-uri() => replace('[^/]+$', ''))[1]"/>
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
-      <xsl:apply-templates select="*"/>
+      <xsl:apply-templates select="*">
+        <xsl:with-param name="base-dir-uri2" tunnel="yes" as="xs:string" select="$base-dir-uri2"/>
+      </xsl:apply-templates>
     </xsl:variable>
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
       <xsl:sequence select="$html-lists"/>
@@ -40,7 +44,7 @@
                              'initial-template': xs:QName('main'),
                              'stylesheet-params': map{
                                                        xs:QName('html-docs'): $html-lists,
-                                                       xs:QName('base-dir-uri'): $base-dir-uri,
+                                                       xs:QName('base-dir-uri'): $base-dir-uri2,
                                                        xs:QName('primary-output-uri'): current-output-uri(),
                                                        xs:QName('conf-file'): base-uri()
                                                      }
@@ -59,8 +63,9 @@
   </xsl:template>
   
   <xsl:template match="rng">
-    <xsl:variable name="file-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
-    <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri,$base-dir-uri)"/>
+    <xsl:param name="base-dir-uri2" as="xs:string" tunnel="yes"/>
+    <xsl:variable name="file-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri2 || '/')"/>
+    <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri, $base-dir-uri2)"/>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
@@ -112,8 +117,9 @@
   </xsl:function>
   
   <xsl:template match="collection">
-    <xsl:variable name="dir-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri || '/')"/>
-    <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri,$base-dir-uri)"/>
+    <xsl:param name="base-dir-uri2" as="xs:string" tunnel="yes"/>
+    <xsl:variable name="dir-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri2 || '/')"/>
+    <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri, $base-dir-uri2)"/>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
