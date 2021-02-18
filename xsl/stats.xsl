@@ -169,12 +169,12 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
   <xsl:template match="customization/@name" mode="best-fit">
     <xsl:next-match/>
     <xsl:variable name="p5s" as="attribute(p5)*" select="//items[@not-in = current()]/@p5"/>
-    <xsl:attribute name="average_p5" select="format-number(sum($p5s) div count($p5s), '.##')"/>
+    <xsl:attribute name="average_p5" select="if (empty($p5s)) then 0 else format-number(sum($p5s) div count($p5s), '.##')"/>
     <xsl:variable name="s5s" as="attribute(s5)*" select="//items[@not-in = current()]/@s5"/>
-    <xsl:attribute name="average_s5" select="format-number(sum($s5s) div count($s5s), '.##')"/>
+      <xsl:attribute name="average_s5" select="if (empty($s5s)) then 0 else format-number(sum($s5s) div count($s5s), '.##')"/>
     <xsl:variable name="collection-s5s" as="attribute(s5)*" 
       select="/customizations/customization[not(@class = 'schema')]/items[@not-in = current()]/@s5"/>
-    <xsl:attribute name="average_collection-s5" select="format-number(sum($collection-s5s) div count($collection-s5s), '.##')"/>
+      <xsl:attribute name="average_collection-s5" select="if (empty($collection-s5s)) then 0 else format-number(sum($collection-s5s) div count($collection-s5s), '.##')"/>
   </xsl:template>
   
 
