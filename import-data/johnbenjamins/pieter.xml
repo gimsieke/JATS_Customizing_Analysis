@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<articles count="9171">
+  <elements>
+    <abstract id="1" lang="64">5699</abstract>
+    <ack id="292">2876</ack>
+    <addr-line content-type="12713" lang="4">20414</addr-line>
+    <address content-type="5" lang="109" specific-use="2">10909</address>
+    <aff id="10796" lang="391" specific-use="3">11356</aff>
+    <aff-alternatives id="281">281</aff-alternatives>
+    <alt-text>4</alt-text>
+    <alt-title alt-title-type="5532" lang="10" specific-use="93">5631</alt-title>
+    <alternatives>4</alternatives>
+    <app id="1940" lang="4" specific-use="36">2143</app>
+    <app-group id="10" lang="2" specific-use="6">1367</app-group>
+    <array content-type="33525" id="23383" lang="16059" orientation="49">40477</array>
+    <article article-type="8919" dtd-version="182" lang="9171">9171</article>
+    <article-categories>625</article-categories>
+    <article-id pub-id-type="18300">18300</article-id>
+    <article-meta>9175</article-meta>
+    <article-title lang="3185">159101</article-title>
+    <attrib>14340</attrib>
+    <author-comment content-type="8">31</author-comment>
+    <author-notes>3</author-notes>
+    <award-group id="232" specific-use="1">287</award-group>
+    <award-id id="43" rid="324">701</award-id>
+    <back>8534</back>
+    <bio id="538" lang="4">2746</bio>
+    <body>9179</body>
+    <bold toggle="1">121991</bold>
+    <book-part-id book-part-id-type="3">3</book-part-id>
+    <boxed-text content-type="286" id="206" position="7">503</boxed-text>
+    <break>8129</break>
+    <caption content-type="713">31905</caption>
+    <chapter-title lang="1256">69047</chapter-title>
+    <citation-alternatives>11</citation-alternatives>
+    <city specific-use="20">3227</city>
+    <code code-type="274" language="3">1143</code>
+    <col span="1106" style="1107" width="75">1192</col>
+    <colgroup span="2" width="2">379</colgroup>
+    <collab collab-type="1" lang="15" type="1">8459</collab>
+    <comment lang="16">128866</comment>
+    <conf-date iso-8601-date="5">1171</conf-date>
+    <conf-loc>1896</conf-loc>
+    <conf-name>2698</conf-name>
+    <conf-sponsor>38</conf-sponsor>
+    <conference>5</conference>
+    <contrib contrib-type="14024" corresp="2017" deceased="1" id="3">14095</contrib>
+    <contrib-group content-type="530">9240</contrib-group>
+    <contrib-id authenticated="1" content-type="1" contrib-id-type="24952" specific-use="1133">24954</contrib-id>
+    <copyright-holder>287</copyright-holder>
+    <copyright-statement>9189</copyright-statement>
+    <copyright-year>1318</copyright-year>
+    <country country="18715" specific-use="67">19273</country>
+    <counts>7</counts>
+    <custom-meta specific-use="3618">3625</custom-meta>
+    <custom-meta-group>3605</custom-meta-group>
+    <data-title>5</data-title>
+    <date date-type="5495" iso-8601-date="7">5495</date>
+    <date-in-citation content-type="7075">7075</date-in-citation>
+    <day>24339</day>
+    <def>11766</def>
+    <def-head>1</def-head>
+    <def-item>11771</def-item>
+    <def-list id="10">567</def-list>
+    <degrees>198</degrees>
+    <disp-formula id="347">999</disp-formula>
+    <disp-quote content-type="1578" id="6300" lang="438">18246</disp-quote>
+    <edition>5248</edition>
+    <email content-type="4">10580</email>
+    <etal>1807</etal>
+    <ext-link ext-link-type="213" href="197">234</ext-link>
+    <fax>5</fax>
+    <fig fig-type="1" id="15454" orientation="112" position="381">15533</fig>
+    <fig-group id="660" orientation="12" position="33">673</fig-group>
+    <fn fn-type="1" id="54540" lang="1">54561</fn>
+    <fn-group content-type="3">6974</fn-group>
+    <fpage id="3">204014</fpage>
+    <front>9175</front>
+    <funding-group specific-use="6">640</funding-group>
+    <funding-source id="379" lang="2" rid="47">839</funding-source>
+    <funding-statement>535</funding-statement>
+    <given-names>650325</given-names>
+    <glossary id="25">431</glossary>
+    <graphic alt="1" content-type="2" href="18582" id="19" mime-subtype="222" orientation="910" position="56"
+      specific-use="3">18582</graphic>
+    <history>1916</history>
+    <inline-formula>6</inline-formula>
+    <inline-graphic href="2274" id="225" mime-subtype="69">2274</inline-graphic>
+    <inline-supplementary-material href="89" specific-use="73" title="89">89</inline-supplementary-material>
+    <institution content-type="8241" lang="61">29050</institution>
+    <institution-id institution-id-type="9938" specific-use="32">9938</institution-id>
+    <institution-wrap>11219</institution-wrap>
+    <isbn publication-format="109">1389</isbn>
+    <issn pub-type="16082" publication-format="16030">16112</issn>
+    <issue>86781</issue>
+    <issue-id pub-id-type="43">43</issue-id>
+    <issue-title>23</issue-title>
+    <italic toggle="1184">910040</italic>
+    <journal-id journal-id-type="25060">25060</journal-id>
+    <journal-meta>9148</journal-meta>
+    <journal-subtitle>3410</journal-subtitle>
+    <journal-title>9146</journal-title>
+    <journal-title-group>9146</journal-title-group>
+    <kwd>32653</kwd>
+    <kwd-group kwd-group-type="6" lang="571" specific-use="1">5854</kwd-group>
+    <label id="1" lang="1">251539</label>
+    <license license-type="825">825</license>
+    <license-p>825</license-p>
+    <list continued-from="2" id="78134" lang="142" list-content="60583" list-type="95606" type="1">96236</list>
+    <list-item id="832" lang="5">180293</list-item>
+    <lpage>202060</lpage>
+    <media href="70" id="70" mime-subtype="69" mimetype="70" orientation="1" position="70" specific-use="69">70</media>
+    <meta-name>3625</meta-name>
+    <meta-value>3625</meta-value>
+    <mixed-citation lang="9" publication-format="72" publication-type="332425">332438</mixed-citation>
+    <monospace>1534</monospace>
+    <month>25375</month>
+    <name content-type="214" lang="245" name-style="1244">16657</name>
+    <name-alternatives>3167</name-alternatives>
+    <named-content content-type="43532" id="18" lang="8848">43532</named-content>
+    <note>141</note>
+    <notes notes-type="311">312</notes>
+    <object-id pub-id-type="60" specific-use="60">60</object-id>
+    <overline>2</overline>
+    <p content-type="8068" id="394943" lang="15470">787195</p>
+    <page-count count="7">7</page-count>
+    <page-range>817</page-range>
+    <part-title>9</part-title>
+    <permissions>9147</permissions>
+    <person-group person-group-type="391649">393168</person-group>
+    <phone>17</phone>
+    <postal-code>2972</postal-code>
+    <prefix>68</prefix>
+    <preformat lang="3" orientation="3" position="3" space="1795" specific-use="1849">2020</preformat>
+    <price>808</price>
+    <principal-award-recipient>195</principal-award-recipient>
+    <principal-investigator>11</principal-investigator>
+    <product id="798" lang="10" product-type="1">1610</product>
+    <pub-date date-type="15365" iso-8601-date="15010" pub-type="16434" publication-format="15333">16526</pub-date>
+    <pub-id pub-id-type="164988" specific-use="11218">164988</pub-id>
+    <publisher>9148</publisher>
+    <publisher-loc lang="56">165961</publisher-loc>
+    <publisher-name lang="67">186936</publisher-name>
+    <rb>1040</rb>
+    <ref content-type="11" id="332449" lang="25">332449</ref>
+    <ref-list content-type="5" id="9" lang="1">9424</ref-list>
+    <related>1</related>
+    <related-article elocation-id="3" ext-link-type="4241" href="4237" issue="3" page="154" related-article-type="4241"
+      vol="155">4241</related-article>
+    <related-object content-type="83293" object-id="82847" specific-use="82847">83293</related-object>
+    <role lang="3">76908</role>
+    <roman lang="7">12</roman>
+    <rt id="1">1040</rt>
+    <ruby content-type="862" id="2">1040</ruby>
+    <sc>199595</sc>
+    <season>2</season>
+    <sec disp-level="152" id="79856" lang="10" sec-type="16269">88627</sec>
+    <sec-meta>25</sec-meta>
+    <self-uri content-type="8002" href="8002">8002</self-uri>
+    <series>5461</series>
+    <sig>142</sig>
+    <sig-block content-type="1">141</sig-block>
+    <size units="620">620</size>
+    <source content-type="1" lang="5847">317600</source>
+    <speaker>6126</speaker>
+    <speech id="2">6126</speech>
+    <state>1289</state>
+    <std>2</std>
+    <std-organization>2</std-organization>
+    <strike>1259</strike>
+    <string-name content-type="1" lang="3401" name-style="4754" specific-use="36">638764</string-name>
+    <styled-content lang="3220" specific-use="174" style="1" style-type="11317">14599</styled-content>
+    <sub arrange="98">43367</sub>
+    <sub-article article-type="4" lang="4">4</sub-article>
+    <subj-group subj-group-type="669">692</subj-group>
+    <subject content-type="6">692</subject>
+    <subtitle lang="1">3845</subtitle>
+    <suffix>688</suffix>
+    <sup arrange="98">40502</sup>
+    <supplement>3</supplement>
+    <surname>652032</surname>
+    <table border="1" cellpadding="4" content-type="36" frame="18448" id="2" rules="19032" style="1" width="8"
+      >19589</table>
+    <table-wrap id="19590" lang="2" orientation="366" position="289" specific-use="3">19801</table-wrap>
+    <table-wrap-foot>3266</table-wrap-foot>
+    <table-wrap-group id="99" orientation="2" position="7">103</table-wrap-group>
+    <target id="5083" target-type="5083">5083</target>
+    <tbody align="4" id="7">63240</tbody>
+    <td align="883394" char="213" colspan="16266" content-type="11483" id="573" rowspan="19067" style="207"
+      valign="16942">1427330</td>
+    <term id="11381">11771</term>
+    <term-head>1</term-head>
+    <textual-form>1</textual-form>
+    <tfoot>76</tfoot>
+    <th align="106660" colspan="13207" content-type="1419" id="12" rowspan="6840" style="31" valign="2027">107372</th>
+    <thead align="2">17495</thead>
+    <title id="206">152022</title>
+    <title-group>9094</title-group>
+    <tr align="3" content-type="3552" id="46" style="85" valign="16893">300606</tr>
+    <trans-abstract base="1" lang="1167" specific-use="1">1177</trans-abstract>
+    <trans-source content-type="1773" lang="6216">8322</trans-source>
+    <trans-subtitle lang="3">90</trans-subtitle>
+    <trans-title content-type="1320" lang="4864">8162</trans-title>
+    <trans-title-group lang="1751">1916</trans-title-group>
+    <underline underline-style="222">32511</underline>
+    <uri content-type="2" href="27093" lang="1" type="1">27158</uri>
+    <verse-group content-type="9" id="320" lang="157">1025</verse-group>
+    <verse-line id="23" lang="52">5600</verse-line>
+    <volume lang="1">145921</volume>
+    <x lang="72" space="6477">3402649</x>
+    <xref alt="30" ref-type="793018" rid="793533" specific-use="189">793543</xref>
+    <year>359953</year>
+  </elements>
+  <elements prefix="mml">
+    <math display="6" overflow="6">16</math>
+    <mfrac>3</mfrac>
+    <mi mathvariant="6">90</mi>
+    <mn>63</mn>
+    <mo>101</mo>
+    <mrow>14</mrow>
+    <msub>31</msub>
+    <msubsup>16</msubsup>
+    <msup>16</msup>
+  </elements>
+  <elements prefix="ali">
+    <free_to_read end_date="608" start_date="608">622</free_to_read>
+    <license_ref start_date="24">249</license_ref>
+  </elements>
+</articles>

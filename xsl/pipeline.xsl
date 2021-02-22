@@ -110,31 +110,47 @@
               then replace($uri, '^[a-z:/]+', '')
               else $uri"/>
     <xsl:variable name="html-file-name" as="xs:string" 
-      select="if (matches($relative, '\.rng$', 'i'))
-              then replace($relative, '\.rng$', '.xhtml')
-              else replace($relative, '(.+?)/*$', '$1.xhtml')"/>
+      select="if (matches($relative, '\.xhtml$'))
+              then $relative
+              else if (matches($relative, '\.rng$', 'i'))
+                   then replace($relative, '\.rng$', '.xhtml')
+                   else replace($relative, '(.+?)/*$', '$1.xhtml')"/>
     <xsl:sequence select="resolve-uri($html-file-name, $base-dir-uri || '/cache/')"/>
   </xsl:function>
   
-  <xsl:template match="collection">
+  <xsl:template match="collection | prefab">
     <xsl:param name="base-dir-uri2" as="xs:string" tunnel="yes"/>
-    <xsl:variable name="dir-uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri2 || '/')"/>
+    <xsl:variable name="uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri2 || '/')"/>
     <xsl:variable name="html-list-uri" as="xs:anyURI" select="html:cache-uri(@uri, $base-dir-uri2)"/>
     <xsl:choose>
       <xsl:when test="doc-available($html-list-uri)">
         <xsl:sequence select="doc($html-list-uri)"/>
       </xsl:when>
-      <xsl:otherwise>
+      <xsl:when test="self::collection">
         <xsl:variable name="html-list" as="document-node(element(html:html))"
           select="transform(
                     map{
                       'initial-template': xs:QName('main'), 
                       'stylesheet-location': 'collection-list.xsl',
                       'stylesheet-params': map{
-                                                xs:QName('base-dir-uri'): $dir-uri,
+                                                xs:QName('base-dir-uri'): $uri,
                                                 xs:QName('name'): @name,
                                                 xs:QName('storage-location'): $html-list-uri,
                                                 xs:QName('content-class'): @class
+                                              }
+                    }
+                  )?output"/>
+        <xsl:sequence select="$html-list"/>
+      </xsl:when>
+      <xsl:otherwise><!-- self::prefab -->
+        <xsl:variable name="html-list" as="document-node(element(html:html))"
+          select="transform(
+                    map{
+                      'source-node': doc($uri), 
+                      'stylesheet-location': 'prefab-list.xsl',
+                      'stylesheet-params': map{
+                                                xs:QName('name'): @name,
+                                                xs:QName('storage-location'): $html-list-uri
                                               }
                     }
                   )?output"/>
