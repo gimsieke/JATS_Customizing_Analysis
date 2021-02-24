@@ -105,10 +105,10 @@
 
   <xsl:template match="customization/*[@not-in]" mode="compute">
     <xsl:variable name="a_ij" as="xs:integer" select="@count">
-      <!-- Elements of the current customization that are not in the customization referenced by @not-in.
-      If this is 0, then the @not-in customization is a superset of the current. -->
+      <!-- Count of items (elements/attributes) in the current customization (i) that are not in the customization 
+        referenced by @not-in (j). If this is 0, then the @not-in customization is a superset of the current.
+      In other words: a_ij is the number of additions that need to be made to j on the way to obtaining i. -->
     </xsl:variable>
-<!--    <xsl:message select="'JJJJJJJJJJJJJ ', string-join((../@name, @not-in), ',')"/>-->
     <xsl:variable name="ji" as="element(*)*" select="key('ij', string-join((../@name, @not-in), ','))"/>
     <xsl:if test="count($ji) gt 1">
       <xsl:message select="'IIIIIIIIIIIII ', ../.."></xsl:message>
