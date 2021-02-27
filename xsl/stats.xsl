@@ -110,9 +110,9 @@
       In other words: a_ij is the number of additions that need to be made to j on the way to obtaining i. -->
     </xsl:variable>
     <xsl:variable name="ji" as="element(*)*" select="key('ij', string-join((../@name, @not-in), ','))"/>
-    <xsl:if test="count($ji) gt 1">
-      <xsl:message select="'IIIIIIIIIIIII ', ../.."></xsl:message>
-    </xsl:if>
+    <!--<xsl:if test="count($ji) gt 1">
+      <xsl:message select="'IIIIIIIIIIIII ', $ji/.."></xsl:message>
+    </xsl:if>-->
     <xsl:variable name="a_ji" as="xs:integer" select="$ji/@count"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
@@ -254,6 +254,9 @@ tr.summary > * {
               <xsl:sort select="."/>
             </xsl:perform-sort>
           </xsl:variable>
+          <xsl:if test="not(count($all-customizings) = count(distinct-values($all-customizings)))">
+            <xsl:message terminate="yes" select="'Duplicate customizing: ', $all-customizings"></xsl:message>
+          </xsl:if>
           <table>
             <tr class="colheads">
               <th class="origin">“Supersetticity” (s5) and aptness as customization starting point (q5) 

@@ -7,12 +7,17 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   exclude-result-prefixes="#all">
 
-  <xsl:param name="base-dir-uri" as="xs:string?" />
+  <xsl:param name="base-dir-uri" as="xs:string?">
+    <!-- Relative paths in the conf file will be resolved against this URI.
+      If it is omitted, the output XHTML file’s URI (or rather, its directory) will be used.
+    -->
+  </xsl:param>
 
   <xsl:param name="cache" as="xs:boolean" select="true()"/>
 
   <xsl:mode name="mark-as-cached" on-no-match="shallow-copy"/>
   <xsl:mode name="create-content-class-lists" on-no-match="shallow-copy"/>
+  <xsl:mode name="cache-collection" on-no-match="shallow-copy"/>
 
   <xsl:template match="/customization-stats">
     <xsl:variable name="base-dir-uri2" as="xs:string" 
@@ -33,11 +38,19 @@
       </xsl:for-each-group>
     </xsl:variable>
     <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = ('true', 'exclude'))]">
+      <xsl:variable name="storage-location" as="xs:string?" 
+        select="html:html/html:head/html:meta[@name='storage-location']/@content"/>
+      <xsl:if test="empty($storage-location)">
+        <xsl:message terminate="yes" 
+          select="'A meta element with the name ''storage-location'' must be present unless the meta element named ''cached'' is ''true'' or ''exclude''. All meta elements: ', 
+          html:html/html:head/html:meta"/>
+      </xsl:if>
       <xsl:result-document method="xhtml" 
         href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
         <xsl:apply-templates select="." mode="mark-as-cached"/>
       </xsl:result-document>
     </xsl:for-each>
+
     <xsl:variable name="stats" as="map(xs:string, item())" 
       select="transform(map{
                              'stylesheet-location': 'stats.xsl',
@@ -118,6 +131,13 @@
     <xsl:sequence select="resolve-uri($html-file-name, $base-dir-uri || '/cache/')"/>
   </xsl:function>
   
+  <xsl:template match="cache-collection">
+    <xsl:param name="base-dir-uri2" tunnel="yes" as="xs:string"/>
+    <xsl:apply-templates select="collection(resolve-uri(@uri, $base-dir-uri2 || '/') || '?recurse=yes;select=*.xhtml')
+                            [not(html:html/html:body/@class = (: suppress generated per-class customization lists :) 
+                                 html:html/html:head/html:meta[@name='customization-name']/@content)]" mode="cache-collection"/>
+  </xsl:template>
+  
   <xsl:template match="collection | prefab">
     <xsl:param name="base-dir-uri2" as="xs:string" tunnel="yes"/>
     <xsl:variable name="uri" as="xs:anyURI" select="resolve-uri(@uri, $base-dir-uri2 || '/')"/>
@@ -170,7 +190,7 @@
     <xsl:attribute name="{name()}" select="$customization-name"/>
   </xsl:template>
   
-  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists" priority="4">
+  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists cache-collection" priority="4">
     <xsl:copy>
       <xsl:copy-of select="@name"/>
       <xsl:attribute name="content" select="'exclude'"/>
