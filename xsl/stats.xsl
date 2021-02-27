@@ -107,12 +107,12 @@
     <xsl:variable name="a_ij" as="xs:integer" select="@count">
       <!-- Count of items (elements/attributes) in the current customization (i) that are not in the customization 
         referenced by @not-in (j). If this is 0, then the @not-in customization is a superset of the current.
-      In other words: a_ij is the number of additions that need to be made to j on the way to obtaining i. -->
+      In other words: a_ij is the number of additions that need to be made to j on the way towards obtaining i. -->
     </xsl:variable>
     <xsl:variable name="ji" as="element(*)*" select="key('ij', string-join((../@name, @not-in), ','))"/>
-    <!--<xsl:if test="count($ji) gt 1">
-      <xsl:message select="'IIIIIIIIIIIII ', $ji/.."></xsl:message>
-    </xsl:if>-->
+    <xsl:if test="count($ji) gt 1">
+      <xsl:message select="'Duplicate customization? ', $ji/../@*"></xsl:message>
+    </xsl:if>
     <xsl:variable name="a_ji" as="xs:integer" select="$ji/@count"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
