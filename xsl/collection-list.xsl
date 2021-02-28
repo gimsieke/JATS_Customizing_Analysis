@@ -14,7 +14,7 @@
   <xsl:param name="cached" as="xs:boolean?"/>
 
   <xsl:template name="main">
-    <xsl:variable name="uris" as="xs:anyURI*" select="uri-collection($base-dir-uri || '?recurse=yes;select=*.xml')"/>
+    <xsl:variable name="uris" as="xs:anyURI*" select="uri-collection($base-dir-uri || '?recurse=yes;select=*.?xml')"/>
     <xsl:variable name="xml-docs" as="document-node()*"
       select="$uris 
                 ! (unparsed-text(.) 

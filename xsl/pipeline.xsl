@@ -70,15 +70,19 @@
     <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = ('true', 'exclude'))]">
       <!-- Write HTML lists into th cache directory (unless they have already been read from the cache as 
         per their 'cached' meta element) -->
-      <xsl:variable name="storage-location" as="xs:string?" 
+      <xsl:variable name="storage-location" as="xs:string*" 
         select="html:html/html:head/html:meta[@name='storage-location']/@content"/>
       <xsl:if test="empty($storage-location)">
         <xsl:message terminate="yes" 
           select="'A meta element with the name ''storage-location'' must be present unless the meta element named ''cached'' is ''true'' or ''exclude''. All meta elements: ', 
           html:html/html:head/html:meta"/>
       </xsl:if>
+      <xsl:if test="count($storage-location) gt 1">
+        <xsl:message terminate="yes" 
+          select="'More than one ''storage-location''. All meta elements: ', html:html/html:head"/>
+      </xsl:if>
       <xsl:result-document method="xhtml" 
-        href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
+        href="{html:html/html:head/html:meta[@name='storage-location'][1]/@content}">
         <xsl:apply-templates select="." mode="mark-as-cached"/>
       </xsl:result-document>
     </xsl:for-each>
@@ -153,7 +157,7 @@
     <xsl:variable name="relative" as="xs:string" 
       select="if (starts-with($uri, '/') or contains($uri, ':'))
               then replace($uri, '^[a-z:/]+', '')
-              else $uri"/>
+              else $uri => replace('^(../)+', '')"/>
     <xsl:variable name="html-file-name" as="xs:string" 
       select="if (matches($relative, '\.xhtml$'))
               then $relative
@@ -237,11 +241,8 @@
     <xsl:attribute name="{name()}" select="$customization-name"/>
   </xsl:template>
   
-  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists" priority="4">
-    <xsl:copy>
-      <xsl:copy-of select="@name"/>
-      <xsl:attribute name="content" select="'exclude'"/>
-    </xsl:copy>
+  <xsl:template match="html:meta[@name='cached']/@content" mode="create-content-class-lists" priority="4">
+    <xsl:attribute name="{name()}" select="'exclude'"/>
   </xsl:template>
   
   <xsl:template match="html:meta[@name='cached']" mode="cache-collection" priority="4">
@@ -294,14 +295,9 @@
   <xsl:template match="html:meta[last()]" mode="create-content-class-lists" priority="5">
     <xsl:param name="class" as="xs:string?" tunnel="yes"/>
     <xsl:next-match/>
-    <xsl:choose>
-      <xsl:when test="$class">
-        <meta xmlns="http://www.w3.org/1999/xhtml" name="pre-generated-summary" content="{$class}"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:next-match/>
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:if test="$class">
+      <meta xmlns="http://www.w3.org/1999/xhtml" name="pre-generated-summary" content="{$class}"/>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="html:meta[@name='is-top-level-collection']" mode="create-content-class-lists"/>
