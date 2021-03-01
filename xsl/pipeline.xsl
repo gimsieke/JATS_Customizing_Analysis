@@ -35,7 +35,12 @@
       <xsl:sequence select="$html-lists"/>
       <!-- Create HTML lists for each content class. They will be stored at arbitrary locations
         (where the first “real” HTML list file with each class was located) -->
-      <xsl:for-each-group select="$html-lists[html:html/html:body[@class[not(. = 'schema')]]]" 
+      <xsl:for-each-group 
+        select="$html-lists[
+                  html:html[
+                    empty(html:head/html:meta[@name = 'pre-generated-summary'])
+                  ]/html:body[@class[not(. = 'schema')]]
+                ]" 
         group-by="html:html/html:body/@class">
         <xsl:apply-templates select="." mode="create-content-class-lists">
           <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="current-group()" tunnel="yes"/>
@@ -61,18 +66,23 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
+    
     <xsl:for-each select="$html-lists[not(html:html/html:head/html:meta[@name = 'cached']/@content = ('true', 'exclude'))]">
       <!-- Write HTML lists into th cache directory (unless they have already been read from the cache as 
         per their 'cached' meta element) -->
-      <xsl:variable name="storage-location" as="xs:string?" 
+      <xsl:variable name="storage-location" as="xs:string*" 
         select="html:html/html:head/html:meta[@name='storage-location']/@content"/>
       <xsl:if test="empty($storage-location)">
         <xsl:message terminate="yes" 
           select="'A meta element with the name ''storage-location'' must be present unless the meta element named ''cached'' is ''true'' or ''exclude''. All meta elements: ', 
           html:html/html:head/html:meta"/>
       </xsl:if>
+      <xsl:if test="count($storage-location) gt 1">
+        <xsl:message terminate="yes" 
+          select="'More than one ''storage-location''. All meta elements: ', html:html/html:head"/>
+      </xsl:if>
       <xsl:result-document method="xhtml" 
-        href="{html:html/html:head/html:meta[@name='storage-location']/@content}">
+        href="{html:html/html:head/html:meta[@name='storage-location'][1]/@content}">
         <xsl:apply-templates select="." mode="mark-as-cached"/>
       </xsl:result-document>
     </xsl:for-each>
@@ -147,7 +157,7 @@
     <xsl:variable name="relative" as="xs:string" 
       select="if (starts-with($uri, '/') or contains($uri, ':'))
               then replace($uri, '^[a-z:/]+', '')
-              else $uri"/>
+              else $uri => replace('^(../)+', '')"/>
     <xsl:variable name="html-file-name" as="xs:string" 
       select="if (matches($relative, '\.xhtml$'))
               then $relative
@@ -163,11 +173,19 @@
       select="string(resolve-uri(@uri, $base-dir-uri2 || '/'))"/>
     <xsl:variable name="top-level-uris" as="xs:string*" 
       select="uri-collection($cache-collection-uri || '?select=*.xhtml') ! string(.)"/>
-    <xsl:apply-templates select="collection($cache-collection-uri || '?recurse=yes;select=*.xhtml')
-                            [not(html:html/html:body/@class = (: suppress generated per-class customization lists :) 
-                                 html:html/html:head/html:meta[@name='customization-name']/@content)]" mode="cache-collection">
-      <xsl:with-param name="cache-collection-uri" tunnel="yes" as="xs:string" select="$cache-collection-uri"/>
-      <xsl:with-param name="top-level-uris" tunnel="yes" as="xs:string*" select="$top-level-uris"/>
+    <xsl:variable name="collection-member-lists" as="document-node(element(html:html))*">
+      <xsl:apply-templates select="collection($cache-collection-uri || '?recurse=yes;select=*.xhtml')
+                              [not(html:html/html:body/@class = (: suppress generated per-class customization lists :) 
+                                   html:html/html:head/html:meta[@name='customization-name']/@content)]" mode="cache-collection">
+        <xsl:with-param name="cache-collection-uri" tunnel="yes" as="xs:string" select="$cache-collection-uri"/>
+        <xsl:with-param name="top-level-uris" tunnel="yes" as="xs:string*" select="$top-level-uris"/>
+      </xsl:apply-templates>  
+    </xsl:variable>
+    <xsl:sequence select="$collection-member-lists"/>
+    <xsl:apply-templates select="$collection-member-lists[1]" mode="create-content-class-lists">
+      <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="$collection-member-lists" tunnel="yes"/>
+      <xsl:with-param name="customization-name" as="xs:string" select="@name" tunnel="yes"/>
+      <xsl:with-param name="class" as="xs:string" select="@name" tunnel="yes"/>
     </xsl:apply-templates>
   </xsl:template>
   
@@ -223,11 +241,8 @@
     <xsl:attribute name="{name()}" select="$customization-name"/>
   </xsl:template>
   
-  <xsl:template match="html:meta[@name='cached']" mode="create-content-class-lists" priority="4">
-    <xsl:copy>
-      <xsl:copy-of select="@name"/>
-      <xsl:attribute name="content" select="'exclude'"/>
-    </xsl:copy>
+  <xsl:template match="html:meta[@name='cached']/@content" mode="create-content-class-lists" priority="4">
+    <xsl:attribute name="{name()}" select="'exclude'"/>
   </xsl:template>
   
   <xsl:template match="html:meta[@name='cached']" mode="cache-collection" priority="4">
@@ -261,4 +276,30 @@
     </xsl:copy>
   </xsl:template>
   
+  <xsl:template match="html:body" mode="create-content-class-lists">
+    <xsl:param name="class" as="xs:string?" tunnel="yes"/>
+    <xsl:choose>
+      <xsl:when test="$class">
+        <xsl:copy>
+          <xsl:apply-templates select="@* except @class" mode="#current"/>
+          <xsl:attribute name="class" select="$class"/>
+          <xsl:apply-templates mode="#current"/>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="html:meta[last()]" mode="create-content-class-lists" priority="5">
+    <xsl:param name="class" as="xs:string?" tunnel="yes"/>
+    <xsl:next-match/>
+    <xsl:if test="$class">
+      <meta xmlns="http://www.w3.org/1999/xhtml" name="pre-generated-summary" content="{$class}"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="html:meta[@name='is-top-level-collection']" mode="create-content-class-lists"/>
+
 </xsl:stylesheet>
