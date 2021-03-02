@@ -23,6 +23,13 @@
   <xsl:mode name="cache-collection" on-no-match="shallow-copy"/>
 
   <xsl:template match="/customization-stats">
+    <!-- Child elements:
+      collection: @uri is a directory that contains JATS articles
+      prefab: @uri points to an XHTML list that is not cached yet OR 
+              @uri points to a directory with XHTML lists that are not cached yet
+      cache-collection: @uri is a directory that contains XHTML lists that stem from a cache directory
+      rng: @uri points to a Relax NG schema 
+      -->
     <xsl:variable name="base-dir-uri2" as="xs:string" 
       select="($base-dir-uri, current-output-uri() => replace('[^/]+$', ''))[1]"/>
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
@@ -152,11 +159,11 @@
     <xsl:param name="uri" as="xs:string"/>
     <xsl:param name="base-dir-uri" as="xs:string"/>
     <xsl:if test="contains($uri, '\')">
-      <xsl:message terminate="yes" select="'URI must not contain backslash: ', $uri"/>
+      <xsl:message terminate="yes" select="'URI must not contain a backslash: ', $uri"/>
     </xsl:if>
     <xsl:variable name="relative" as="xs:string" 
       select="if (starts-with($uri, '/') or contains($uri, ':'))
-              then replace($uri, '^[a-z:/]+', '')
+              then replace($uri, '^([a-z]*:/+)+', '', 'i') (: drive letter or file: :)
               else $uri => replace('^(../)+', '')"/>
     <xsl:variable name="html-file-name" as="xs:string" 
       select="if (matches($relative, '\.xhtml$'))
@@ -213,7 +220,36 @@
                   )?output"/>
         <xsl:sequence select="$html-list"/>
       </xsl:when>
-      <xsl:otherwise><!-- self::prefab -->
+      <xsl:when test="exists(self::prefab) and not(doc-available($uri))"><!-- prefab/@uri probably points to a directory -->
+        <xsl:variable name="html-list-uris" as="xs:string*" select="uri-collection($uri || '?select=*.xhtml') ! string(.)"/>
+        <xsl:variable name="cached-lists" as="document-node(element(html:html))*">
+          <xsl:for-each select="$html-list-uris">
+            <xsl:variable name="html-list" as="document-node(element(html:html))" select="doc(.)"/>
+            <xsl:variable name="relative" as="xs:string" select="substring-after(., $base-dir-uri2)"/>
+            <xsl:message select="'UUUUUUUUUUU ', html:cache-uri($relative, $base-dir-uri2)"></xsl:message>
+            <xsl:sequence
+              select="transform(
+                        map{
+                          'source-node': doc(.), 
+                          'stylesheet-location': 'prefab-list.xsl',
+                          'stylesheet-params': map{
+                                                    xs:QName('name'): $html-list/html:html/html:head/html:meta[@name='customization-name']/@content,
+                                                    xs:QName('storage-location'): html:cache-uri($relative, $base-dir-uri2),
+                                                    xs:QName('cached'): false()
+                                                  }
+                        }
+                      )?output"/>
+          </xsl:for-each>
+        </xsl:variable>
+        <xsl:sequence select="$cached-lists"/>
+        <xsl:variable name="classes" as="xs:string*" select="distinct-values($cached-lists/html:html/html:body/@class)"/>
+        <xsl:apply-templates select="$cached-lists[1]" mode="create-content-class-lists">
+          <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="$cached-lists" tunnel="yes"/>
+          <xsl:with-param name="customization-name" as="xs:string" select="@name" tunnel="yes"/>
+          <xsl:with-param name="class" as="xs:string" select="if (count($classes) = 1) then $classes else ''" tunnel="yes"/>
+        </xsl:apply-templates>  
+      </xsl:when>
+      <xsl:otherwise><!-- prefab/@uri points to an XHTML list -->
         <xsl:variable name="html-list" as="document-node(element(html:html))"
           select="transform(
                     map{
@@ -279,7 +315,7 @@
   <xsl:template match="html:body" mode="create-content-class-lists">
     <xsl:param name="class" as="xs:string?" tunnel="yes"/>
     <xsl:choose>
-      <xsl:when test="$class">
+      <xsl:when test="exists($class)">
         <xsl:copy>
           <xsl:apply-templates select="@* except @class" mode="#current"/>
           <xsl:attribute name="class" select="$class"/>
