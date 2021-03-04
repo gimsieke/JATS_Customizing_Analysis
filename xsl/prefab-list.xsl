@@ -18,7 +18,7 @@
   <xsl:template match="html:head">
     <xsl:copy>
       <xsl:apply-templates select="@*, html:title, 
-        html:meta[not(@name = ('customization-name[$name]', 'storage-location'[$storage-location], 'cached'[$cached]))]"/>
+        html:meta[not(@name = ('customization-name'[$name], 'storage-location'[$storage-location], 'cached'[exists($cached)]))]"/>
       <xsl:choose>
         <xsl:when test="$name">
           <meta name="customization-name" content="{$name}"/>
