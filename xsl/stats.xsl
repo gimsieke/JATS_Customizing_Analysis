@@ -348,22 +348,29 @@ tr.summary > * {
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:attribute name="class" select="'summary'"/>
+      <xsl:variable name="blue-exists" as="xs:boolean" select="exists(xhtml:tr/xhtml:th[. = 'Blue'])"/>
       <tr>
         <th>Customization name</th>
         <th>Best starting point <br/>for this customization</th>
         <th>Modifications wrt <br/>best starting point</th>
+        <xsl:if test="$blue-exists">
+          <th>Modifications wrt <br/>Blue</th>
+        </xsl:if>
         <th>Item count</th>
         <th>Average supersetticity <br/><span class="non-bold">(2.0 is highest)</span></th>
         <th>Average supersetticity <br/>only for collections</th>
         <th>Average percentage of aptness <br/>as a starting point <br/><span class="non-bold">relative to the best 
           starting <br/>point’s aptness, which is 100</span></th>
       </tr>
-      <xsl:apply-templates select="xhtml:tr except (xhtml:tr[1] union xhtml:tr[last()])" mode="#current"/>
+      <xsl:apply-templates select="xhtml:tr except (xhtml:tr[1] union xhtml:tr[last()])" mode="#current">
+        <xsl:with-param name="blue-exists" as="xs:boolean" select="$blue-exists" tunnel="yes"/>
+      </xsl:apply-templates>
     </xsl:copy>
   </xsl:template>
   
   <xsl:template match="xhtml:tr" mode="summary" xmlns="http://www.w3.org/1999/xhtml">
     <xsl:param name="customizations" as="document-node(element(customizations))" tunnel="yes"/>
+    <xsl:param name="blue-exists" as="xs:boolean" tunnel="yes"/>
     <xsl:variable name="current-customization-name" as="xs:string" select="*[1]"/>
     <xsl:variable name="current-pos" as="xs:integer" select="position() + 1"/>
     <xsl:variable name="max-pos" as="xs:integer" 
@@ -397,6 +404,30 @@ tr.summary > * {
           </details>
         </xsl:if>
       </td>
+      <xsl:if test="$blue-exists">
+        <td>
+          <xsl:variable name="additions" as="element(*)*" 
+            select="$customizations/customizations/customization[@name = $current-customization-name]
+                          /items[@not-in = 'Blue']/*[normalize-space()]"/>
+          <xsl:variable name="deletions" as="element(*)*" 
+            select="$customizations/customizations/customization[@name = 'Blue']
+                          /items[@not-in = $current-customization-name]/*[normalize-space()]"/>
+          
+          <xsl:if test="exists($additions)">
+            <details open="true">
+              <summary>Additions</summary>
+              <xsl:apply-templates select="$additions" mode="#current"/>
+            </details>
+          </xsl:if>
+          <xsl:if test="exists($deletions)">
+            <details open="true">
+              <summary>Deletions</summary>
+              <xsl:apply-templates select="$deletions" mode="#current"/>
+            </details>
+          </xsl:if>
+
+        </td>
+      </xsl:if>
       <xsl:for-each select="('items', 's5', 's5coll', 'p5')">
         <xsl:apply-templates select="$aptness-cell" mode="summary-extract-stats">
           <xsl:with-param name="quantity-name" as="xs:string" select="." tunnel="yes"/>
