@@ -46,7 +46,7 @@
         select="$html-lists[
                   html:html[
                     empty(html:head/html:meta[@name = 'pre-generated-summary'])
-                  ]/html:body[@class[not(. = 'schema')]]
+                  ]/html:body[@class[not(. = ('schema', ''))]]
                 ]" 
         group-by="html:html/html:body/@class">
         <xsl:apply-templates select="." mode="create-content-class-lists">
@@ -226,7 +226,6 @@
           <xsl:for-each select="$html-list-uris">
             <xsl:variable name="html-list" as="document-node(element(html:html))" select="doc(.)"/>
             <xsl:variable name="relative" as="xs:string" select="substring-after(., $base-dir-uri2)"/>
-            <xsl:message select="'UUUUUUUUUUU ', html:cache-uri($relative, $base-dir-uri2)"></xsl:message>
             <xsl:sequence
               select="transform(
                         map{
