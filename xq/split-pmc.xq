@@ -1,3 +1,5 @@
+import module namespace jats = 'http://jats.nlm.nih.gov' at "jats-analysis.xqm";
+
 declare variable $collection external := 'comm-use';
 declare variable $from external := 1;
 declare variable $to external := 1000000;
@@ -6,9 +8,9 @@ for $doc in db:open($collection) [position() = ($from to $to)]
 let $path := db:path($doc),
     $journal := ($path => tokenize('/'))[1]
 group by $journal
-where count($doc) gt 40
+(:where count($doc) gt 40:)
 return (
-  let $newdb := 'PMC__' || codepoints-to-string(string-to-codepoints(normalize-unicode($journal, 'NFD'))[. lt 128])
+  let $newdb := 'PMC__' || jats:normalize-pmc-path($journal)
   return ( 
     if (db:exists($newdb)) 
     then for $d in $doc 
