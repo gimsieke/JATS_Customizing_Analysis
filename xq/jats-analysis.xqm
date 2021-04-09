@@ -47,5 +47,5 @@ declare function jats:normalize-pmc-path (
     for $r in analyze-string($path, '&amp;#x([0-9a-f]+);')/(*:non-match | *:match/*:group )
     return if ($r/self::*:group) then codepoints-to-string(convert:integer-from-base($r, 16))
            else string($r)
-)
+  ) => replace('[\p{P}\p{Zs}]+', '_')
 };
