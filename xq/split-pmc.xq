@@ -8,7 +8,7 @@ let $path := db:path($doc),
 group by $journal
 where count($doc) gt 40
 return (
-  let $newdb := 'PMC__' || $journal
+  let $newdb := 'PMC__' || codepoints-to-string(string-to-codepoints(normalize-unicode($journal, 'NFD'))[. lt 128])
   return ( 
     if (db:exists($newdb)) 
     then for $d in $doc 
