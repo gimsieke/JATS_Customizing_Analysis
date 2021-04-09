@@ -1,6 +1,8 @@
 declare variable $collection external := 'comm-use';
+declare variable $from external := 1;
+declare variable $to external := 1000000;
 
-for $doc in db:open($collection) (:[position() = (1 to 200)]:)
+for $doc in db:open($collection) [position() = ($from to $to)]
 let $path := db:path($doc),
     $journal := ($path => tokenize('/'))[1]
 group by $journal
