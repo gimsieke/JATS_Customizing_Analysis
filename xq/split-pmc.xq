@@ -13,7 +13,7 @@ return (
     if (db:exists($newdb)) 
     then for $d in $doc 
          return db:replace($newdb, db:path($d), $d)
-    else db:create($newdb)    
+    else db:create($newdb, (), (), map{'attrindex': true(), 'updindex': true()})    
   )
 )
 
