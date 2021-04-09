@@ -8,7 +8,7 @@ for $doc in db:open($collection) [position() = ($from to $to)]
 let $path := db:path($doc),
     $journal := ($path => tokenize('/'))[1]
 group by $journal
-(:where count($doc) gt 40:)
+where count($doc) gt 40
 return (
   let $newdb := 'PMC__' || jats:normalize-pmc-path($journal)
   return ( 
