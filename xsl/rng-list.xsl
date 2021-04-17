@@ -79,6 +79,9 @@
   <xsl:template match="rng:define[rng:element]" mode="li">
     <xsl:param name="prefix" as="xs:string?"/>
     <li>
+      <xsl:if test="starts-with((base-uri(.) => tokenize('/'))[last()], 'mathml')">
+        <xsl:attribute name="class" select="'mathml'"/>
+      </xsl:if>
       <xsl:value-of select="$prefix || rng:element/@name"/>
     </li>
   </xsl:template>
@@ -86,12 +89,18 @@
   <xsl:template match="rng:define" mode="li">
     <xsl:param name="prefix" as="xs:string?"/>
     <li>
+      <xsl:if test="starts-with((base-uri(.) => tokenize('/'))[last()], 'mathml')">
+        <xsl:attribute name="class" select="'mathml'"/>
+      </xsl:if>
       <xsl:value-of select="$prefix || @name"/>
     </li>
   </xsl:template>
   
   <xsl:template match="rng:attribute" mode="li">
     <li>
+      <xsl:if test="starts-with((base-uri(.) => tokenize('/'))[last()], 'mathml')">
+        <xsl:attribute name="class" select="'mathml'"/>
+      </xsl:if>
       <xsl:value-of select="'@' || @name"/>
     </li>
   </xsl:template>

@@ -14,12 +14,21 @@
 
   <xsl:param name="html-docs" as="document-node()*"
     select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
+  <xsl:param name="mathml-as-single-item" as="xs:boolean" select="false()"/>
   
   <xsl:param name="conf-file" as="xs:string"/>
 
   <xsl:template name="main">
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[@id='elements']"/>
 <!--    <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>-->
+    <xsl:variable name="ignorable-elements" as="xs:string*" 
+      select="distinct-values(
+                $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='elements']/xhtml:li[@class = 'mathml'][not(. = 'mml:math')]
+              )"/>
+    <xsl:variable name="ignorable-attributes" as="xs:string*" 
+      select="distinct-values(
+                $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='attributes']/xhtml:li[@class = 'mathml']
+              )"/>
     <xsl:variable name="customizations" as="document-node(element(customizations))">
       <xsl:document>
         <customizations>
@@ -31,14 +40,15 @@
                        root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='customization-name']/@content,
                        xhtml:notdir(root($outer-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)
                      )[1]}" 
-              items="{count(xhtml:li) + count($outer-attribute-list/xhtml:li)}">
+              items="{  count(xhtml:filter-list-items(xhtml:li, $ignorable-elements)) 
+                      + count(xhtml:filter-list-items($outer-attribute-list/xhtml:li, $ignorable-attributes))}">
               <xsl:copy-of select="ancestor::xhtml:body/@class"/>
               <xsl:for-each select="$element-lists except $outer-element-list">
                 <xsl:variable name="inner-element-list" as="element(xhtml:ul)" select="."/>
                 <xsl:variable name="inner-attribute-list" as="element(xhtml:ul)" select="$inner-element-list/../xhtml:ul[@id='attributes']"/>
                 <xsl:variable name="not-in" as="map(xs:string, element(xhtml:li)*)" 
-                  select="map{'elements': $outer-element-list/xhtml:li[not(. = $inner-element-list/xhtml:li)],
-                           'attributes': $outer-attribute-list/xhtml:li[not(. = $inner-attribute-list/xhtml:li)]}"/>
+                  select="map{'elements': $outer-element-list/xhtml:li[not(. = xhtml:filter-list-items($inner-element-list/xhtml:li, $ignorable-elements))] => xhtml:filter-list-items($ignorable-elements),
+                           'attributes': $outer-attribute-list/xhtml:li[not(. = xhtml:filter-list-items($inner-attribute-list/xhtml:li, $ignorable-attributes))] => xhtml:filter-list-items($ignorable-attributes)}"/>
                 <items not-in="{(
                                   root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='customization-name']/@content,
                                   xhtml:notdir(root($inner-element-list)/xhtml:html/xhtml:head/xhtml:meta[@name='storage-location']/@content)
@@ -92,6 +102,12 @@
     </xsl:variable>
     <xsl:sequence select="$html-summary"/>
   </xsl:template>
+
+  <xsl:function name="xhtml:filter-list-items" as="element(xhtml:li)*">
+    <xsl:param name="original-items" as="element(xhtml:li)*"/>
+    <xsl:param name="ignore-tokens" as="xs:string*"/>
+    <xsl:sequence select="$original-items[not(. = $ignore-tokens)]"/>
+  </xsl:function>
 
   <xsl:mode name="compute" on-no-match="shallow-copy"/>
 
@@ -188,7 +204,7 @@ q: degree to which <xsl:value-of select="@not-in"/> is suitable to derive <xsl:v
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
           <title>RNG List</title>
-          <meta charset="utf-8"/>
+<!--          <meta charset="utf-8"/>-->
           <style>
 body {
   font-family: sans-serif;
