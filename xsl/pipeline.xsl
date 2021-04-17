@@ -113,7 +113,23 @@
         <xsl:sequence select="$stats(.)"/>
       </xsl:result-document>
     </xsl:for-each>
+    <xsl:result-document href="plot.csv" method="text">
+      <xsl:apply-templates select="$stats?output//xhtml:table" mode="csv"/>
+    </xsl:result-document>
     <xsl:sequence select="$stats?output"/>
+  </xsl:template>
+  
+  <xsl:template match="xhtml:table" mode="csv" xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates select="xhtml:tr except (xhtml:tr[1] union xhtml:tr[last()])" mode="#current"/>
+  </xsl:template>
+
+  <xsl:template match="xhtml:tr" mode="csv" xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:value-of select="*[last() -3]"/>
+    <xsl:text>;</xsl:text>
+    <xsl:value-of select="'+' || *[last()]"/>
+    <xsl:value-of select="normalize-space(*[1]/text()[1])"/>
+    <xsl:text>;</xsl:text>
+    <xsl:text>&#13;&#10;</xsl:text>
   </xsl:template>
   
   <xsl:template match="html:head/html:meta[last()]" mode="mark-as-cached">
