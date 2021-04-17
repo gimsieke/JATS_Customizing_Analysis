@@ -124,11 +124,11 @@
   </xsl:template>
 
   <xsl:template match="xhtml:tr" mode="csv" xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:value-of select="normalize-space(*[1]/text()[1])"/>
+    <xsl:text>;</xsl:text>
     <xsl:value-of select="*[last() -3]"/>
     <xsl:text>;</xsl:text>
     <xsl:value-of select="'+' || *[last()]"/>
-    <xsl:value-of select="normalize-space(*[1]/text()[1])"/>
-    <xsl:text>;</xsl:text>
     <xsl:text>&#13;&#10;</xsl:text>
   </xsl:template>
   
