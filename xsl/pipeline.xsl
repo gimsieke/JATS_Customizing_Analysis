@@ -113,7 +113,7 @@
         <xsl:sequence select="$stats(.)"/>
       </xsl:result-document>
     </xsl:for-each>
-    <xsl:result-document href="plot.csv" method="text">
+    <xsl:result-document href="{current-output-uri() => replace('\.[^.]+$', '.csv')}" method="text">
       <xsl:apply-templates select="$stats?output//xhtml:table" mode="csv"/>
     </xsl:result-document>
     <xsl:sequence select="$stats?output"/>
