@@ -18,16 +18,33 @@
   
   <xsl:param name="conf-file" as="xs:string"/>
 
+  <xsl:variable name="deprecated-elements" as="xs:string+" select="('access-date', 'nlm-citation', 'time-stamp')"/>
+  <xsl:variable name="deprecated-attributes" as="xs:string+" select="('@pub-type')"/>
+  <xsl:variable name="non-jats-elements" as="xs:string+" select="('book-part-id', 'related')"/>
+  <xsl:variable name="non-jats-attributes" as="xs:string+" select="('@book-part-id-type')"/>
+
   <xsl:template name="main">
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[@id='elements']"/>
 <!--    <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>-->
     <xsl:variable name="ignorable-elements" as="xs:string*" 
-      select="distinct-values(
-                $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='elements']/xhtml:li[@class = 'mathml'][not(. = 'mml:math')]
+      select="(
+                $deprecated-elements,
+                $non-jats-elements,
+                if ($mathml-as-single-item)
+                then distinct-values(
+                       $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='elements']/xhtml:li[@class = 'mathml'][not(. = 'mml:math')]
+                     )
+                else ()
               )"/>
     <xsl:variable name="ignorable-attributes" as="xs:string*" 
-      select="distinct-values(
-                $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='attributes']/xhtml:li[@class = 'mathml']
+      select="(
+                $deprecated-attributes,
+                $non-jats-attributes,
+                if ($mathml-as-single-item)
+                then distinct-values(
+                       $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='attributes']/xhtml:li[@class = 'mathml']
+                     )
+                else ()
               )"/>
     <xsl:variable name="customizations" as="document-node(element(customizations))">
       <xsl:document>
