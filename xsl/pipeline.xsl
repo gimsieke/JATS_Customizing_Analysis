@@ -19,6 +19,7 @@
   <xsl:param name="top-level-collections-only" as="xs:boolean" select="true()">
     <!-- only relevant for HTML lists that stem from cache-collection elements in the configuration -->
   </xsl:param>
+  <xsl:param name="class-lists" as="xs:boolean" select="true()"/>
 
   <xsl:mode name="mark-as-cached" on-no-match="shallow-copy"/>
   <xsl:mode name="create-content-class-lists" on-no-match="shallow-copy"/>
@@ -44,18 +45,20 @@
       <xsl:sequence select="$html-lists"/>
       <!-- Create HTML lists for each content class. They will be stored at arbitrary locations
         (where the first “real” HTML list file with each class was located) -->
-      <xsl:for-each-group 
-        select="$html-lists[
-                  html:html[
-                    empty(html:head/html:meta[@name = 'pre-generated-summary'])
-                  ]/html:body[@class[not(. = ('schema', ''))]]
-                ]" 
-        group-by="html:html/html:body/@class">
-        <xsl:apply-templates select="." mode="create-content-class-lists">
-          <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="current-group()" tunnel="yes"/>
-          <xsl:with-param name="customization-name" as="xs:string" select="current-grouping-key()" tunnel="yes"/>
-        </xsl:apply-templates>
-      </xsl:for-each-group>
+      <xsl:if test="$class-lists">
+         <xsl:for-each-group 
+           select="$html-lists[
+                     html:html[
+                       empty(html:head/html:meta[@name = 'pre-generated-summary'])
+                     ]/html:body[@class[not(. = ('schema', ''))]]
+                   ]" 
+           group-by="html:html/html:body/@class">
+           <xsl:apply-templates select="." mode="create-content-class-lists">
+             <xsl:with-param name="all-lists" as="document-node(element(html:html))+" select="current-group()" tunnel="yes"/>
+             <xsl:with-param name="customization-name" as="xs:string" select="current-grouping-key()" tunnel="yes"/>
+           </xsl:apply-templates>
+         </xsl:for-each-group>
+      </xsl:if>
     </xsl:variable>
 
     <xsl:variable name="html-lists" as="document-node(element(html:html))*">
