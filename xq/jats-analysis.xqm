@@ -20,7 +20,7 @@ return
     <meta name="customization-name" content="{$collection}{$cutoff}" />
     <meta name="cached" content="true"/>
   </head>
-  <body class="{$class}">
+  <body class="{$class}" data-threshold="{$threshold}" data-doccount="{$doccount}">
     <ul id="elements"
         data-orig-count="{count($enames)}" data-filtered-count="{count($filtered-elements)}"> {
       for $e in $filtered-elements 
