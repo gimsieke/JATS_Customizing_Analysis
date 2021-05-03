@@ -49,4 +49,5 @@ declare function jats:normalize-pmc-path (
            else string($r)
   ) ! replace(., '[\p{P}\p{Zs}]+', '_')
     ! codepoints-to-string(string-to-codepoints(normalize-unicode(., 'NFD'))[. lt 128])
+    ! replace(., '[\W-[_]]', '')
 };
