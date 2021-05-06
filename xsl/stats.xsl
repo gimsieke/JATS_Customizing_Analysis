@@ -20,8 +20,8 @@
 
   <xsl:variable name="deprecated-elements" as="xs:string+" select="('access-date', 'nlm-citation', 'time-stamp')"/>
   <xsl:variable name="deprecated-attributes" as="xs:string+" select="('@pub-type')"/>
-  <xsl:variable name="non-jats-elements" as="xs:string+" select="('book-part-id', 'related', 'citation')"/>
-  <xsl:variable name="non-jats-attributes" as="xs:string+" select="('@book-part-id-type', '@citation-type')"/>
+  <xsl:variable name="non-jats-elements" as="xs:string+" select="('book-part-id', 'related', 'citation', 'floats-wrap', 'grant-sponsor', 'grant-num', 'custom-meta-wrap', 'table-of-contents', 'toc-sec', 'toc-content', 'issue-identifier', 'issue-meta')"/>
+  <xsl:variable name="non-jats-attributes" as="xs:string+" select="('@book-part-id-type', '@citation-type', '@alternate-form-of', '@xsi:schemaLocation')"/>
 
   <xsl:template name="main">
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[@id='elements']"/>
