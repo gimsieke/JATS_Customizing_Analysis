@@ -14,6 +14,7 @@
   </xsl:param>
   
   <xsl:param name="mathml-as-single-item" as="xs:boolean" select="true()"/>
+  <xsl:param name="ignore-items-not-in-blue" as="xs:boolean" select="false()"/>
 
   <xsl:param name="cache" as="xs:boolean" select="true()"/>
   <xsl:param name="top-level-collections-only" as="xs:boolean" select="true()">
@@ -108,6 +109,7 @@
                                                        xs:QName('base-dir-uri'): $base-dir-uri2,
                                                        xs:QName('primary-output-uri'): current-output-uri(),
                                                        xs:QName('mathml-as-single-item'): $mathml-as-single-item,
+                                                       xs:QName('ignore-items-not-in-blue'): $ignore-items-not-in-blue,
                                                        xs:QName('conf-file'): base-uri()
                                                      }
                            })"/>
