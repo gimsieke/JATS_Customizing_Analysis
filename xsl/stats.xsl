@@ -15,6 +15,7 @@
   <xsl:param name="html-docs" as="document-node()*"
     select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
   <xsl:param name="mathml-as-single-item" as="xs:boolean" select="false()"/>
+  <xsl:param name="ignore-items-not-in-blue" as="xs:boolean" select="false()"/>
   
   <xsl:param name="conf-file" as="xs:string"/>
 
@@ -26,25 +27,32 @@
   <xsl:template name="main">
     <xsl:variable name="element-lists" as="element(xhtml:ul)*" select="$html-docs/xhtml:html/xhtml:body/xhtml:ul[@id='elements']"/>
 <!--    <xsl:message select="'Counts: ', $element-lists ! count(xhtml:li)"/>-->
+    <xsl:variable name="green-bodies" as="element(xhtml:body)*"
+    select="$html-docs/xhtml:html[starts-with(xhtml:head/xhtml:meta[@name = 'customization-name'][1]/@content, 'Green')]
+               /xhtml:body[@class = 'schema']"/>
+    <xsl:variable name="blue-body" as="element(xhtml:body)?"
+    select="$html-docs/xhtml:html[xhtml:head/xhtml:meta[@name = 'customization-name']/@content = 'Blue']
+               /xhtml:body[@class = 'schema']"/>
     <xsl:variable name="ignorable-elements" as="xs:string*" 
       select="(
                 $deprecated-elements,
                 $non-jats-elements,
-                if ($mathml-as-single-item)
-                then distinct-values(
-                       $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='elements']/xhtml:li[@class = 'mathml'][not(. = 'mml:math')]
-                     )
-                else ()
+                distinct-values(
+                  $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='elements']/xhtml:li[@class = 'mathml']
+                                                                                                       [not(. = 'mml:math')]
+                )[$mathml-as-single-item],
+                $green-bodies/xhtml:ul[@id='elements']/xhtml:li[not(. = $blue-body/xhtml:ul[@id='elements']/xhtml:li)]
+                                                               [$ignore-items-not-in-blue]
               )"/>
     <xsl:variable name="ignorable-attributes" as="xs:string*" 
       select="(
                 $deprecated-attributes,
                 $non-jats-attributes,
-                if ($mathml-as-single-item)
-                then distinct-values(
-                       $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='attributes']/xhtml:li[@class = 'mathml']
-                     )
-                else ()
+                distinct-values(
+                  $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='attributes']/xhtml:li[@class = 'mathml']
+                )[$mathml-as-single-item],
+                $green-bodies/xhtml:ul[@id='attributes']/xhtml:li[not(. = $blue-body/xhtml:ul[@id='elements']/xhtml:li)]
+                                                               [$ignore-items-not-in-blue]
               )"/>
     <xsl:variable name="customizations" as="document-node(element(customizations))">
       <xsl:document>
