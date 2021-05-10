@@ -51,7 +51,7 @@
                 distinct-values(
                   $html-docs/xhtml:html/xhtml:body[@class = 'schema']/xhtml:ul[@id='attributes']/xhtml:li[@class = 'mathml']
                 )[$mathml-as-single-item],
-                $green-bodies/xhtml:ul[@id='attributes']/xhtml:li[not(. = $blue-body/xhtml:ul[@id='elements']/xhtml:li)]
+                $green-bodies/xhtml:ul[@id='attributes']/xhtml:li[not(. = $blue-body/xhtml:ul[@id='attributes']/xhtml:li)]
                                                                [$ignore-items-not-in-blue]
               )"/>
     <xsl:variable name="customizations" as="document-node(element(customizations))">
