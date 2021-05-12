@@ -126,11 +126,9 @@
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$best-fit" mode="html-table"/>
     </xsl:variable>
-    <xsl:if test="$debug">
-      <xsl:result-document href="{replace($primary-output-uri, '(\.[^.]+)$', '.details$1')}" method="xhtml">
-        <xsl:sequence select="$html-table"/>
-      </xsl:result-document>
-    </xsl:if>
+    <xsl:result-document href="{replace($primary-output-uri, '(\.[^.]+)$', '.details$1')}" method="xhtml">
+      <xsl:sequence select="$html-table"/>
+    </xsl:result-document>
     <xsl:variable name="html-summary" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$html-table" mode="summary">
         <xsl:with-param name="customizations" as="document-node(element(customizations))" select="$best-fit" tunnel="yes"/>
