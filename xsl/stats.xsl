@@ -16,6 +16,7 @@
     select="collection($base-dir-uri || '?recurse=yes;select=*.xhtml')"/>
   <xsl:param name="mathml-as-single-item" as="xs:boolean" select="false()"/>
   <xsl:param name="ignore-items-not-in-blue" as="xs:boolean" select="false()"/>
+  <xsl:param name="debug" as="xs:boolean" select="false()"/>
   
   <xsl:param name="conf-file" as="xs:string"/>
 
@@ -93,33 +94,43 @@
       </xsl:document>
     </xsl:variable>
     
-    <xsl:result-document href="{$base-dir-uri}/debug/0_customizations.xml">
-      <xsl:sequence select="$customizations"/>
-    </xsl:result-document>
+    <xsl:if test="$debug">
+      <xsl:result-document href="{$base-dir-uri}/debug/0_customizations.xml">
+        <xsl:sequence select="$customizations"/>
+      </xsl:result-document>
+    </xsl:if>
     <xsl:variable name="computed-s-q" as="document-node(element(customizations))">
       <xsl:apply-templates select="$customizations" mode="compute"/>
     </xsl:variable>
-    <xsl:result-document href="{$base-dir-uri}/debug/1_computed-s-q.xml">
-      <xsl:sequence select="$computed-s-q"/>
-    </xsl:result-document>
+    <xsl:if test="$debug">
+      <xsl:result-document href="{$base-dir-uri}/debug/1_computed-s-q.xml">
+        <xsl:sequence select="$computed-s-q"/>
+      </xsl:result-document>
+    </xsl:if>
     <xsl:variable name="minmax" as="document-node(element(customizations))">
       <xsl:apply-templates select="$computed-s-q" mode="minmax"/>
     </xsl:variable>
-    <xsl:result-document href="{$base-dir-uri}/debug/2_minmax.xml">
-      <xsl:sequence select="$minmax"/>
-    </xsl:result-document>
+    <xsl:if test="$debug">
+      <xsl:result-document href="{$base-dir-uri}/debug/2_minmax.xml">
+        <xsl:sequence select="$minmax"/>
+      </xsl:result-document>
+    </xsl:if>
     <xsl:variable name="best-fit" as="document-node(element(customizations))">
       <xsl:apply-templates select="$minmax" mode="best-fit"/>
     </xsl:variable>
-    <xsl:result-document href="{$base-dir-uri}/debug/3_best-fit.xml">
-      <xsl:sequence select="$best-fit"/>
-    </xsl:result-document>
+    <xsl:if test="$debug">
+      <xsl:result-document href="{$base-dir-uri}/debug/3_best-fit.xml">
+        <xsl:sequence select="$best-fit"/>
+      </xsl:result-document>
+    </xsl:if>
     <xsl:variable name="html-table" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$best-fit" mode="html-table"/>
     </xsl:variable>
-    <xsl:result-document href="{replace($primary-output-uri, '(\.[^.]+)$', '.details$1')}" method="xhtml">
-      <xsl:sequence select="$html-table"/>
-    </xsl:result-document>
+    <xsl:if test="$debug">
+      <xsl:result-document href="{replace($primary-output-uri, '(\.[^.]+)$', '.details$1')}" method="xhtml">
+        <xsl:sequence select="$html-table"/>
+      </xsl:result-document>
+    </xsl:if>
     <xsl:variable name="html-summary" as="document-node(element(xhtml:html))">
       <xsl:apply-templates select="$html-table" mode="summary">
         <xsl:with-param name="customizations" as="document-node(element(customizations))" select="$best-fit" tunnel="yes"/>
