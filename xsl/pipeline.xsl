@@ -21,6 +21,7 @@
     <!-- only relevant for HTML lists that stem from cache-collection elements in the configuration -->
   </xsl:param>
   <xsl:param name="class-lists" as="xs:boolean" select="true()"/>
+  <xsl:param name="debug" as="xs:boolean" select="false()"/>
 
   <xsl:mode name="mark-as-cached" on-no-match="shallow-copy"/>
   <xsl:mode name="create-content-class-lists" on-no-match="shallow-copy"/>
@@ -110,7 +111,8 @@
                                                        xs:QName('primary-output-uri'): current-output-uri(),
                                                        xs:QName('mathml-as-single-item'): $mathml-as-single-item,
                                                        xs:QName('ignore-items-not-in-blue'): $ignore-items-not-in-blue,
-                                                       xs:QName('conf-file'): base-uri()
+                                                       xs:QName('conf-file'): base-uri(),
+                                                       xs:QName('debug'): $debug
                                                      }
                            })"/>
     <xsl:for-each select="map:keys($stats)[not(. = 'output')]">
