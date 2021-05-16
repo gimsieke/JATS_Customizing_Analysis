@@ -1143,8 +1143,7 @@
     </meta>
     <projectTree name="JATS_Customizing.xpr">
         <folder masterFiles="true" name="Master Files">
-            <file name="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng"/>
-            <file name="schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng"/>
+            <file name="schema/proposed-customizations/JATS-Publishing-1-3d2-MathML3-DTD_custom-minimal/JATS-journalpublishing1-3d2-mathml3_custom-minimal.dtd"/>
         </folder>
         <folder path="."/>
     </projectTree>
