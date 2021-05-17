@@ -492,7 +492,7 @@ tr.summary > * {
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:attribute name="id" select="."/>
       <xsl:value-of select="."/>
-      <xsl:if test="@class">
+      <xsl:if test="@class[normalize-space()]">
         <span class="non-bold">
           <xsl:text> (</xsl:text>
           <xsl:value-of select="@class"/>
