@@ -386,18 +386,18 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    EMPHASIS RENDITION ELEMENTS                -->
 <!--                    All the face markup plus <ruby>            -->
 <!ENTITY % emphasis.class
-                        "bold | fixed-case | italic | monospace | 
-                         overline | roman |  sans-serif | sc | 
-                         strike | underline |
-                         ruby"                                       >
+                        "bold |  italic | monospace | 
+                         roman | sc | 
+                         strike | underline"                                       >
+
+
 
 
 <!--                    FACE MARKUP CLASS ELEMENTS                 -->
 <!--                    All the face markup without <ruby>         -->
 <!ENTITY % face-markup.class
-                        "bold | fixed-case |italic | monospace | 
-                         overline | roman | sans-serif | sc | strike |
-                         underline"                                  >
+                        "bold | italic | monospace | 
+                        roman | sc | underline"                                  >
 
 
 <!-- ============================================================= -->
@@ -410,24 +410,23 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         within, for example, the text of a
                         paragraph                                  -->
 <!ENTITY % citation.class
-                        "citation-alternatives | element-citation | 
-                         mixed-citation | nlm-citation"              >
+                        "element-citation | mixed-citation"              >
 
 
 <!--                    CITATION MINUS ALTERNATIVES CLASS ELEMENTS -->
 <!--                    All the citation elements except the
                         <citation-alternatives> element.           -->
 <!ENTITY % citation-minus-alt.class
-                        "element-citation | mixed-citation | 
-                         nlm-citation"                               >
+                        "element-citation | mixed-citation"                               >
 
 
 <!--                    CONTRIBUTOR INFORMATION                    -->
 <!--                    Metadata about a contributor               -->
 <!ENTITY % contrib-info.class
-                        "address | aff | aff-alternatives |
-                         author-comment | bio | email | ext-link |
-                         on-behalf-of | role | uri | xref"           >
+                        "address | aff |
+                         email | ext-link |  role | 
+                         uri | xref"           >
+                         
 
 <!-- ============================================================= -->
 <!--                    OVER-RIDE PARAGRAPH-LIKE ELEMENTS          -->
@@ -441,8 +440,207 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         not also used inside tables and excepting
                         also the paragraph element itself.         -->
 <!ENTITY % rest-of-para.class
-                        "disp-quote | speech | statement |
-                         verse-group"                                >
-
-
+                        "disp-quote | statement"                                >
 <!-- ================== End Publishing Classes Customization ===== -->
+
+
+<!-- ================== Start Minimal Publishing DTD Classes Customization === -->  
+<!ENTITY % access.class "alt-text"                       >   
+
+
+<!ENTITY % address.class
+                        "addr-line | city | country | 
+                         institution | institution-wrap | phone |
+                         postal-code | state"                        >
+
+
+<!ENTITY % address-line.class
+                        "city | country | institution | 
+                         institution-wrap | phone |
+                         postal-code | state"                        >
+                         
+                         
+<!ENTITY % aff-alternatives.class
+                        "aff"                     >
+
+<!ENTITY % alternatives-display.class
+                        "array | chem-struct | graphic |
+                         inline-graphic | media | preformat |
+                         supplementary-material | table"                               >
+                         
+
+<!ENTITY % article-link.class
+                        "related-article"           >
+
+
+<!ENTITY % article-identifier.class
+                        "article-id | issn | isbn"          >
+                        
+                        
+<!ENTITY % back.class   "ack | app-group | fn-group |
+                         glossary |  ref-list"                       >
+                         
+                         
+<!ENTITY % block-display.class    
+                        "address | alternatives | array |
+                         boxed-text | 
+                         fig | graphic | media |
+                         preformat | 
+                         supplementary-material |
+                         table-wrap"              >
+
+
+<!ENTITY % block-display-noalt.class
+                        "address | array |
+                         boxed-text | 
+                         fig | graphic | media |
+                         preformat | 
+                         supplementary-material |
+                         table-wrap"              >
+ 
+ 
+<!ENTITY % block-display-minus-explanation.class
+                        "address | alternatives |
+                         array |
+                         boxed-text | fig | graphic | media |
+                         preformat  |
+                         supplementary-material |
+                         table-wrap"              >
+                         
+                         
+<!ENTITY % block-math.class
+                        "disp-formula"          >
+
+   
+<!ENTITY % citation.class
+                        "element-citation | mixed-citation"                             >
+
+
+<!ENTITY % conference.class
+                        "conf-date | conf-name |
+                         conf-loc | conf-acronym | string-conf"                 >
+                   
+                        
+<!ENTITY % contrib-info.class
+                        "address | aff | 
+                         email |  etal | ext-link | 
+                         role | uri | xref">
+                         
+
+<!ENTITY % emphasis.class
+                        "bold | italic | monospace |
+                         roman | sc"                                       >
+                         
+
+<!ENTITY % face-markup.class
+                        "bold | italic | monospace |
+                         roman | sc | underline"                              >
+                         
+                         
+<!ENTITY % fig-display.class
+                        "fig"                   >
+                        
+                        
+<!ENTITY % floats-display.class
+                        "alternatives | 
+                         boxed-text |
+                         code | fig | 
+                         graphic | media | preformat |
+                         supplementary-material"              >
+                         
+                         
+<!ENTITY % front.class  "ack | fn-group | glossary"            >
+
+
+<!ENTITY % inline-display.class
+                        "alternatives | inline-graphic "              >
+
+
+<!ENTITY % inline-display-noalt.class
+                        "inline-graphic"                >
+                        
+                        
+<!ENTITY % inside-chem-struct-wrap.class
+                        "alternatives | chem-struct | graphic |
+                         media | preformat"           >
+                         
+                         
+<!ENTITY % intable-para.class
+                        "disp-quote | statement"                                >
+                        
+ 
+<!ENTITY % kwd.class    "kwd"           > 
+
+
+<!ENTITY % person-group-info.class
+                        "aff | etal | role"       >
+                        
+                        
+<!ENTITY % phrase.class "named-content | styled-content"             >
+                         
+
+<!ENTITY % name.class   "collab | 
+                         name | name-alternatives | string-name"     >
+                         
+                         
+<!ENTITY % nested-kwd.class    
+                        "kwd"                         >
+
+
+
+<!ENTITY % question-answer.class
+                        "question | question-wrap | question-wrap-group"        >
+
+                                                  
+<!ENTITY % references.class
+                        "article-title | chapter-title |
+                         collab | comment | 
+                         conf-acronym | conf-date | conf-loc | 
+                         conf-name | conf-sponsor | 
+                         data-title | date | date-in-citation | 
+                         day | edition |  email | elocation-id |  
+                         etal | ext-link | fpage |
+                         institution | institution-wrap |
+                         isbn | issn |  
+                         issue | issue-id | issue-title |
+                         lpage | month | name | name-alternatives |
+                         object-id | page-range | person-group | pub-id |
+                         publisher-loc | publisher-name | role |
+                         season | series | size | source | 
+                         string-date | string-name | supplement | uri | 
+                         volume | volume-series | year"  >
+                         
+                                               
+<!ENTITY % ref-types    "aff | app | author-notes | award | 
+                         bibr | boxed-text | 
+                         chem | collab | contrib | corresp |
+                         disp-formula | fig | fn | kwd | list |
+                         plate | scheme | sec | statement |
+                         supplementary-material |
+                         table | table-fn |
+                         other | custom"                             >
+
+
+<!ENTITY % related-article.class
+                        "related-article"          >
+                        
+                        
+<!ENTITY % simple-display.class
+                        "alternatives | array | graphic | 
+                         media | preformat"                          >
+
+
+<!ENTITY % simple-display-noalt.class
+                        "array | graphic | media | preformat" >
+                        
+                        
+<!ENTITY % simple-intable-display.class
+                        "alternatives | disp-formula | 
+                         graphic | media | preformat"                >
+
+
+<!ENTITY % simple-link.class
+                        "fn | xref"                         >
+                        
+
+<!ENTITY % std.class    "day | month | pub-id | source | year"                    >

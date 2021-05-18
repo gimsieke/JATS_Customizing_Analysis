@@ -811,10 +811,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    What version of this DTD was used to make
                         the document instance under consideration. -->
 <!ENTITY % dtd-version
-            "dtd-version
-                        (3.0 | 0.4 | 1.0 | 1.1d1 | 1.1d2 | 1.1d3 | 
-                         1.1 | 1.2d1 | 1.2d2 | 1.2 | 1.3d1 | 1.3d2 )
-                                                          #IMPLIED"  >
+            " "  >
 
 
 <!--                    ARTICLE ATTRIBUTES                         -->
@@ -831,9 +828,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              %XLINK.xmlns.attrib;
              %MATHML.xmlns.attrib;
              %ali.xmlns.attrib;
-             %Schema.xmlns.attrib;  
-             %Schema.prefix;:noNamespaceSchemaLocation   
-                        CDATA          #IMPLIED"                     >
+             %Schema.xmlns.attrib;"                     >
 
 
 <!--                    BACK ATTRIBUTES                            -->
@@ -877,8 +872,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    Attributes for the <response> element      -->
 <!ENTITY % response-atts
             "%jats-common-atts;                                       
-             response-type
-                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
@@ -895,7 +888,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         is contained in side a journal article.
                                                                    -->
 <!ENTITY % article-short-model
-                        "(processing-meta?, (front | front-stub),
+                        "((front | front-stub),
                           body?, back?, floats-group?)"              >
 
 
@@ -906,9 +899,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         contains neither.
                                                                    -->
 <!ENTITY % article-full-model
-                        "(processing-meta?, front, 
-                          body?, back?, floats-group?,
-                          (sub-article* | response*) )"              >
+                        "(front, body?, back?, floats-group?,
+                          (sub-article*) )"              >
 
 
 <!--                    ARTICLE                                    -->
@@ -954,8 +946,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    BODY MODEL                                 -->
 <!--                    Content model for the Body (main textual
                         content) of a journal article.             -->
-<!ENTITY % body-model   "((%para-level;)*, (%sec-level;)*,
-                          sig-block?)"                               >
+<!ENTITY % body-model   "((%para-level;)*, (%sec-level;)*)"                               >
 
 
 <!--                    BODY OF THE ARTICLE                        -->
@@ -978,7 +969,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    Content model for the Back Matter (ancillary
                         material such as appendices) of a journal
                         article.                                   -->
-<!ENTITY % back-model   "(label?, title*, (%doc-back-matter-mix;)* )">
+<!ENTITY % back-model   "(label?, title*, (%doc-back-matter-mix;)* )" >
 
 
 <!--                    BACK MATTER                                -->
@@ -1003,9 +994,9 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    Content model for the <sub-article> element
                                                                    -->
 <!ENTITY % sub-article-model
-                        "(processing-meta?, (front | front-stub), 
+                        "((front | front-stub), 
                           body?, back?, floats-group?,
-                          (sub-article* | response*) )"              >
+                          (sub-article*) )"              >
 
 <!--                    SUB-ARTICLE                                -->
 <!--                    An article that is completely contained
@@ -1024,28 +1015,26 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         a reduced metadata set for use in
                         sub-articles and responses                 -->
 <!ENTITY % front-stub-model
-                       "(article-id*, (%article-version.class;)?,  
+                       "(article-id*, 
                          article-categories?,
                          title-group?,
-                         ( %contrib-group.class; |
+                         (%contrib-group.class; |
                            %aff-alternatives.class;)*,
-                         author-notes?, ( (%pub-date.class;)* | 
-                           pub-date-not-available?), 
-                         volume*, volume-id*, volume-series?,
+                         author-notes?, ( (%pub-date.class;)* ), 
+                         volume*, volume-id, volume-series?,
                          issue*, issue-id*, 
-                         issue-title*, issue-title-group*,
-                         issue-sponsor*, issue-part?, 
-                         volume-issue-group*, isbn*,
+                         issue-title*, 
+                         issue-sponsor*, isbn*,
                          supplement?,
                          ( (fpage, lpage?, page-range?) |
                             elocation-id)?,
-                         ( %address-link.class; | product |
+                         ( %address-link.class; |  
                            supplementary-material)*, 
-                         history?, pub-history?, permissions?, 
+                         history?, permissions?, 
                          self-uri*, (%related-article.class;)*, 
-                         (%abstract.class;)*, trans-abstract*, 
+                         (%abstract.class;)*, 
                          (%kwd-group.class;)*,
-                         funding-group*, support-group*,  
+                         funding-group*, 
                          conference*, counts?,
                          custom-meta-group?)"                        >
 
