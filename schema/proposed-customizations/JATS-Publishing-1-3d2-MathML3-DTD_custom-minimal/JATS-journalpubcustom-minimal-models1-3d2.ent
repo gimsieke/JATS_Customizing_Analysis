@@ -961,28 +961,26 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         Unlike in Archive DTD, some of the metadata
                         is required here.                          -->
 <!ENTITY % article-meta-model
-                       "(article-id*, (%article-version.class;)?,
+                       "(article-id*,
                          article-categories?,
                          title-group,
                          ( %contrib-group.class; |
                            %aff-alternatives.class;)*,
-                         author-notes?, ( (%pub-date.class;)+ | 
-                           pub-date-not-available?), 
-                         volume*, volume-id*, volume-series?,
+                         author-notes?, ( (%pub-date.class;)+ ), 
+                         volume*,  volume-series?,
                          issue*, issue-id*, 
-                         issue-title*, issue-title-group*,
-                         issue-sponsor*, issue-part?, 
-                         volume-issue-group*, isbn*,
+                         issue-title*, 
+                         issue-sponsor*, isbn*,
                          supplement?,
                          ( (fpage, lpage?, page-range?) |
                             elocation-id)?,
-                         (%address-link.class; | product |
+                         (%address-link.class; | 
                           supplementary-material)*, 
-                         history?, pub-history?, permissions?, 
+                         history?, permissions?, 
                          self-uri*, (%related-article.class;)*, 
-                         (%abstract.class;)*, trans-abstract*, 
+                         (%abstract.class;)*,  
                          (%kwd-group.class;)*, 
-                         funding-group*, support-group*,   
+                         funding-group*,  
                          conference*, counts?,
                          custom-meta-group?)"                        >
 
@@ -1014,7 +1012,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         Unlike the base DTD Suite, this <date>
                         requires a <year> and may not take a string
                         date as an alternative.                    -->
-<!ENTITY % date-model   "(((day?, month?) | season)?, year, era?)"   >
+<!ENTITY % date-model   "(((day?, month?) | season)?, year)"   >
 
 
 <!--                    DEFINITION LIST: DEFINITION ITEM ELEMENTS  -->
@@ -1026,12 +1024,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    EVENT MODEL                                -->
 <!--                    The content model for the <event> element. -->
 <!ENTITY % event-model  "(event-desc?, article-id*, 
-                          (%article-version.class;)?,
-                          ( (%pub-date.class;)* | 
-                             pub-date-not-available?),
+                          ( (%pub-date.class;)* ),
                           (%date-only.class;)*,
-                          issn*, issn-l?, isbn*, permissions?,
-                          notes*, self-uri*)"                        >
+                          issn*, isbn*, permissions?,
+                          notes*, self-uri*)"                       >
 
 
 <!--                    FIGURE-LIKE CONTENT MODEL                  -->
@@ -1044,7 +1040,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                           (%subj-group.class;)*, 
                           (%access.class; | %address-link.class;)*,
                           (%block-math.class; |
-                           %chem-struct-wrap.class; |
                            %intable-para.class; |
                            %just-table.class; | %just-para.class; |
                            %list.class; | %simple-display.class; |
@@ -1066,7 +1061,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "(journal-id+, journal-title-group*,
                           (%contrib-group.class; |
                           %aff-alternatives.class;)*,
-                          issn+, issn-l?, isbn*, publisher?, notes*,
+                          issn+, isbn*, publisher?, notes*,
                           self-uri*)"                                >
 
 
@@ -1091,7 +1086,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    REFERENCE ITEM MODEL                       -->
 <!--                    Content model for the <ref> element        -->
 <!ENTITY % ref-model    "(label?,
-                         (%citation.class; | %note.class;)+ )"       >
+                         (%citation.class;)+ )"       >
 
 
 <!--                    CONTENT MODEL FOR A STRUCTURAL SECTION     -->
@@ -1101,7 +1096,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         present. One or the other must be present
                         for autogeneration of a Table of Contents or
                         other navigation.                          -->
-<!ENTITY % sec-model    "(sec-meta?, ( (label, title?) | title ),
+<!ENTITY % sec-model    "(((label, title?) | title ),
                           (%para-level;)*,
                           (%sec-level;)*,
                           (%sec-back-matter-mix;)* )"                >
@@ -1147,7 +1142,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         in sync. To add a global attribute, modify
                         this list.                                 -->
 <!ENTITY % jats-base-atts
-            "xml:base   CDATA                             #IMPLIED"  >
+            " "  >
 
 
 <!--                    JATS COMMON ATTRIBUTES                     -->
@@ -1188,14 +1183,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
             "xmlns:xlink CDATA                            #IMPLIED
              xlink:type  (simple)                         #IMPLIED
              xlink:href  CDATA                            #REQUIRED
-             xlink:role  CDATA                            #IMPLIED
-             xlink:title CDATA                            #IMPLIED
-             xlink:show  (embed | new | none | other | replace)
-                                                          #IMPLIED
-             xlink:actuate
-                         (none | onLoad | onRequest | other)
-                                                          #IMPLIED
-             hreflang    NMTOKEN                          #IMPLIED"  >
+             xlink:title CDATA                            #IMPLIED"  >
 
 
 <!--                    MIGHT LINK XLINK ATTRIBUTES                -->
@@ -1205,14 +1193,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
             "xmlns:xlink CDATA                            #IMPLIED
              xlink:type  (simple)                         #IMPLIED
              xlink:href  CDATA                            #IMPLIED
-             xlink:role  CDATA                            #IMPLIED
-             xlink:title CDATA                            #IMPLIED
-             xlink:show  (embed | new | none | other | replace)
-                                                          #IMPLIED
-             xlink:actuate
-                         (none | onLoad | onRequest | other)
-                                                          #IMPLIED
-             hreflang    NMTOKEN                          #IMPLIED"  >
+             xlink:title CDATA                            #IMPLIED"  >
 
 
 
@@ -1229,8 +1210,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % fn-atts
             "%jats-common-atts;                                       
              fn-type    (%fn-types;)                      #IMPLIED
-             custom-type
-                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              symbol     CDATA                             #IMPLIED
@@ -1246,7 +1225,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         a space separated series of index names    -->
 <!ENTITY % index-term-atts
            "%jats-common-atts;
-             index-type NMTOKENS                          #IMPLIED
              content-type
                         CDATA                             #IMPLIED
              specific-use
@@ -1267,8 +1245,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
             "%jats-common-atts;                                       
              content-type
                        CDATA                              #IMPLIED
-             baseline-shift
-                       CDATA                              #IMPLIED
              mimetype  CDATA                              #IMPLIED
              mime-subtype
                        CDATA                              #IMPLIED
@@ -1284,8 +1260,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
             "%jats-common-atts;                                       
              person-group-type
                         (%person-group-types;)            #IMPLIED
-             custom-type
-                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED" >
@@ -1320,3 +1294,1059 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 
 <!-- ================== End Publishing Content/ATT Override ====== -->
+<!-- ================== Start Minimal Publishing DTD Model Customization === -->
+<!ENTITY % answer-model
+                        "((%id.class;)*,
+                          label?, title?, subtitle*, alt-title*,
+                          ( (%sec-level;)+ |
+                            ( (%answer-para-level;)+, 
+                              (%sec-level;)* ) ),
+                          (%sec-back-matter-mix;)*)"                           >
+                          
+                          
+<!ENTITY % answer-set-model
+                        "((%id.class;)*,
+                          label?, title?, subtitle*, alt-title*,
+                          (%just-para.class;)+)"                           > 
+                          
+
+<!ENTITY % article-categories-model
+                        "(subj-group*)" >  
+
+
+<!ENTITY % article-meta-model
+                       "(article-id*,
+                         article-categories?,
+                         title-group,
+                         ( %contrib-group.class; |
+                           %aff-alternatives.class;)*,
+                         author-notes?, ( (%pub-date.class;)+ ), 
+                         volume*, volume-series?,
+                         issue*, issue-id*, 
+                         issue-title*, 
+                         issue-sponsor*, isbn*,
+                         supplement?,
+                         ( (fpage, lpage?, page-range?) |
+                            elocation-id)?,
+                         (%address-link.class; | 
+                          supplementary-material)*, 
+                         history?, permissions?, 
+                         self-uri*, (%related-article.class;)*, 
+                         (%abstract.class;)*, 
+                         (%kwd-group.class;)*, 
+                         funding-group*,   
+                         conference*, counts?,
+                         custom-meta-group?)"                        >
+                         
+                         
+<!ENTITY % article-short-model
+                        "(front, body?, back?, floats-group?)"              >
+                        
+
+<!ENTITY % award-group-model
+                        "((funding-source*), 
+                          award-id*, 
+                          principal-award-recipient)"                  >
+                          
+                          
+<!ENTITY % date-model   "(((day?, month?) | season)?, year)"   >   
+
+
+<!ENTITY % body-model   "((%para-level;)*, (%sec-level;)*)"                               >
+
+
+<!ENTITY % contributed-resource-group-model
+                        "(award-group*)"                          >
+                        
+                        
+<!ENTITY % def-list-model
+                        "(label?, title?,
+                          (%def-item.class;)*, (%def-list.class;)* )">
+
+                        
+<!ENTITY % event-model  "(event-desc?, article-id*,
+                          ( (%pub-date.class;)* ),
+                          (%date.class;)*,
+                          issn*, isbn*, permissions?,
+                          notes*, self-uri*)"                        >
+                          
+
+<!ENTITY % index-term-model
+                        "(term)"       >
+                        
+
+<!ENTITY % issue-title-group-model
+                        "(issue-title)"                       >
+
+
+<!ENTITY % journal-title-group-model
+                        "(journal-title*)">
+
+
+<!ENTITY % nested-kwd-model
+                        "(%nested-kwd.class;)+"       >
+                        
+                        
+<!ENTITY % note-model   "(label?,
+                          (%just-para.class;)+ )"  >
+                          
+                          
+<!ENTITY % option-model 
+                        "((%id.class;)*,
+                          label?, title?, subtitle*, alt-title*,
+                          ( (%sec-level;)+ |
+                            ( (%answer-para-level;)+, 
+                              (%sec-level;)* ) ),
+                          (%sec-back-matter-mix;)*)"                           >
+                          
+                          
+<!ENTITY % private-char-model
+                        "(inline-graphic*)"
+                                                                     >
+
+
+<!ENTITY % processing-meta-model
+                        "(custom-meta-group*)"                       >
+                        
+                        
+<!ENTITY % question-model
+                        "((%id.class;)*, 
+                         label?, title?, subtitle*, alt-title*,
+                         ( (%sec-level;)+ |
+                           ( (%para-level;)+, (%sec-level;)* ) ),
+                         (%sec-back-matter-mix;)* )"                 > 
+
+
+<!ENTITY % question-wrap-model
+                        "(%id.class;)*"     >
+
+
+<!ENTITY % question-wrap-group-model
+                        "((%id.class;)*,
+                          label?, title?, subtitle*, alt-title*)"                >                          
+
+
+<!ENTITY % sec-model    "(( (label, title?) | title ), (%para-level;)*,
+                          (%sec-level;)*,
+                          (%sec-back-matter-mix;)* )"                >
+ 
+ 
+<!ENTITY % sec-opt-title-model
+                        "(label?, title?, (%para-level;)*,
+                          (%sec-level;)*,
+                          (%sec-back-matter-mix;)* )"                >
+                          
+                          
+<!ENTITY % speech-model "((%id.class;)*, (%just-para.class;)+ )"                    >
+
+
+<!ENTITY % sub-article-model
+                        "(front, body?, back?, floats-group?,
+                          (sub-article*) )"              >
+                          
+                          
+<!ENTITY % subj-group-model
+                        "((subject)+, subj-group*)"
+                                                                     >
+                                                              
+<!ENTITY % support-group-model
+                        "(funding-group*)"              >
+
+
+<!ENTITY % title-group-model
+                        "(article-title, subtitle*, alt-title*, fn-group?)">
+
+
+<!ENTITY % verse-group-model
+                        "(label?, title?, subtitle?,
+                         (%display-back-matter.class;)*)"           >
+                         
+                         
+<!ENTITY % volume-issue-group-model
+                        "(volume*, volume-series?,
+                         issue*, issue-id*, 
+                         issue-title*,  
+                         issue-sponsor*)"               >
+                        
+<!-- ================== Start Minimal Publishing DTD Model Customization Attributes === -->
+<!ENTITY % abbrev-atts
+            "%jats-common-atts;                                       
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % abbrev-journal-title-atts
+            "%jats-common-atts;                                       
+    
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+                         
+
+<!ENTITY % access-date-atts
+            "%jats-common-atts;                                       
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+
+<!ENTITY % answer-atts
+           "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+
+<!ENTITY % article-atts
+            "%jats-common-atts;                                       
+             article-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             %dtd-version;
+             xml:lang   NMTOKEN                           'en'
+             %XLINK.xmlns.attrib;
+             %MATHML.xmlns.attrib;
+             %ali.xmlns.attrib;
+             %Schema.xmlns.attrib;"                     >
+             
+             
+<!ENTITY % article-version-atts
+            "%jats-common-atts;                                       
+           
+             designator CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % article-id-atts
+            "%jats-common-atts;                                       
+             pub-id-type   (%pub-id-types;)               #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+
+<!ENTITY % award-group-atts
+            "%jats-common-atts;                                       
+             rid        IDREFS                            #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % award-id-atts
+            "%jats-common-atts;                                       
+             rid        IDREFS                            #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+ 
+             
+<!ENTITY % citation-atts
+            "%jats-common-atts;                                        
+             publication-type
+                        CDATA                             #IMPLIED
+             publication-format
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+ <!ENTITY % code-atts
+            "%jats-common-atts; 
+             %display-atts;" >
+
+
+<!ENTITY % collab-atts
+            "%jats-common-atts;                                        
+             collab-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % compound-kwd-atts
+            "%jats-common-atts;
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED"  >
+
+
+<!ENTITY % compound-subject-atts
+            "%jats-common-atts;
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED"  >
+
+
+<!ENTITY % conf-date-atts
+            "%jats-common-atts;                                        
+             
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % contrib-atts
+            "%jats-common-atts;                                        
+             contrib-type
+                        CDATA                             #IMPLIED
+             corresp    (no | yes)                        #IMPLIED
+             equal-contrib
+                        (no | yes)                        #IMPLIED
+             rid        IDREFS                            #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % contrib-id-atts
+            "%jats-common-atts;                                        
+             contrib-id-type
+                        CDATA                             #IMPLIED
+             authenticated
+                        (true | false)                    'false'
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % contributed-resource-group-atts
+            "%jats-common-atts;
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % custom-meta-atts
+            "%jats-common-atts;                                        
+             specific-use
+                        CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+
+<!ENTITY % date-atts
+            "%jats-common-atts;                                        
+             date-type  CDATA                             #IMPLIED
+             publication-format
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+                        
+<!ENTITY % date-in-citation-atts
+            "%jats-common-atts;                                       
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % def-list-atts
+            "%jats-common-atts;                                       
+             list-type  CDATA                             #IMPLIED
+             list-content
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % dtd-version
+            " " >
+
+<!ENTITY % elocation-id-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+                        
+<!ENTITY % event-atts
+           "%jats-common-atts;
+            specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+ 
+<!ENTITY % explanation-atts
+           "%jats-common-atts;
+              content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % extended-by-atts
+            "%jats-common-atts;                                       
+             designator CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             %might-link-atts;"                                      >
+             
+
+<!ENTITY % ext-link-atts
+            "%jats-common-atts;                                        
+             ext-link-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+      
+
+<!ENTITY % fpage-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % free-to-read-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             %ali.xmlns.attrib;"                                     >
+
+
+<!ENTITY % given-names-atts
+            "%jats-common-atts;"  >
+             
+             
+<!ENTITY % glyph-data-atts
+            "%jats-common-atts;" >
+             
+
+<!ENTITY % glyph-ref-atts
+            "%jats-common-atts;" >
+             
+
+<!ENTITY % index-term-atts
+           "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % institution-id-atts
+            "%jats-common-atts;                                        
+             institution-id-type
+                        CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % isbn-atts
+            "%jats-common-atts;                                        
+             publication-format
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+
+
+<!ENTITY % issn-atts
+            "%jats-common-atts;                                        
+             pub-type   CDATA                             #IMPLIED
+             publication-format
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+
+
+<!ENTITY % issn-l-atts
+            "%jats-common-atts;                                        
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+
+<!ENTITY % issue-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % issue-id-atts
+            "%jats-common-atts;                                        
+             pub-id-type
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+
+<!ENTITY % journal-id-atts
+            "%jats-common-atts;                                        
+             journal-id-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % kwd-atts
+            "%jats-common-atts;
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED"  >
+
+
+<!ENTITY % kwd-group-atts
+            "%jats-common-atts;                                       
+             kwd-group-type
+                        CDATA                             #IMPLIED 
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % label-atts
+            "%jats-common-atts;                                        
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+  
+<!ENTITY % license-ref-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             %ali.xmlns.attrib;"                                     >
+             
+                         
+<!ENTITY % link-atts
+            "xmlns:xlink CDATA                            #IMPLIED
+             xlink:type  (simple)                         #IMPLIED
+             xlink:href  CDATA                            #REQUIRED
+             xlink:title CDATA                            #IMPLIED"  >
+
+
+<!ENTITY % list-atts
+            "%jats-common-atts;                                       
+             list-type  CDATA                             #IMPLIED
+             list-content
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % might-link-atts
+            "xmlns:xlink CDATA                            #IMPLIED
+             xlink:type  (simple)                         #IMPLIED
+             xlink:href  CDATA                            #IMPLIED
+             xlink:title CDATA                            #IMPLIED"  >
+             
+ 
+<!ENTITY % milestone-atts
+            "%jats-common-atts;                                       
+             rid        IDREF                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % named-content-atts
+            "%jats-common-atts;                                       
+             rid        IDREFS                            #IMPLIED
+             content-type
+                        CDATA                             #REQUIRED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+
+
+<!ENTITY % nested-kwd-atts
+            "%jats-common-atts;                                  
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                       CDATA                             #IMPLIED"  >
+                       
+
+<!ENTITY % nlm-citation-atts
+            "%jats-common-atts;                                       
+             publication-type
+                        CDATA                             #IMPLIED
+             publication-format
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % object-id-atts
+            "%jats-common-atts;                                        
+             pub-id-type
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+
+<!ENTITY % option-atts  
+           "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % preformat-atts
+            "%jats-common-atts;                                       
+              %display-atts;"  >
+              
+              
+<!ENTITY % price-atts
+            "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % private-char-atts
+            "%jats-common-atts;
+             name       CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED"  >
+                        
+                        
+<!ENTITY % processing-meta-atts
+            "%jats-common-atts;"  >
+                        
+
+<!ENTITY % product-atts
+            "%jats-common-atts;                                       
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % pub-date-atts
+            "%jats-common-atts;                                       
+             pub-type   CDATA                             #IMPLIED
+             publication-format
+                        CDATA                             #IMPLIED
+             date-type  CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+<!ENTITY % pub-id-atts
+            "%jats-common-atts;                                       
+             pub-id-type   (%pub-id-types;)               #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             %might-link-atts;"                                      >
+             
+<!ENTITY % question-atts
+           "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % question-wrap-atts
+           "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % question-wrap-group-atts
+           "%jats-common-atts;
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % related-article-atts
+            "%jats-common-atts;                                        
+             related-article-type
+                        CDATA                             #REQUIRED
+             ext-link-type
+                       CDATA                              #IMPLIED
+            journal-id-type
+                        CDATA                             #IMPLIED
+             specific-use
+                       CDATA                              #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % related-object-atts
+            "%jats-common-atts;                                       
+             link-typeext-link-type
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+
+
+
+<!ENTITY % resource-id-atts
+            "%jats-common-atts;                                        
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % response-atts
+            "%jats-common-atts;                                       
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % restricted-by-atts
+            "%jats-common-atts; 
+             designator CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             %might-link-atts;"                                      >
+
+
+<!ENTITY % role-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % self-uri-atts
+            "%jats-common-atts;                                       
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+
+<!ENTITY % size-atts
+            "%jats-common-atts;                                        
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % string-date-atts
+            "%jats-common-atts;                                        
+             
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+<!ENTITY % subject-atts
+            "%jats-common-atts;                                     
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED"  >
+
+
+<!ENTITY % subj-group-atts
+            "%jats-common-atts;                                       
+             subj-group-type
+                        CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+
+<!ENTITY % supplement-atts
+            "%jats-common-atts;                                        
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+
+<!ENTITY % support-source-atts
+            "%jats-common-atts;                                       
+             rid        IDREFS                            #IMPLIED
+             country    CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+             
+<!ENTITY % surname-atts
+            "%jats-common-atts;                                        "  >
+             
+             
+<!ENTITY % styled-content-atts
+            "%jats-common-atts; 
+             toggle     (yes | no)                        #IMPLIED
+             style      CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % target-atts
+            "%jats-common-atts-id-required;                                       
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+
+<!ENTITY % term-atts
+            "%jats-common-atts;                                       
+             rid        IDREFS                            #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED
+             vocab-term CDATA                             #IMPLIED
+             vocab-term-identifier
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % tex-math-atts
+            "%jats-common-atts;                                       
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             notation   NOTATION (LaTeX | tex | TEX | TeX)
+                                                          #IMPLIED"  >
+             
+             
+<!ENTITY % unstructured-kwd-group-atts
+            "%jats-common-atts;
+             kwd-group-type
+                        CDATA                             #IMPLIED
+             vocab      CDATA                             #IMPLIED
+             vocab-identifier
+                        CDATA                             #IMPLIED 
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % uri-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+ 
+<!ENTITY % verse-group-atts
+            "%jats-common-atts;                                       
+             style      CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+
+<!ENTITY % verse-line-atts
+            "%jats-common-atts;                                       
+             
+             style      CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+
+                         
+<!ENTITY % volume-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % volume-id-atts
+            "%jats-common-atts;                                        
+             pub-id-type
+                        CDATA                             #IMPLIED
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED
+             %might-link-atts;"                                      >
+             
+
+<!ENTITY % x-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+             
+             
+<!ENTITY % xref-atts
+            "%jats-common-atts;                                       
+             ref-type   (%ref-types;)                     #IMPLIED
+             rid        IDREFS                            #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+<!ENTITY % year-atts
+            "%jats-common-atts;                                        
+             content-type
+                        CDATA                             #IMPLIED
+             specific-use
+                        CDATA                             #IMPLIED
+             xml:lang   NMTOKEN                           #IMPLIED"  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         

@@ -374,5 +374,53 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         structures, such as sections and sidebars  -->
 <!ENTITY % sec-back-matter-mix
                         "%sec-back.class;"                           >
+                        
+
+
 
 <!-- ================== End Publishing DTD Mixes Customization === -->
+
+<!-- ================== Start Minimal Publishing DTD Mixes Customization === -->
+<!ENTITY % event-desc-elements
+                        "| %address-link.class; |
+                         %article-identifier.class; |  
+                         %date.class; | %pub-date.class;"                     >
+
+<!ENTITY % inside-cell  "%address-link.class; |  %appearance.class; |
+                         %article-link.class; |
+                         %block-math.class; | %break.class; |
+                         %citation.class; | %emphasis.class; |                         
+                         %inline-display-noalt.class; |
+                         %inline-math.class; | %intable-para.class; |
+                         %list.class; | %math.class; |
+                         %nothing-but-para.class; |
+                         %phrase.class; | %simple-display.class; | 
+                         %simple-link.class; | %subsup.class;"       >
+
+
+<!ENTITY % license-p-elements
+                        "%p-elements;"               >
+                        
+                        
+<!ENTITY % product-elements
+                        "| %article-link.class; | %break.class; |
+                         %emphasis.class; | %inline-display.class; |
+                         %inline-math.class; | %phrase.class; |
+                         %references.class; |
+                         %simple-link.class; | %subsup.class;"      >
+
+
+<!ENTITY % sig-block-elements
+                         "| %break.class; | %emphasis.class; |
+                          %just-base-display.class; |
+                          %inline-display-noalt.class; |
+                          %phrase-content.class; | %subsup.class;"              >
+
+
+<!ENTITY % source-elements
+                        "| %abbrev.class; |
+                         %address-link.class; |%emphasis.class; |
+                         %inline-display.class; |
+                         %inline-math.class; | %math.class; |
+                         %phrase-content.class; | 
+                         %simple-link.class; | %subsup.class;"       >
