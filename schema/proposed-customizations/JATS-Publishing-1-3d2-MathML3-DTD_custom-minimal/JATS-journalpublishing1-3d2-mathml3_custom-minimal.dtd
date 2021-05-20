@@ -831,9 +831,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    DTD VERSION                                -->
 <!--                    What version of this DTD was used to make
                         the document instance under consideration. -->
-                        <!--Minimal customization: Delete dtd-version-->
 <!ENTITY % dtd-version
-            " "  >
+            "dtd-version
+                        (3.0 | 0.4 | 1.0 | 1.1d1 | 1.1d2 | 1.1d3 | 
+                         1.1 | 1.2d1 | 1.2d2 | 1.2 | 1.3d1 | 1.3d2 )
+                                                          #IMPLIED"  >
 
 
 <!--                    ARTICLE ATTRIBUTES                         -->
