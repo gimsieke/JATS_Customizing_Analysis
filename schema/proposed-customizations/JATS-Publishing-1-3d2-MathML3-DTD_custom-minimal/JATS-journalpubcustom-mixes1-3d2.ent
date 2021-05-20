@@ -329,6 +329,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
      ANSI/NISO Z39.96-2015 JATS-based DTDs, XSDs, 
      RNGs and supporting documentation are available at
            http://jats.nlm.nih.gov/1.1/                            -->
+
 <!-- ============================================================= -->
 <!--                    INLINE MIXES FOR USE IN CONTENT MODELS     -->
 <!--                    (MIXES ARE COMPOSED USING CLASSES)         -->
@@ -375,69 +376,3 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "%sec-back.class;"                           >
 
 <!-- ================== End Publishing DTD Mixes Customization === -->
-<!-- ================== New Publishing Mix Overrides for Minimal Customization ===== -->
-
-<!-- ============================================================= -->
-<!--                 
-                     DUPLICATE MIX DECLARATIONS           -->
-<!--                    (These are unchanged from the base Suite,  -->
-<!--                    but are used in Mix over-rides below)-->
-
-<!--                    PARAGRAPH ELEMENTS                         -->
-<!--                                                      --> 
-<!ENTITY % p-elements   "| %address-link.class; |
-                         %article-link.class; |
-                         %block-display.class; | %block-math.class; |
-                         %citation.class; |  %emphasis.class; |
-                         %funding.class; |  %inline-math.class; |
-                         %inline-display-noalt.class; |
-                         %list.class; | %math.class; |
-                         %phrase.class; | %rest-of-para.class; |
-                         %simple-link.class; |
-                         %subsup.class;"                             > 
-
-<!-- ============================================================= -->
-
-<!--                    Delete abbrev.class                                          -->
-
-<!ENTITY % source-elements
-                        "| %address-link.class; |%emphasis.class; |
-                         %inline-display.class; |
-                         %inline-math.class; | %math.class; |
-                         %phrase-content.class; | 
-                         %simple-link.class; | %subsup.class;"       >
-
-
-<!--                    PRODUCT ELEMENTS: Delete price.class  -->
-<!ENTITY % product-elements
-                        "| %article-link.class; | %break.class; |
-                         %emphasis.class; | %inline-display.class; |
-                         %inline-math.class; | %phrase.class; |
-                         %references.class; |
-                         %simple-link.class; | %subsup.class; "      >
-                         
-
-<!--                    LICENSE PARAGRAPH ELEMENTS: Delete price.class-->
-<!ENTITY % license-p-elements
-                        "%p-elements;"               >
-
-<!--                    INSIDE TABLE CELL ELEMENTS: Delete question-answer.class-->
-
-<!ENTITY % inside-cell  "%address-link.class; |  %appearance.class; |
-                         %article-link.class; |
-                         %block-math.class; | %break.class; |
-                         %citation.class; | %emphasis.class; |                         
-                         %inline-display-noalt.class; |
-                         %inline-math.class; | %intable-para.class; |
-                         %list.class; | %math.class; |
-                         %nothing-but-para.class; |
-                         %phrase.class; | %simple-display.class; | 
-                         %simple-link.class; | %subsup.class;"       >
-
-
-<!--                    SIGNATURE BLOCK ELEMENTS: Delete sig.class -->
-<!ENTITY % sig-block-elements
-                         "| %break.class; | %emphasis.class; |
-                          %just-base-display.class; |
-                          %inline-display-noalt.class; |
-                          %phrase-content.class; | %subsup.class;"              >
