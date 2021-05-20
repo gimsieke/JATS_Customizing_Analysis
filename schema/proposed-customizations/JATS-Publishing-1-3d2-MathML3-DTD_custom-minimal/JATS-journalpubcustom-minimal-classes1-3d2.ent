@@ -624,19 +624,15 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    EMPHASIS/RENDITION ELEMENTS: Delete fixed-case, overline, ruby, sans-serif, strike-->
 <!ENTITY % emphasis.class
                         "bold | italic | monospace |
-                         overline-start | overline-end |
                          roman | sc | 
-                         underline | underline-start | 
-                         underline-end"                                       >
+                         underline"                                       >
 
 
 <!--                    FACE MARKUP ELEMENTS: Delete fixed-case, overline, sans-serif, strike  -->
 <!ENTITY % face-markup.class
                         "bold | italic | monospace |
-                         overline-start | overline-end |
                          roman | sc | 
-                         underline | underline-start | 
-                         underline-end"                              >
+                         underline"                              >
 
 <!--                    INLINE DISPLAY CLASS ELEMENTS: Delete inline-media, private-char-->
 <!ENTITY % inline-display.class
