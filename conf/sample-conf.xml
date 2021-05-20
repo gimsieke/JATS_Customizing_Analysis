@@ -3,6 +3,8 @@
   <rng uri="schema/JATS/1.3d2/Blue/rng/JATS-journalpublishing1-3d2-mathml3.rng" name="Blue"/>
   <rng uri="schema/JATS/1.3d2/Green/rng/JATS-archivearticle1-3d2-mathml3.rng" name="Green"/>
   <rng uri="schema/JATS/1.3d2/Green/rng/JATS-archive-oasis-article1-3d2-mathml3.rng" name="Green1.3d2_OASIS"/>
+  <rng name="minimal" 
+    uri="schema/proposed-customizations/JATS-Publishing-1-3d2-MathML3-DTD_custom-minimal/rng/JATS-journalpublishing1-3d2-mathml3_custom-minimal.rng"/>
   <rng uri="schema/JATS/1.3d2/Pumpkin/rng/JATS-articleauthoring1-3d2-mathml3.rng" name="Pumpkin"/>
   <prefab uri="import-data/johnbenjamins/JohnBenjamins.xhtml" name="JohnBenjamins"/>
   <prefab uri="import-data/OUP/" name="OUP"/>

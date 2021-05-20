@@ -720,13 +720,9 @@
       <ref name="bold"/>
       <ref name="italic"/>
       <ref name="monospace"/>
-      <ref name="overline-start"/>
-      <ref name="overline-end"/>
       <ref name="roman"/>
       <ref name="sc"/>
       <ref name="underline"/>
-      <ref name="underline-start"/>
-      <ref name="underline-end"/>
     </choice>
   </define>
   <!-- FACE MARKUP ELEMENTS: Delete fixed-case, overline, sans-serif, strike -->
@@ -735,13 +731,9 @@
       <ref name="bold"/>
       <ref name="italic"/>
       <ref name="monospace"/>
-      <ref name="overline-start"/>
-      <ref name="overline-end"/>
       <ref name="roman"/>
       <ref name="sc"/>
       <ref name="underline"/>
-      <ref name="underline-start"/>
-      <ref name="underline-end"/>
     </choice>
   </define>
   <!--                     INLINE DISPLAY CLASS ELEMENTS: Delete inline-media, private-char -->
