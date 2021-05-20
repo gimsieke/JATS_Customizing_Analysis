@@ -384,21 +384,21 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 
 <!--                    EMPHASIS RENDITION ELEMENTS                -->
-<!--                    All the face markup plus <ruby>            -->
+<!--                    All the face markup plus <ruby>            
 <!ENTITY % emphasis.class
-                        "bold |  italic | monospace | 
-                         roman | sc | 
-                         strike | underline"                                       >
-
-
+                        "bold | fixed-case | italic | monospace | 
+                         overline | roman |  sans-serif | sc | 
+                         strike | underline |
+                         ruby"                                       > -->
 
 
 <!--                    FACE MARKUP CLASS ELEMENTS                 -->
-<!--                    All the face markup without <ruby>         -->
+<!--                    All the face markup without <ruby>         
 <!ENTITY % face-markup.class
-                        "bold | italic | monospace | 
-                        roman | sc | underline"                                  >
-
+                        "bold | fixed-case |italic | monospace | 
+                         overline | roman | sans-serif | sc | strike |
+                         underline"                                  > -->
+ 
 
 <!-- ============================================================= -->
 <!--                    OVER-RIDE INLINE CLASSES                   -->
@@ -408,25 +408,26 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    CITATION CLASS ELEMENTS                    -->
 <!--                    Reference to an external document, as used
                         within, for example, the text of a
-                        paragraph                                  -->
+                        paragraph                                 
 <!ENTITY % citation.class
-                        "element-citation | mixed-citation"              >
+                        "citation-alternatives | element-citation | 
+                         mixed-citation | nlm-citation"              > -->
 
 
 <!--                    CITATION MINUS ALTERNATIVES CLASS ELEMENTS -->
 <!--                    All the citation elements except the
                         <citation-alternatives> element.           -->
 <!ENTITY % citation-minus-alt.class
-                        "element-citation | mixed-citation"                               >
+                        "element-citation | mixed-citation | 
+                         nlm-citation"                               >
 
 
 <!--                    CONTRIBUTOR INFORMATION                    -->
-<!--                    Metadata about a contributor               -->
+<!--                    Metadata about a contributor               
 <!ENTITY % contrib-info.class
-                        "address | aff |
-                         email | ext-link |  role | 
-                         uri | xref"           >
-                         
+                        "address | aff | aff-alternatives |
+                         author-comment | bio | email | ext-link |
+                         on-behalf-of | role | uri | xref"           >-->
 
 <!-- ============================================================= -->
 <!--                    OVER-RIDE PARAGRAPH-LIKE ELEMENTS          -->
@@ -438,160 +439,36 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         same structural level as a Paragraph.
                         Contains all paragraph-level objects that are
                         not also used inside tables and excepting
-                        also the paragraph element itself.         -->
+                        also the paragraph element itself.         
 <!ENTITY % rest-of-para.class
-                        "disp-quote | statement"                                >
+                        "disp-quote | speech | statement |
+                         verse-group"                                >-->
+
+
 <!-- ================== End Publishing Classes Customization ===== -->
+<!-- ================== New Publishing Classes Overrides for Minimal Customization ===== -->
 
 
-<!-- ================== Start Minimal Publishing DTD Classes Customization === -->  
-<!ENTITY % access.class "alt-text"                       >   
-
-
-<!ENTITY % address.class
-                        "addr-line | city | country | 
-                         institution | institution-wrap | phone |
-                         postal-code | state"                        >
-
-
-<!ENTITY % address-line.class
-                        "city | country | institution | 
-                         institution-wrap | phone |
-                         postal-code | state"                        >
-                         
-                         
-<!ENTITY % aff-alternatives.class
-                        "aff"                     >
-
-<!ENTITY % alternatives-display.class
-                        "array | chem-struct | graphic |
-                         inline-graphic | media | preformat |
-                         supplementary-material | table"                               >
-                         
-
-<!ENTITY % article-link.class
-                        "related-article"           >
-
-
-<!ENTITY % article-identifier.class
-                        "article-id | issn | isbn"          >
+<!--                    PHRASE CLASS ELEMENTS: Delete abbrev, index-term, index-term-range-end, milestone-end/-start                      -->
                         
-                        
-<!ENTITY % back.class   "ack | app-group | fn-group |
-                         glossary |  ref-list"                       >
-                         
-                         
-<!ENTITY % block-display.class    
-                        "address | alternatives | array |
-                         boxed-text | 
-                         fig | graphic | media |
-                         preformat | 
-                         supplementary-material |
-                         table-wrap"              >
+<!ENTITY % phrase.class "named-content | styled-content"             >
 
+<!--                    CONTRIBUTOR INFORMATION CLASS: Delete aff-alternatives, author-comment, bio, on-behalf-of-->
 
-<!ENTITY % block-display-noalt.class
-                        "address | array |
-                         boxed-text | 
-                         fig | graphic | media |
-                         preformat | 
-                         supplementary-material |
-                         table-wrap"              >
- 
- 
-<!ENTITY % block-display-minus-explanation.class
-                        "address | alternatives |
-                         array |
-                         boxed-text | fig | graphic | media |
-                         preformat  |
-                         supplementary-material |
-                         table-wrap"              >
-                         
-                         
-<!ENTITY % block-math.class
-                        "disp-formula"          >
-
-   
-<!ENTITY % citation.class
-                        "element-citation | mixed-citation"                             >
-
-
-<!ENTITY % conference.class
-                        "conf-date | conf-name |
-                         conf-loc | conf-acronym | string-conf"                 >
-                   
-                        
 <!ENTITY % contrib-info.class
-                        "address | aff | 
-                         email |  etal | ext-link | 
-                         role | uri | xref">
-                         
-
-<!ENTITY % emphasis.class
-                        "bold | italic | monospace |
-                         roman | sc"                                       >
-                         
-
-<!ENTITY % face-markup.class
-                        "bold | italic | monospace |
-                         roman | sc | underline"                              >
-                         
-                         
-<!ENTITY % fig-display.class
-                        "fig"                   >
-                        
-                        
-<!ENTITY % floats-display.class
-                        "alternatives | 
-                         boxed-text |
-                         code | fig | 
-                         graphic | media | preformat |
-                         supplementary-material"              >
-                         
-                         
-<!ENTITY % front.class  "ack | fn-group | glossary"            >
-
-
-<!ENTITY % inline-display.class
-                        "alternatives | inline-graphic "              >
-
-
-<!ENTITY % inline-display-noalt.class
-                        "inline-graphic"                >
-                        
-                        
-<!ENTITY % inside-chem-struct-wrap.class
-                        "alternatives | chem-struct | graphic |
-                         media | preformat"           >
-                         
-                         
-<!ENTITY % intable-para.class
-                        "disp-quote | statement"                                >
-                        
- 
-<!ENTITY % kwd.class    "kwd"           > 
-
+                        "address | aff | email |  etal |
+                         ext-link | role | uri | xref">
 
 <!ENTITY % person-group-info.class
                         "aff | etal | role"       >
                         
-                        
-<!ENTITY % phrase.class "named-content | styled-content"             >
-                         
+<!--                    AFFILIATIONS ALTERNATIVES CLASS: Delete aff-alternatives-->
+<!ENTITY % aff-alternatives.class
+                        "aff"                     > 
 
-<!ENTITY % name.class   "collab | 
-                         name | name-alternatives | string-name"     >
-                         
-                         
-<!ENTITY % nested-kwd.class    
-                        "kwd"                         >
-
-
-
-<!ENTITY % question-answer.class
-                        "question | question-wrap | question-wrap-group"        >
-
-                                                  
+<!--                    BIBLIOGRAPHIC REFERENCE (CITATION) CLASS: Delete annotation, collab-annotations, 
+                                                                  gov, issn-l, issue-part, part-title, patent, 
+                                                                  std, string-date, trans-source, version, volume-id-->
 <!ENTITY % references.class
                         "article-title | chapter-title |
                          collab | comment | 
@@ -601,30 +478,94 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                          day | edition |  email | elocation-id |  
                          etal | ext-link | fpage |
                          institution | institution-wrap |
-                         isbn | issn |  
+                         isbn | issn | 
                          issue | issue-id | issue-title |
                          lpage | month | name | name-alternatives |
-                         object-id | page-range | person-group | pub-id |
+                         object-id | page-range | 
+                         person-group | pub-id |
                          publisher-loc | publisher-name | role |
                          season | series | size | source | 
-                         string-date | string-name | supplement | uri | 
+                         string-name | supplement | uri | 
                          volume | volume-series | year"  >
+
+<!--                    NAMES CLASS: Delete anonymous, collab-alternatives -->
+<!ENTITY % name.class   "collab | 
+                         name | name-alternatives | string-name"     >
                          
-                                               
-<!ENTITY % ref-types    "aff | app | author-notes | award | 
-                         bibr | boxed-text | 
-                         chem | collab | contrib | corresp |
-                         disp-formula | fig | fn | kwd | list |
-                         plate | scheme | sec | statement |
+<!--                    DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group, table-wrap-group -->
+
+<!ENTITY % block-display.class    
+                        "address | alternatives | array | 
+                         boxed-text | 
+                         fig | graphic | media |
+                         preformat | 
                          supplementary-material |
-                         table | table-fn |
-                         other | custom"                             >
+                         table-wrap"              >
 
 
-<!ENTITY % related-article.class
-                        "related-article"          >
+<!ENTITY % block-display-noalt.class
+                        "address | array | 
+                         boxed-text | 
+                         fig | graphic | media |
+                         preformat | 
+                         supplementary-material |
+                         table-wrap"              >
+
+
+<!--                    DISPLAY CLASS ELEMENTS MINUS EXPLANATION   -->
+
+<!ENTITY % block-display-minus-explanation.class
+                        "address | alternatives | array | 
+                         boxed-text | 
+                         fig | graphic | media |
+                         preformat |
+                         supplementary-material |
+                         table-wrap"              >                         
+
+<!--                    BACK MATTER CLASS: Delete bio   -->
+
+<!ENTITY % back.class   "ack | app-group | fn-group |
+                         glossary |  ref-list"                       >
+
+
+<!--                    FRONT MATTER CLASS: Delete bio   -->
+
+<!ENTITY % front.class  "ack | fn-group | glossary"            >
+
+<!--                    FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives, code  -->
+
+<!ENTITY % floats-display.class
+                        "alternatives | boxed-text | fig | 
+                         graphic | media | preformat |
+                         supplementary-material |
+                         table-wrap | table-wrap-group"              >
+
+<!--                    FIGURE DISPLAY ELEMENTS: Delete block-alternatives  -->
+<!ENTITY % fig-display.class
+                        "fig"                   >
                         
-                        
+ <!--                    SIMPLE TABLE DISPLAY ELEMENTS: Delete chem-struct-wrap  -->
+ 
+<!ENTITY % simple-intable-display.class
+                        "alternatives | 
+                         disp-formula | 
+                         graphic | media | preformat"                >
+
+
+<!--                    INSIDE CHEMICAL STRUCTURE ELEMENTS: Delete chem-struct-wrap, code, textual-form  -->
+
+<!ENTITY % inside-chem-struct-wrap.class
+                        "alternatives | graphic |
+                         media | preformat"           >   
+                         
+
+<!--                    CITATION CLASS ELEMENTS: Delete citation-alternatives -->
+<!ENTITY % citation.class
+                        "element-citation | 
+                         mixed-citation"                             >
+
+
+<!--                    SIMPLE DISPLAY ELEMENTS: Delete code -->
 <!ENTITY % simple-display.class
                         "alternatives | array | graphic | 
                          media | preformat"                          >
@@ -632,15 +573,122 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!ENTITY % simple-display-noalt.class
                         "array | graphic | media | preformat" >
-                        
-                        
-<!ENTITY % simple-intable-display.class
-                        "alternatives | disp-formula | 
-                         graphic | media | preformat"                >
+
+<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete code, inline-media, inline-supplement-material, private-char, textual-form -->
+
+<!ENTITY % alternatives-display.class
+                        "array | chem-struct | graphic |
+                         inline-graphic |
+                         media | preformat |
+                         supplementary-material | table"                               >
+
+<!--                    KEYWORD CLASS ELEMENTS: Delete compound-kwd, nested-kwd  -->
+<!ENTITY % kwd.class    "kwd"            >
 
 
+<!--                    NESTED KEYWORD CLASS ELEMENTS: Delete compound-kwd  -->
+
+<!ENTITY % nested-kwd.class    
+                        "kwd"                         >
+
+<!--                    CONFERENCE CLASS: Delete conf-num, conf-sponsor, conf-theme  -->
+<!ENTITY % conference.class
+                        "conf-date | conf-name | 
+                         conf-loc |
+                         conf-acronym | string-conf"                 >
+
+<!--                    MATHEMATICAL EXPRESSIONS AND FORMULAE
+                        CLASS ELEMENTS: Delete disp-formula-group                             -->
+                        
+<!ENTITY % block-math.class
+                        "disp-formula"          >
+                        
+<!--                    DATE PARTS CLASS ELEMENTS: Delete era   -->
+
+<!ENTITY % date-parts.class
+                        "day | month | season | year"          >   
+                        
+<!--                    ADDRESS CLASS ELEMENTS: Delete fax  -->
+<!ENTITY % address.class
+                        "addr-line | city | country |
+                         institution | institution-wrap | phone |
+                         postal-code | state"                        >
+
+
+<!--                    ADDRESS LINE CLASS ELEMENTS: Delete fax-->
+<!ENTITY % address-line.class
+                        "city | country | institution | 
+                         institution-wrap | phone |
+                         postal-code | state"                        >
+
+<!--                    EMPHASIS/RENDITION ELEMENTS: Delete fixed-case, overline, ruby, sans-serif, strike-->
+<!ENTITY % emphasis.class
+                        "bold | italic | monospace |
+                         overline-start | overline-end |
+                         roman | sc | 
+                         underline | underline-start | 
+                         underline-end"                                       >
+
+
+<!--                    FACE MARKUP ELEMENTS: Delete fixed-case, overline, sans-serif, strike  -->
+<!ENTITY % face-markup.class
+                        "bold | italic | monospace |
+                         overline-start | overline-end |
+                         roman | sc | 
+                         underline | underline-start | 
+                         underline-end"                              >
+
+<!--                    INLINE DISPLAY CLASS ELEMENTS: Delete inline-media, private-char-->
+<!ENTITY % inline-display.class
+                        "alternatives | inline-graphic"                               >
+
+
+<!ENTITY % inline-display-noalt.class
+                        "inline-graphic"                >
+
+
+<!--                    JOURNAL ARTICLE LINK CLASS ELEMENTS: Delete inline-supplement-material, related-object -->
+<!ENTITY % article-link.class
+                        "related-article"           >
+
+<!--                    ARTICLE IDENTIFIER CLASS ELEMENTS: Delete issn-l-->
+<!ENTITY % article-identifier.class
+                        "article-id | issn | isbn"          >
+                        
+<!--                    ACCESSIBILITY CLASS ELEMENTS: Delete long-desc -->     
+
+<!ENTITY % access.class "alt-text"                       >
+
+
+<!--                    RELATED ARTICLE LINKS CLASS                -->
+<!--                    For using <related-article> at the paragraph, related-object
+                        level                                      -->
+<!ENTITY % related-article.class
+                        "related-article"          >
+
+
+
+<!--                    REST OF PARAGRAPH CLASS (MINUS PARAGRAPH): Delete speech, verse-group-->
+<!ENTITY % rest-of-para.class
+                        "disp-quote | statement"                                >
+
+<!--                    IN TABLE PARAGRAPH CLASS: speech, verse-group-->
+<!ENTITY % intable-para.class
+                        "disp-quote |statement"                                >
+
+
+<!--                    STANDARDS CLASS: Delete std-organization -->
+<!ENTITY % std.class    "day | month | pub-id | source
+                         | year"                    >
+ 
+<!--                    DATE CLASS ELEMENTS: Delete string-date-->
+<!ENTITY % date.class   "date"                         >
+
+<!--                    BLOCK ALTERNATIVES CLASS ELEMENTS: Delete table-wrap-group -->
+<!ENTITY % block-alternatives.class
+                        "boxed-text | fig | fig-group |
+                         table-wrap"              >
+
+<!--                    SIMPLE LINKS/CROSS-REFERENCES CLASS: Delete target -->
 <!ENTITY % simple-link.class
                         "fn | xref"                         >
-                        
-
-<!ENTITY % std.class    "day | month | pub-id | source | year"                    >

@@ -549,13 +549,26 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!-- ============================================================= -->
 
 
-<!--                    MODULE TO NAME DTD-SPECIFIC MODULES        -->
-<!--                    Names all DTD-specific external modules    -->
+
+
 <!ENTITY % journalpubcustom-minimal-modules.ent
                         PUBLIC
 "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD-Specific Modules v1.3d2 20201130//EN"
 "JATS-journalpubcustom-minimal-modules1-3d2.ent"                             >
 %journalpubcustom-minimal-modules.ent;
+
+
+<!--                    MODULE TO NAME DTD-SPECIFIC MODULES        -->
+<!--                    Names all DTD-specific external modules    -->
+<!ENTITY % journalpubcustom-modules.ent
+                        PUBLIC
+"-//NLM//DTD JATS (Z39.96) Journal Publishing DTD-Specific Modules v1.3d2 20201130//EN"
+"JATS-journalpubcustom-modules1-3d2.ent"                             >
+%journalpubcustom-modules.ent;
+
+
+
+
 
 
 <!--                    MODULE TO NAME THE MATHML 3.0 MODULES      -->
@@ -607,12 +620,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!-- ============================================================= -->
 
 
-<!--                    COMMON ATTRIBUTES MODULE                   -->
-<!--                    Set up the common attributes, those used on
-                        nearly all elements.
-                        Must be called before the custom models
-                        module.                                    -->
-%JATS-common-atts.ent;
+
 
 
 <!-- ============================================================= -->
@@ -623,7 +631,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    of these modules matters.                  -->
 <!-- ============================================================= -->
 
-
 <!--                    DTD-SPECIFIC CLASS CUSTOMIZATIONS MODULE   -->
 <!--                    Names the module that holds the DTD-specific
                         class definitions for the Journal Publishing
@@ -631,6 +638,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         (Defined in %journalpubcustom-modules.ent;)-->
 %journalpubcustom-minimal-classes.ent;
 
+<!--%journalpubcustom-classes.ent;-->
 
 <!--                    DEFAULT ELEMENT CLASSES MODULE             -->
 <!--                    Names the module that holds the standard
@@ -644,6 +652,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         over-ride some element mixes in this DTD.
                         (Defined in %journalpubcustom-modules.ent;)-->
 %journalpubcustom-minimal-mixes.ent;
+
+<!--%journalpubcustom-mixes.ent;-->
 
 
 <!--                    DEFAULT MIX CUSTOMIZATIONS MODULE          -->
@@ -660,6 +670,17 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         attribute values. These are DTD-specific.
                         (Defined in %journalpubcustom-modules.ent;)-->
 %journalpubcustom-minimal-models.ent;
+
+<!--%journalpubcustom-models.ent;-->
+
+
+
+<!--                    COMMON ATTRIBUTES MODULE                   -->
+<!--                    Set up the common attributes, those used on
+                        nearly all elements.
+                        Must be called before the custom models
+                        module.                                    -->
+%JATS-common-atts.ent;
 
 
 
@@ -811,7 +832,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    What version of this DTD was used to make
                         the document instance under consideration. -->
 <!ENTITY % dtd-version
-            " "  >
+            "dtd-version
+                        (3.0 | 0.4 | 1.0 | 1.1d1 | 1.1d2 | 1.1d3 | 
+                         1.1 | 1.2d1 | 1.2d2 | 1.2 | 1.3d1 | 1.3d2 )
+                                                          #IMPLIED"  >
 
 
 <!--                    ARTICLE ATTRIBUTES                         -->
@@ -828,7 +852,9 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              %XLINK.xmlns.attrib;
              %MATHML.xmlns.attrib;
              %ali.xmlns.attrib;
-             %Schema.xmlns.attrib;"                     >
+             %Schema.xmlns.attrib;  
+             %Schema.prefix;:noNamespaceSchemaLocation   
+                        CDATA          #IMPLIED"                     >
 
 
 <!--                    BACK ATTRIBUTES                            -->
@@ -870,8 +896,12 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!--                    RESPONSE ATTRIBUTES                        -->
 <!--                    Attributes for the <response> element      -->
+
+<!-- Minimal Customization: Delete response-type -->
 <!ENTITY % response-atts
             "%jats-common-atts;                                       
+             response-type
+                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
@@ -887,8 +917,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         a short sub-article such as a news brief that
                         is contained in side a journal article.
                                                                    -->
+                                                                   
+                <!--    Minimal Customization: Delete front-stub, processing-meta    -->
 <!ENTITY % article-short-model
-                        "((front | front-stub),
+                        "((front),
                           body?, back?, floats-group?)"              >
 
 
@@ -898,8 +930,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         sub-articles or responses, but which usually
                         contains neither.
                                                                    -->
+               <!--    Minimal Customization: Delete processing-meta, response    -->
 <!ENTITY % article-full-model
-                        "(front, body?, back?, floats-group?,
+                        "(front, 
+                          body?, back?, floats-group?,
                           (sub-article*) )"              >
 
 
@@ -946,6 +980,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    BODY MODEL                                 -->
 <!--                    Content model for the Body (main textual
                         content) of a journal article.             -->
+  <!--                   Delete sig-block -->                      
 <!ENTITY % body-model   "((%para-level;)*, (%sec-level;)*)"                               >
 
 
@@ -969,7 +1004,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    Content model for the Back Matter (ancillary
                         material such as appendices) of a journal
                         article.                                   -->
-<!ENTITY % back-model   "(label?, title*, (%doc-back-matter-mix;)* )" >
+<!ENTITY % back-model   "(label?, title*, (%doc-back-matter-mix;)* )">
 
 
 <!--                    BACK MATTER                                -->
@@ -992,9 +1027,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!--                    SUB-ARTICLE MODEL                          -->
 <!--                    Content model for the <sub-article> element
-                                                                   -->
+                                                                            -->
+                 <!--    Minimal Customization: Delete front-stub, processing-meta, response    -->  
+                 
 <!ENTITY % sub-article-model
-                        "((front | front-stub), 
+                        "((front), 
                           body?, back?, floats-group?,
                           (sub-article*) )"              >
 
@@ -1014,27 +1051,30 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    Content model for the <front-stub> element,
                         a reduced metadata set for use in
                         sub-articles and responses                 -->
+                        
+<!-- Minimal Customization: Delete article-version + article-version-alternatives, pub-history, issue-part, issue-title-group, product, pub-date-not-available, support-group, trans-abstract, volume-id, volume-issue-group-->
+                       
 <!ENTITY % front-stub-model
-                       "(article-id*, 
-                         article-categories?,
+                       "(article-id*, article-categories?,
                          title-group?,
-                         (%contrib-group.class; |
+                         ( %contrib-group.class; |
                            %aff-alternatives.class;)*,
-                         author-notes?, ( (%pub-date.class;)* ), 
-                         volume*, volume-id, volume-series?,
+                         author-notes?, ( (%pub-date.class;)*), 
+                         volume*, volume-series?,
                          issue*, issue-id*, 
                          issue-title*, 
-                         issue-sponsor*, isbn*,
+                         issue-sponsor*,  
+                         isbn*,
                          supplement?,
                          ( (fpage, lpage?, page-range?) |
                             elocation-id)?,
-                         ( %address-link.class; |  
+                         ( %address-link.class; |
                            supplementary-material)*, 
                          history?, permissions?, 
                          self-uri*, (%related-article.class;)*, 
-                         (%abstract.class;)*, 
+                         (%abstract.class;)*,
                          (%kwd-group.class;)*,
-                         funding-group*, 
+                         funding-group*,   
                          conference*, counts?,
                          custom-meta-group?)"                        >
 
