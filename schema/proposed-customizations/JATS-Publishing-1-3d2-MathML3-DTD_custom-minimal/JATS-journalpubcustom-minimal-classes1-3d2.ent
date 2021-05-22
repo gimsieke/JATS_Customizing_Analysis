@@ -497,8 +497,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % block-display.class    
                         "address | alternatives | array | 
                          boxed-text | chem-struct-wrap |
-                         fig | fig-wrap | graphic | media |
-                         preformat | 
+                         fig | fig-group | graphic | media |
+                         preformat |
                          supplementary-material |
                          table-wrap | table-wrap-group"              >
 
@@ -506,7 +506,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % block-display-noalt.class
                         "address | array | 
                          boxed-text | chem-struct-wrap |
-                         fig | fig-wrap | graphic | media |
+                         fig | fig-group | graphic | media |
                          preformat | 
                          supplementary-material |
                          table-wrap | table-wrap-group"              >
@@ -517,7 +517,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % block-display-minus-explanation.class
                         "address | alternatives | array | 
                          boxed-text | chem-struct-wrap |
-                         fig | fig-wrap | graphic | media |
+                         fig | fig-group | graphic | media |
                          preformat |
                          supplementary-material |
                          table-wrap | table-wrap-group"              >                         
