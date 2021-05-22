@@ -467,8 +467,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "aff"                     > 
 
 <!--                    BIBLIOGRAPHIC REFERENCE (CITATION) CLASS: Delete annotation, collab-annotations, 
-                                                                  gov, issn-l, issue-part, part-title, patent, 
-                                                                  std, string-date, trans-source, version, volume-id-->
+                                                                  gov, issn-l, issue-part, part-title, 
+                                                                  std, string-date, volume-id-->
 <!ENTITY % references.class
                         "article-title | chapter-title |
                          collab | comment | 
@@ -481,11 +481,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                          isbn | issn | 
                          issue | issue-id | issue-title |
                          lpage | month | name | name-alternatives |
-                         object-id | page-range | 
+                         object-id | page-range | patent |
                          person-group | pub-id |
                          publisher-loc | publisher-name | role |
                          season | series | size | source | 
-                         string-name | supplement | uri | 
+                         string-name | supplement | trans-source | trans-title | uri | version |
                          volume | volume-series | year"  >
 
 <!--                    NAMES CLASS: Delete anonymous, collab-alternatives -->
@@ -496,31 +496,31 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!ENTITY % block-display.class    
                         "address | alternatives | array | 
-                         boxed-text | 
-                         fig | graphic | media |
-                         preformat | 
+                         boxed-text | chem-struct-wrap |
+                         fig | fig-group | graphic | media |
+                         preformat |
                          supplementary-material |
-                         table-wrap"              >
+                         table-wrap | table-wrap-group"              >
 
 
 <!ENTITY % block-display-noalt.class
                         "address | array | 
-                         boxed-text | 
-                         fig | graphic | media |
+                         boxed-text | chem-struct-wrap |
+                         fig | fig-group | graphic | media |
                          preformat | 
                          supplementary-material |
-                         table-wrap"              >
+                         table-wrap | table-wrap-group"              >
 
 
 <!--                    DISPLAY CLASS ELEMENTS MINUS EXPLANATION   -->
 
 <!ENTITY % block-display-minus-explanation.class
                         "address | alternatives | array | 
-                         boxed-text | 
-                         fig | graphic | media |
+                         boxed-text | chem-struct-wrap |
+                         fig | fig-group | graphic | media |
                          preformat |
                          supplementary-material |
-                         table-wrap"              >                         
+                         table-wrap | table-wrap-group"              >                         
 
 <!--                    BACK MATTER CLASS: Delete bio   -->
 
@@ -535,7 +535,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives, code  -->
 
 <!ENTITY % floats-display.class
-                        "alternatives | boxed-text | fig | 
+                        "alternatives | boxed-text | chem-struct-wrap | fig | fig-group |
                          graphic | media | preformat |
                          supplementary-material |
                          table-wrap | table-wrap-group"              >
@@ -544,20 +544,20 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % fig-display.class
                         "fig"                   >
                         
- <!--                    SIMPLE TABLE DISPLAY ELEMENTS: Delete chem-struct-wrap  -->
+ <!--                    SIMPLE TABLE DISPLAY ELEMENTS: -->
  
 <!ENTITY % simple-intable-display.class
-                        "alternatives | 
+                        "alternatives | chem-struct-wrap |
                          disp-formula | 
                          graphic | media | preformat"                >
 
 
-<!--                    INSIDE CHEMICAL STRUCTURE ELEMENTS: Delete chem-struct-wrap, code, textual-form  -->
+<!--                    INSIDE CHEMICAL STRUCTURE ELEMENTS: Delete code -->
 
 <!ENTITY % inside-chem-struct-wrap.class
-                        "alternatives | graphic |
-                         media | preformat"           >   
-                         
+                        "alternatives | chem-struct | graphic |
+                         media | preformat | textual-form"           >   
+
 
 <!--                    CITATION CLASS ELEMENTS: Delete citation-alternatives -->
 <!ENTITY % citation.class
@@ -574,13 +574,13 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % simple-display-noalt.class
                         "array | graphic | media | preformat" >
 
-<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete code, inline-media, inline-supplement-material, private-char, textual-form -->
+<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete code, inline-media, inline-supplement-material, private-char -->
 
 <!ENTITY % alternatives-display.class
                         "array | chem-struct | graphic |
                          inline-graphic |
                          media | preformat |
-                         supplementary-material | table"                               >
+                         supplementary-material | table | textual-form"                               >
 
 <!--                    KEYWORD CLASS ELEMENTS: Delete compound-kwd, nested-kwd  -->
 <!ENTITY % kwd.class    "kwd"            >
@@ -596,12 +596,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "conf-date | conf-name | 
                          conf-loc |
                          conf-acronym | string-conf"                 >
-
-<!--                    MATHEMATICAL EXPRESSIONS AND FORMULAE
-                        CLASS ELEMENTS: Delete disp-formula-group                             -->
-                        
-<!ENTITY % block-math.class
-                        "disp-formula"          >
                         
 <!--                    DATE PARTS CLASS ELEMENTS: Delete era   -->
 
@@ -643,24 +637,20 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "inline-graphic"                >
 
 
-<!--                    JOURNAL ARTICLE LINK CLASS ELEMENTS: Delete inline-supplement-material, related-object -->
+<!--                    JOURNAL ARTICLE LINK CLASS ELEMENTS: Delete inline-supplement-material -->
 <!ENTITY % article-link.class
-                        "related-article"           >
+                        "related-article | related-object "           >
 
 <!--                    ARTICLE IDENTIFIER CLASS ELEMENTS: Delete issn-l-->
 <!ENTITY % article-identifier.class
                         "article-id | issn | isbn"          >
-                        
-<!--                    ACCESSIBILITY CLASS ELEMENTS: Delete long-desc -->     
-
-<!ENTITY % access.class "alt-text"                       >
 
 
 <!--                    RELATED ARTICLE LINKS CLASS                -->
 <!--                    For using <related-article> at the paragraph, related-object
                         level                                      -->
 <!ENTITY % related-article.class
-                        "related-article"          >
+                        "related-article | related-object "          >
 
 
 
@@ -683,7 +673,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    BLOCK ALTERNATIVES CLASS ELEMENTS: Delete table-wrap-group -->
 <!ENTITY % block-alternatives.class
                         "boxed-text | fig | fig-group |
-                         table-wrap"              >
+                         table-wrap | table-wrap-group"              >
 
 <!--                    SIMPLE LINKS/CROSS-REFERENCES CLASS: Delete target -->
 <!ENTITY % simple-link.class

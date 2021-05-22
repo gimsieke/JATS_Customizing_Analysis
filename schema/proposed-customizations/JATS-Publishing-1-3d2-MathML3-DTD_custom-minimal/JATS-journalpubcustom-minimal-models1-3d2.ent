@@ -1340,7 +1340,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    JOURNAL TITLE GROUP MODEL: Delete abbrev-journal-title, journal-subtitle, trans-title, trans-title-group                  -->
 
 <!ENTITY % journal-title-group-model
-                        "(journal-title*)">
+                        "(journal-title*, trans-title-group*)">
 
 <!--                    QUESTION WRAP MODEL: Delete answer, explanation-->
 
@@ -1384,7 +1384,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                           supplementary-material)*,
                          history?, permissions?, 
                          self-uri*, (%related-article.class;)*, 
-                         (%abstract.class;)*,
+                         (%abstract.class;)*,trans-abstract*,
                          (%kwd-group.class;)*, 
                          funding-group*,   
                          conference*, counts?, 
@@ -1505,7 +1505,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!--                    ISSUE TITLE GROUP: Delete issue-subtitle, trans-title-group  -->
 <!ENTITY % issue-title-group-model
-                        "(issue-title)"                       >
+                        "(issue-title, trans-title-group*)"                       >
 
 <!--                    NESTED KEYWORD MODEL: Delete nested-kwd-->
 <!ENTITY % nested-kwd-model
@@ -1558,15 +1558,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % speech-model "((%id.class;)*, (%just-para.class;)+ )"                    >
 
                         
-<!--                    TITLE GROUP MODEL: Delete trans-title, trans-title-group-->
-<!ENTITY % title-group-model
-                        "(article-title, subtitle*,
-                          alt-title*, fn-group?)">
-                          
 
-<!--                    TRANSLATED TITLE GROUP MODEL: Delete trans-title-->
-<!ENTITY % trans-title-group-model
-                        "(trans-title, trans-subtitle*)"             >
 
 <!--                    VERSE GROUP MODEL: delete verse-group, verse-line-->
 <!ENTITY % verse-group-model
@@ -1652,7 +1644,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
-<!--                    ARTICLE VERSION ATTRIBUTES: Delete article-version-type, assigning-authority, iso-8601-date  -->
+<!--                    ARTICLE VERSION ATTRIBUTES: Delete article-version-type, assigning-authority  -->
 <!ENTITY % article-version-atts
             "%jats-common-atts;                                       
              designator CDATA                             #IMPLIED
@@ -1661,6 +1653,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              vocab-term CDATA                             #IMPLIED
              vocab-term-identifier
+                        CDATA                             #IMPLIED
+             iso-8601-date
                         CDATA                             #IMPLIED
              content-type
                         CDATA                             #IMPLIED
@@ -1749,13 +1743,15 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              content-type
                        CDATA                             #IMPLIED"  >
 
-<!--                    PUBLICATION DATE ATTRIBUTES Delete assigning-authority, calendar, iso-8601-date -->
+<!--                    PUBLICATION DATE ATTRIBUTES Delete assigning-authority, calendar -->
 <!ENTITY % pub-date-atts
             "%jats-common-atts;                                       
              pub-type   CDATA                             #IMPLIED
              publication-format
                         CDATA                             #IMPLIED
              date-type  CDATA                             #IMPLIED
+             iso-8601-date
+                        CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
 <!--                    RESTRICTED BY ATTRIBUTES: Delete assigning-authority -->
@@ -1872,55 +1868,67 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % processing-meta-atts
             "%jats-common-atts;"  >
 
-<!--                    CONFERENCE DATE ATTRIBUTES: Delete calendar, iso-8601-date     -->
+<!--                    CONFERENCE DATE ATTRIBUTES: Delete calendar    -->
 <!ENTITY % conf-date-atts
             "%jats-common-atts;                                        
              content-type
                         CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
+             iso-8601-date
+                        CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
 
-<!--                    DATE (HISTORICAL) ATTRIBUTES: Delete calendar, iso-8601-date         -->
+<!--                    DATE (HISTORICAL) ATTRIBUTES: Delete calendar         -->
 <!ENTITY % date-atts
             "%jats-common-atts;                                        
              date-type  CDATA                             #IMPLIED
              publication-format
                         CDATA                             #IMPLIED
+             iso-8601-date
+                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED"  >
 
-<!--                    STRING DATE ATTRIBUTES: Delete calendar, iso-8601-date   -->
+<!--                    STRING DATE ATTRIBUTES: Delete calendar  -->
 <!ENTITY % string-date-atts
             "%jats-common-atts;                                        
+             iso-8601-date
+                        CDATA                             #IMPLIED
              content-type
                         CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
-<!--                    YEAR ATTRIBUTES: Delete calendar, iso-8601-date          -->
+<!--                    YEAR ATTRIBUTES: Delete calendar          -->
 <!ENTITY % year-atts
             "%jats-common-atts;                                        
              content-type
+                        CDATA                             #IMPLIED
+             iso-8601-date
                         CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
  
-<!--                    Attributes for the <access-date> element: Delete calendar, iso-8601-date   -->
+<!--                    Attributes for the <access-date> element: Delete calendar   -->
 <!ENTITY % access-date-atts
             "%jats-common-atts;                                       
+             iso-8601-date
+                        CDATA                             #IMPLIED
              content-type
                         CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED"  > 
 
-<!--                    DATE IN CITATION ATTRIBUTE: Delete calendar, iso-8601-date   -->
+<!--                    DATE IN CITATION ATTRIBUTE: Delete calendar   -->
 
 <!ENTITY % date-in-citation-atts
             "%jats-common-atts;                                       
+             iso-8601-date
+                        CDATA                             #IMPLIED
              content-type
                         CDATA                             #IMPLIED
              specific-use
@@ -1932,23 +1940,27 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
             "%jats-common-atts;                                       
              %display-atts;" >
 
-<!--                    DEFAULT DEFINITION LIST ATTRIBUTES: Delete continued-from, prefix-word                   -->
+<!--                    DEFAULT DEFINITION LIST ATTRIBUTES: Delete prefix-word                   -->
 <!ENTITY % def-list-atts
             "%jats-common-atts;                                       
              list-type  CDATA                             #IMPLIED
              list-content
                         CDATA                             #IMPLIED
+             continued-from
+                        IDREF                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
 
-<!--                    DEFAULT LIST CLASS ATTRIBUTES: Delete continued-from, prefix-word                       -->
+<!--                    DEFAULT LIST CLASS ATTRIBUTES: Delete prefix-word                       -->
 <!ENTITY % list-atts
             "%jats-common-atts;                                       
              list-type  CDATA                             #IMPLIED
              list-content
                         CDATA                             #IMPLIED
+             continued-from
+                        IDREF                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
