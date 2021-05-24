@@ -496,7 +496,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!ENTITY % block-display.class    
                         "address | alternatives | array | 
-                         boxed-text | chem-struct-wrap |
+                         boxed-text | chem-struct-wrap | code |
                          fig | fig-group | graphic | media |
                          preformat |
                          supplementary-material |
@@ -505,7 +505,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!ENTITY % block-display-noalt.class
                         "address | array | 
-                         boxed-text | chem-struct-wrap |
+                         boxed-text | chem-struct-wrap | code |
                          fig | fig-group | graphic | media |
                          preformat | 
                          supplementary-material |
@@ -516,7 +516,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!ENTITY % block-display-minus-explanation.class
                         "address | alternatives | array | 
-                         boxed-text | chem-struct-wrap |
+                         boxed-text | chem-struct-wrap | code |
                          fig | fig-group | graphic | media |
                          preformat |
                          supplementary-material |
@@ -532,10 +532,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!ENTITY % front.class  "ack | fn-group | glossary"            >
 
-<!--                    FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives, code  -->
+<!--                    FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives -->
 
 <!ENTITY % floats-display.class
-                        "alternatives | boxed-text | chem-struct-wrap | fig | fig-group |
+                        "alternatives | boxed-text | chem-struct-wrap  | code | fig | fig-group |
                          graphic | media | preformat |
                          supplementary-material |
                          table-wrap | table-wrap-group"              >
@@ -543,41 +543,17 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    FIGURE DISPLAY ELEMENTS: Delete block-alternatives  -->
 <!ENTITY % fig-display.class
                         "fig"                   >
-                        
- <!--                    SIMPLE TABLE DISPLAY ELEMENTS: -->
- 
-<!ENTITY % simple-intable-display.class
-                        "alternatives | chem-struct-wrap |
-                         disp-formula | 
-                         graphic | media | preformat"                >
-
-
-<!--                    INSIDE CHEMICAL STRUCTURE ELEMENTS: Delete code -->
-
-<!ENTITY % inside-chem-struct-wrap.class
-                        "alternatives | chem-struct | graphic |
-                         media | preformat | textual-form"           >   
-
-
+                       
 <!--                    CITATION CLASS ELEMENTS: Delete citation-alternatives -->
 <!ENTITY % citation.class
                         "element-citation | 
                          mixed-citation"                             >
 
 
-<!--                    SIMPLE DISPLAY ELEMENTS: Delete code -->
-<!ENTITY % simple-display.class
-                        "alternatives | array | graphic | 
-                         media | preformat"                          >
-
-
-<!ENTITY % simple-display-noalt.class
-                        "array | graphic | media | preformat" >
-
-<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete code, inline-media, inline-supplement-material, private-char -->
+<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete inline-media, inline-supplement-material, private-char -->
 
 <!ENTITY % alternatives-display.class
-                        "array | chem-struct | graphic |
+                        "array | chem-struct | code | graphic |
                          inline-graphic |
                          media | preformat |
                          supplementary-material | table | textual-form"                               >
