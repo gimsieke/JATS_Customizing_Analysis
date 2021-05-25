@@ -40,7 +40,12 @@
         <ul id="attributes">
           <xsl:for-each-group select="descendant::rng:attribute" group-by="@name">
             <xsl:sort select="rng:normalize-sortkey(current-grouping-key())"/>
-            <xsl:apply-templates select="." mode="li"/>
+            <xsl:for-each select="current-group()">
+              <xsl:sort select="rng:downrank-mathml(.)"/>
+              <xsl:if test="position() = 1">
+                <xsl:apply-templates select="." mode="li"/> 
+              </xsl:if>
+            </xsl:for-each>
           </xsl:for-each-group>
         </ul>
         <h2>Parameter Entities</h2>
@@ -74,6 +79,11 @@
                             '\p{P}',
                             ''
                           )"/>
+  </xsl:function>
+  
+  <xsl:function name="rng:downrank-mathml" as="xs:integer">
+    <xsl:param name="input" as="item()"/>
+    <xsl:sequence select="if (contains(base-uri($input), '/mathml')) then 1 else 0"/>
   </xsl:function>
   
   <xsl:template match="rng:define[rng:element]" mode="li">
