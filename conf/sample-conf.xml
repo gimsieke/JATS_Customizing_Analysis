@@ -5,8 +5,10 @@
   <rng uri="schema/JATS/1.3d2/Green/rng/JATS-archive-oasis-article1-3d2-mathml3.rng" name="Green1.3d2_OASIS"/>
   <rng name="minimal" 
     uri="schema/proposed-customizations/JATS-Publishing-1-3d2-MathML3-DTD_custom-minimal/rng/JATS-journalpublishing1-3d2-mathml3_custom-minimal.rng"/>
+  <rng uri="schema/proposed-customizations/Texture-JATS/rng/JATS-archive-oasis-article1-mathml3.rng" name="Texture Subset"/>
   <rng uri="schema/JATS/1.3d2/Pumpkin/rng/JATS-articleauthoring1-3d2-mathml3.rng" name="Pumpkin"/>
   <prefab uri="import-data/johnbenjamins/JohnBenjamins.xhtml" name="JohnBenjamins"/>
+  <prefab uri="import-data/PMC/pmc.xhtml" name="PMC"/>
   <prefab uri="import-data/OUP/" name="OUP"/>
   <prefab uri="import-data/OSA/cache/" name="OSA"/>
   <collection uri="articles/SO_plus_DeGruyter/" name="SO_plus_DeGruyter"/>
