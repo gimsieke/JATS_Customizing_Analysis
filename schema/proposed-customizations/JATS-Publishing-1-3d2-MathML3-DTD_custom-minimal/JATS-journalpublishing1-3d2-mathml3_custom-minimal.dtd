@@ -1072,7 +1072,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                            supplementary-material)*, 
                          history?, permissions?, 
                          self-uri*, (%related-article.class;)*, 
-                         (%abstract.class;)*,
+                         (%abstract.class;)*, trans-abstract*,
                          (%kwd-group.class;)*,
                          funding-group*,   
                          conference*, counts?,
