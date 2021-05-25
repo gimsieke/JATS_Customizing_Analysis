@@ -12,7 +12,76 @@
                         </String-array>
                     </entry>
                     <entry>
+                        <String>diff.info.v12</String>
+                        <diffInfo>
+                            <field name="algorithm">
+                                <Integer>0</Integer>
+                            </field>
+                            <field name="algorithm3Way">
+                                <Integer>0</Integer>
+                            </field>
+                            <field name="ignorePI">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreComments">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreCDATA">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreWhitespaces">
+                                <Boolean>true</Boolean>
+                            </field>
+                            <field name="ignoreDOCTYPE">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreText">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreAttributesOrder">
+                                <Boolean>true</Boolean>
+                            </field>
+                            <field name="ignorePrefixes">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreNamespaces">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreNamespaceDeclarations">
+                                <Boolean>true</Boolean>
+                            </field>
+                            <field name="mergeAdjacentDifferences">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="markEndTagsAsDifferent">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="maxNoOfDiffs">
+                                <Integer>10000</Integer>
+                            </field>
+                            <field name="maxNoOfDiffs3Way">
+                                <Integer>10000</Integer>
+                            </field>
+                            <field name="ignoreEntities">
+                                <Boolean>true</Boolean>
+                            </field>
+                            <field name="ignoreStateOfEmptyElements">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="ignoreNodesByXPath">
+                                <Boolean>false</Boolean>
+                            </field>
+                            <field name="defaultXPath">
+                                <null/>
+                            </field>
+                        </diffInfo>
+                    </entry>
+                    <entry>
                         <String>enable.project.master.files.support</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
+                        <String>key.diff.option.pane</String>
                         <Boolean>true</Boolean>
                     </entry>
                     <entry>
@@ -28,7 +97,67 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>schema/proposed-customizations/JATS-Publishing-1-3d2-MathML3-DTD_custom-minimal/rng/JATS-journalpublishing1-3d2-mathml3_custom-minimal_expanded_expanded.rng</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-list</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>xsl/rng-list.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-expand-includes</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>schema/proposed-customizations/JATS-Publishing-1-3d2-MathML3-DTD_custom-minimal/rng/JATS-journalpublishing1-3d2-mathml3_custom-minimal_expanded.rng</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>rng-expand-refs</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>schema/proposed-customizations/JATS-Publishing-1-3d2-MathML3-DTD_custom-minimal/rng/JATS-journalpublishing1-3d2-mathml3_custom-minimal.rng</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -531,6 +660,12 @@
                                                 <field name="initializer">
                                                     <String></String>
                                                 </field>
+                                                <field name="profilingOutputFile">
+                                                    <null/>
+                                                </field>
+                                                <field name="isProfilingEnabled">
+                                                    <Boolean>false</Boolean>
+                                                </field>
                                             </xsltSaxonBAdvancedOptions>
                                         </entry>
                                     </serializableOrderedMap>
@@ -862,6 +997,12 @@
                                                 <field name="initializer">
                                                     <String></String>
                                                 </field>
+                                                <field name="profilingOutputFile">
+                                                    <null/>
+                                                </field>
+                                                <field name="isProfilingEnabled">
+                                                    <Boolean>false</Boolean>
+                                                </field>
                                             </xsltSaxonBAdvancedOptions>
                                         </entry>
                                     </serializableOrderedMap>
@@ -1026,6 +1167,12 @@
                                                 </field>
                                                 <field name="initializer">
                                                     <String></String>
+                                                </field>
+                                                <field name="profilingOutputFile">
+                                                    <null/>
+                                                </field>
+                                                <field name="isProfilingEnabled">
+                                                    <Boolean>false</Boolean>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
                                         </entry>
