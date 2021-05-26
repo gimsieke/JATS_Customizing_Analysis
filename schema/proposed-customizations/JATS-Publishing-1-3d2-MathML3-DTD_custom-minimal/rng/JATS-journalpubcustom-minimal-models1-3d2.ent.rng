@@ -1541,6 +1541,9 @@
     <zeroOrMore>
       <ref name="journal-title"/>
     </zeroOrMore>
+    <zeroOrMore>
+      <ref name="trans-title-group"/>
+    </zeroOrMore>
   </define>
   <!--                     QUESTION WRAP MODEL: Delete answer, explanation -->
   <define name="question-wrap-model">
@@ -1604,7 +1607,7 @@
     </oneOrMore>
   </define>
   <!--
-    ARTICLE METADATA MODEL: Delete article-version + article-version-alternatives, pub-history, 
+    ARTICLE METADATA MODEL: Deletepub-history, 
     issue-part, product, pub-date-not-available, support-group,trans-abstract,
     volume-id, volume-issue-group
   -->
@@ -1612,6 +1615,9 @@
     <zeroOrMore>
       <ref name="article-id"/>
     </zeroOrMore>
+    <optional>
+      <ref name="article-version.class"/>
+    </optional>
     <optional>
       <ref name="article-categories"/>
     </optional>
@@ -1690,10 +1696,16 @@
       <ref name="abstract.class"/>
     </zeroOrMore>
     <zeroOrMore>
+      <ref name="trans-abstract"/>
+    </zeroOrMore>
+    <zeroOrMore>
       <ref name="kwd-group.class"/>
     </zeroOrMore>
     <zeroOrMore>
       <ref name="funding-group"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="support-group"/>
     </zeroOrMore>
     <zeroOrMore>
       <ref name="conference"/>
@@ -1705,20 +1717,24 @@
       <ref name="custom-meta-group"/>
     </optional>
   </define>
-  <!-- EVENT DESCRIPTION ELEMENTS: Delete article-version + article-version-alternatives, pub-date-not-available -->
+  <!-- EVENT DESCRIPTION ELEMENTS: Delete pub-date-not-available -->
   <define name="event-desc-elements">
     <choice>
       <ref name="address-link.class"/>
       <ref name="article-identifier.class"/>
+      <ref name="article-version.class"/>
       <ref name="date.class"/>
       <ref name="pub-date.class"/>
     </choice>
   </define>
-  <!-- EVENT MODEL: Delete article-version + article-version-alternatives, event-desc, issn-l, notes, pub-date-not-available -->
+  <!-- EVENT MODEL: Delete event-desc, notes, pub-date-not-available -->
   <define name="event-model">
     <zeroOrMore>
       <ref name="article-id"/>
     </zeroOrMore>
+    <optional>
+      <ref name="article-version.class"/>
+    </optional>
     <zeroOrMore>
       <ref name="pub-date.class"/>
     </zeroOrMore>
@@ -1728,6 +1744,9 @@
     <zeroOrMore>
       <ref name="issn"/>
     </zeroOrMore>
+    <optional>
+      <ref name="issn-l"/>
+    </optional>
     <zeroOrMore>
       <ref name="isbn"/>
     </zeroOrMore>
@@ -1829,14 +1848,11 @@
       <ref name="subj-group"/>
     </zeroOrMore>
   </define>
-  <!--                     CONFERENCE MODEL: Delete conf-num, conf-sponsor, conf-theme -->
+  <!--                     CONFERENCE MODEL: Delete conf-num, conf-sponsor, conf-theme, conf-acronym -->
   <define name="conference-model">
     <ref name="conf-date"/>
     <oneOrMore>
-      <choice>
-        <ref name="conf-name"/>
-        <ref name="conf-acronym"/>
-      </choice>
+      <ref name="conf-name"/>
     </oneOrMore>
     <optional>
       <ref name="conf-loc"/>
@@ -1934,39 +1950,6 @@
       <ref name="term"/>
     </zeroOrMore>
   </define>
-  <!--                     JOURNAL METADATA MODEL: Delete issn-l -->
-  <define name="journal-meta-model">
-    <zeroOrMore>
-      <ref name="journal-id"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="journal-title-group"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <choice>
-        <ref name="contrib-group.class"/>
-        <ref name="aff-alternatives.class"/>
-      </choice>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="issn"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="isbn"/>
-    </zeroOrMore>
-    <optional>
-      <ref name="publisher"/>
-    </optional>
-    <zeroOrMore>
-      <ref name="notes"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="self-uri"/>
-    </zeroOrMore>
-    <optional>
-      <ref name="custom-meta-group"/>
-    </optional>
-  </define>
   <!-- VOLUME ISSUE GROUP: Delete issue-part, issue-title-group, volume-id -->
   <define name="volume-issue-group-model">
     <zeroOrMore>
@@ -1991,6 +1974,9 @@
   <!-- ISSUE TITLE GROUP: Delete issue-subtitle, trans-title-group -->
   <define name="issue-title-group-model">
     <ref name="issue-title"/>
+    <zeroOrMore>
+      <ref name="trans-title-group"/>
+    </zeroOrMore>
   </define>
   <!--                     NESTED KEYWORD MODEL: Delete nested-kwd -->
   <define name="nested-kwd-model">
@@ -2010,11 +1996,14 @@
       <ref name="citation.class"/>
     </oneOrMore>
   </define>
-  <!-- QUESTION MODEL: Delete option.class, sec-meta -->
+  <!-- QUESTION MODEL: Delete option.class -->
   <define name="question-model">
     <zeroOrMore>
       <ref name="id.class"/>
     </zeroOrMore>
+    <optional>
+      <ref name="sec-meta"/>
+    </optional>
     <optional>
       <ref name="label"/>
     </optional>
@@ -2077,40 +2066,6 @@
       <ref name="award-group"/>
     </zeroOrMore>
   </define>
-  <!-- CONTENT MODEL FOR A STRUCTURAL SECTION: Delete sec-meta -->
-  <define name="sec-model">
-    <optional>
-      <ref name="label"/>
-    </optional>
-    <ref name="title"/>
-    <zeroOrMore>
-      <ref name="para-level"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="sec-level"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="sec-back-matter-mix"/>
-    </zeroOrMore>
-  </define>
-  <!--                     CONTENT MODEL FOR AN UNTITLED SECTION: Delete sec-meta -->
-  <define name="sec-opt-title-model">
-    <optional>
-      <ref name="label"/>
-    </optional>
-    <optional>
-      <ref name="title"/>
-    </optional>
-    <zeroOrMore>
-      <ref name="para-level"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="sec-level"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="sec-back-matter-mix"/>
-    </zeroOrMore>
-  </define>
   <!--                     ARTICLE CATEGORIES MODEL: Delete series-title, series-text -->
   <define name="article-categories-model">
     <zeroOrMore>
@@ -2125,26 +2080,6 @@
     <oneOrMore>
       <ref name="just-para.class"/>
     </oneOrMore>
-  </define>
-  <!--                     TITLE GROUP MODEL: Delete trans-title, trans-title-group -->
-  <define name="title-group-model">
-    <ref name="article-title"/>
-    <zeroOrMore>
-      <ref name="subtitle"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="alt-title"/>
-    </zeroOrMore>
-    <optional>
-      <ref name="fn-group"/>
-    </optional>
-  </define>
-  <!--                     TRANSLATED TITLE GROUP MODEL: Delete trans-title -->
-  <define name="trans-title-group-model">
-    <ref name="trans-title"/>
-    <zeroOrMore>
-      <ref name="trans-subtitle"/>
-    </zeroOrMore>
   </define>
   <!--                     VERSE GROUP MODEL: delete verse-group, verse-line -->
   <define name="verse-group-model">
@@ -2163,7 +2098,7 @@
   </define>
   <!-- ================== End Publishing Minimal Customization Override ====== -->
   <!-- ================== New Publishing Attribute Overrides for Minimal Customization ===== -->
-  <!-- FOOTNOTE TYPE VALUES: Delete abbr, deceased -->
+  <!-- FOOTNOTE TYPE VALUES: Delete abbr -->
   <define name="fn-types">
     <choice>
       <value>coi-statement</value>
@@ -2172,6 +2107,7 @@
       <value>conflict</value>
       <value>corresp</value>
       <value>current-aff</value>
+      <value>deceased</value>
       <value>edited-by</value>
       <value>equal</value>
       <value>financial-disclosure</value>
@@ -2200,7 +2136,7 @@
       </attribute>
     </optional>
   </define>
-  <!-- MIGHT LINK XLINK ATTRIBUTES: Delete hreflang, xlink:actuate, xlink:role, xlink:show -->
+  <!-- MIGHT LINK XLINK ATTRIBUTES: Delete xlink:actuate, xlink:role, xlink:show -->
   <define name="might-link-atts">
     <optional>
       <attribute name="xlink:type">
@@ -2215,8 +2151,13 @@
     <optional>
       <attribute name="xlink:title"/>
     </optional>
+    <optional>
+      <attribute name="hreflang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
   </define>
-  <!-- XLINK LINK ATTRIBUTES: Delete hreflang, xlink:actuate, xlink:role, xlink:show -->
+  <!-- XLINK LINK ATTRIBUTES: Delete xlink:actuate, xlink:role, xlink:show -->
   <define name="link-atts">
     <optional>
       <attribute name="xlink:type">
@@ -2228,6 +2169,11 @@
     <attribute name="xlink:href"/>
     <optional>
       <attribute name="xlink:title"/>
+    </optional>
+    <optional>
+      <attribute name="hreflang">
+        <data type="NMTOKEN"/>
+      </attribute>
     </optional>
   </define>
   <!--                     LABEL ATTRIBUTES: Delete alt -->
@@ -2309,9 +2255,12 @@
       </attribute>
     </optional>
   </define>
-  <!-- ARTICLE VERSION ATTRIBUTES: Delete article-version-type, assigning-authority, iso-8601-date -->
+  <!-- ARTICLE VERSION ATTRIBUTES: Delete assigning-authority -->
   <define name="article-version-atts">
     <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="article-version-type"/>
+    </optional>
     <optional>
       <attribute name="designator"/>
     </optional>
@@ -2326,6 +2275,9 @@
     </optional>
     <optional>
       <attribute name="vocab-term-identifier"/>
+    </optional>
+    <optional>
+      <attribute name="iso-8601-date"/>
     </optional>
     <optional>
       <attribute name="content-type"/>
@@ -2466,7 +2418,7 @@
       <attribute name="content-type"/>
     </optional>
   </define>
-  <!-- PUBLICATION DATE ATTRIBUTES Delete assigning-authority, calendar, iso-8601-date -->
+  <!-- PUBLICATION DATE ATTRIBUTES Delete assigning-authority, calendar -->
   <define name="pub-date-atts">
     <ref name="jats-common-atts"/>
     <optional>
@@ -2477,6 +2429,9 @@
     </optional>
     <optional>
       <attribute name="date-type"/>
+    </optional>
+    <optional>
+      <attribute name="iso-8601-date"/>
     </optional>
     <optional>
       <attribute name="xml:lang">
@@ -2673,7 +2628,7 @@
   <define name="processing-meta-atts">
     <ref name="jats-common-atts"/>
   </define>
-  <!-- CONFERENCE DATE ATTRIBUTES: Delete calendar, iso-8601-date -->
+  <!-- CONFERENCE DATE ATTRIBUTES: Delete calendar -->
   <define name="conf-date-atts">
     <ref name="jats-common-atts"/>
     <optional>
@@ -2683,12 +2638,15 @@
       <attribute name="specific-use"/>
     </optional>
     <optional>
+      <attribute name="iso-8601-date"/>
+    </optional>
+    <optional>
       <attribute name="xml:lang">
         <data type="NMTOKEN"/>
       </attribute>
     </optional>
   </define>
-  <!-- DATE (HISTORICAL) ATTRIBUTES: Delete calendar, iso-8601-date -->
+  <!-- DATE (HISTORICAL) ATTRIBUTES: Delete calendar -->
   <define name="date-atts">
     <ref name="jats-common-atts"/>
     <optional>
@@ -2698,12 +2656,18 @@
       <attribute name="publication-format"/>
     </optional>
     <optional>
+      <attribute name="iso-8601-date"/>
+    </optional>
+    <optional>
       <attribute name="specific-use"/>
     </optional>
   </define>
-  <!-- STRING DATE ATTRIBUTES: Delete calendar, iso-8601-date -->
+  <!-- STRING DATE ATTRIBUTES: Delete calendar -->
   <define name="string-date-atts">
     <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="iso-8601-date"/>
+    </optional>
     <optional>
       <attribute name="content-type"/>
     </optional>
@@ -2716,13 +2680,16 @@
       </attribute>
     </optional>
   </define>
-  <!-- YEAR ATTRIBUTES: Delete calendar, iso-8601-date -->
+  <!-- YEAR ATTRIBUTES: Delete calendar -->
   <define name="year-atts">
     <ref name="jats-common-atts"/>
     <optional>
       <attribute name="content-type"/>
     </optional>
     <optional>
+      <attribute name="iso-8601-date"/>
+    </optional>
+    <optional>
       <attribute name="specific-use"/>
     </optional>
     <optional>
@@ -2731,9 +2698,12 @@
       </attribute>
     </optional>
   </define>
-  <!-- Attributes for the <access-date> element: Delete calendar, iso-8601-date -->
+  <!-- Attributes for the <access-date> element: Delete calendar -->
   <define name="access-date-atts">
     <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="iso-8601-date"/>
+    </optional>
     <optional>
       <attribute name="content-type"/>
     </optional>
@@ -2741,9 +2711,12 @@
       <attribute name="specific-use"/>
     </optional>
   </define>
-  <!-- DATE IN CITATION ATTRIBUTE: Delete calendar, iso-8601-date -->
+  <!-- DATE IN CITATION ATTRIBUTE: Delete calendar -->
   <define name="date-in-citation-atts">
     <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="iso-8601-date"/>
+    </optional>
     <optional>
       <attribute name="content-type"/>
     </optional>
@@ -2761,7 +2734,7 @@
     <ref name="jats-common-atts"/>
     <ref name="display-atts"/>
   </define>
-  <!-- DEFAULT DEFINITION LIST ATTRIBUTES: Delete continued-from, prefix-word -->
+  <!-- DEFAULT DEFINITION LIST ATTRIBUTES: Delete prefix-word, continued-from -->
   <define name="def-list-atts">
     <ref name="jats-common-atts"/>
     <optional>
@@ -2779,7 +2752,7 @@
       </attribute>
     </optional>
   </define>
-  <!-- DEFAULT LIST CLASS ATTRIBUTES: Delete continued-from, prefix-word -->
+  <!-- DEFAULT LIST CLASS ATTRIBUTES: Delete prefix-word, continued-from -->
   <define name="list-atts">
     <ref name="jats-common-atts"/>
     <optional>
@@ -2910,38 +2883,6 @@
     </optional>
     <ref name="might-link-atts"/>
   </define>
-  <!-- CONTRIBUTOR ATTRIBUTES: contrib-atts -->
-  <define name="contrib-atts">
-    <ref name="jats-common-atts"/>
-    <optional>
-      <attribute name="contrib-type"/>
-    </optional>
-    <optional>
-      <attribute name="corresp">
-        <choice>
-          <value>no</value>
-          <value>yes</value>
-        </choice>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="equal-contrib">
-        <choice>
-          <value>no</value>
-          <value>yes</value>
-        </choice>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="rid">
-        <data type="IDREFS"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-    <ref name="might-link-atts"/>
-  </define>
   <!-- ROLE ATTRIBUTES: assigning-authority, degree-contribution -->
   <define name="role-atts">
     <ref name="jats-common-atts"/>
@@ -3000,37 +2941,6 @@
       </attribute>
     </optional>
     <ref name="might-link-atts"/>
-  </define>
-  <!--                     RELATED ARTICLE ATTRIBUTES: Delete elocation-id, issue, journal-id, page, vol -->
-  <define name="related-article-atts">
-    <ref name="jats-common-atts"/>
-    <attribute name="related-article-type"/>
-    <optional>
-      <attribute name="ext-link-type"/>
-    </optional>
-    <optional>
-      <attribute name="journal-id-type"/>
-    </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-    <optional>
-      <attribute name="xml:lang">
-        <data type="NMTOKEN"/>
-      </attribute>
-    </optional>
-    <ref name="might-link-atts"/>
-  </define>
-  <!-- FREE TO READ ATTRIBUTES: Delete end_date, start_date -->
-  <define name="free-to-read-atts">
-    <ref name="jats-common-atts"/>
-    <optional>
-      <attribute name="content-type"/>
-    </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-    <ref name="ali.xmlns.attrib"/>
   </define>
   <!-- PUBLICATION EVENT ATTRIBUTES: Delete event-type -->
   <define name="event-atts">
@@ -3311,17 +3221,6 @@
       </attribute>
     </optional>
   </define>
-  <!-- LICENSE REFERENCE ATTRIBUTES: Delete start_date -->
-  <define name="license-ref-atts">
-    <ref name="jats-common-atts"/>
-    <optional>
-      <attribute name="content-type"/>
-    </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-    <ref name="ali.xmlns.attrib"/>
-  </define>
   <!--                     VERSE GROUP ATTRIBUTES: Delete style-detail, style-type -->
   <define name="verse-group-atts">
     <ref name="jats-common-atts"/>
@@ -3475,6 +3374,24 @@
       <attribute name="xml:lang">
         <data type="NMTOKEN"/>
       </attribute>
+    </optional>
+  </define>
+  <!-- SUBSCRIPT ATTRIBUTES: Delete arrange -->
+  <define name="sub-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+  </define>
+  <!-- SUPERSCRIPT ATTRIBUTES -->
+  <!--
+    Attributes for the superscript <sup>
+    element
+  -->
+  <define name="sup-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="specific-use"/>
     </optional>
   </define>
 </grammar>

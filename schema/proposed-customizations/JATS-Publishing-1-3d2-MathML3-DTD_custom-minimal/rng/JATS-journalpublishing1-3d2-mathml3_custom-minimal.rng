@@ -836,9 +836,6 @@
   <define name="response-atts">
     <ref name="jats-common-atts"/>
     <optional>
-      <attribute name="response-type"/>
-    </optional>
-    <optional>
       <attribute name="specific-use"/>
     </optional>
     <optional>
@@ -876,7 +873,7 @@
     sub-articles or responses, but which usually
     contains neither.
   -->
-  <!-- Minimal Customization: Delete processing-meta, response -->
+  <!-- Minimal Customization: Delete processing-meta, response, sub-article -->
   <define name="article-full-model">
     <ref name="front"/>
     <optional>
@@ -888,9 +885,6 @@
     <optional>
       <ref name="floats-group"/>
     </optional>
-    <zeroOrMore>
-      <ref name="sub-article"/>
-    </zeroOrMore>
   </define>
   <!-- ARTICLE -->
   <!--
@@ -998,7 +992,7 @@
     Ancillary or supporting material not included
     as part of the main textual content of a
     journal article, for example appendices and
-    acknowledgments.
+    acknowledgments.xs
     Details at:
     http://jats.nlm.nih.gov/publishing/tag-library/1.3d2/index.html?elem=back
   -->
@@ -1016,7 +1010,7 @@
   <!-- ============================================================= -->
   <!-- SUB-ARTICLE MODEL -->
   <!-- Content model for the <sub-article> element -->
-  <!-- Minimal Customization: Delete front-stub, processing-meta, response -->
+  <!-- Minimal Customization: Delete front-stub, processing-meta, response, sub-article -->
   <define name="sub-article-model">
     <ref name="front"/>
     <optional>
@@ -1028,9 +1022,6 @@
     <optional>
       <ref name="floats-group"/>
     </optional>
-    <zeroOrMore>
-      <ref name="sub-article"/>
-    </zeroOrMore>
   </define>
   <!-- SUB-ARTICLE -->
   <!--
@@ -1055,11 +1046,14 @@
     a reduced metadata set for use in
     sub-articles and responses
   -->
-  <!--  Minimal Customization: Delete article-version + article-version-alternatives, pub-history, issue-part, issue-title-group, product, pub-date-not-available, support-group, trans-abstract, volume-id, volume-issue-group -->
+  <!--  Minimal Customization: article-version-alternatives, pub-history, issue-part, issue-title-group, product, pub-date-not-available, support-group, trans-abstract, volume-id, volume-issue-group -->
   <define name="front-stub-model">
     <zeroOrMore>
       <ref name="article-id"/>
     </zeroOrMore>
+    <optional>
+      <ref name="article-version.class"/>
+    </optional>
     <optional>
       <ref name="article-categories"/>
     </optional>
@@ -1136,6 +1130,9 @@
     </zeroOrMore>
     <zeroOrMore>
       <ref name="abstract.class"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="trans-abstract"/>
     </zeroOrMore>
     <zeroOrMore>
       <ref name="kwd-group.class"/>

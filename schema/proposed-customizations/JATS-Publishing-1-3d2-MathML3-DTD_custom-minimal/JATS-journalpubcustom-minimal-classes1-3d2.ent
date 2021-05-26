@@ -453,10 +453,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         
 <!ENTITY % phrase.class "named-content | styled-content"             >
 
-<!--                    CONTRIBUTOR INFORMATION CLASS: Delete aff-alternatives, author-comment, bio, on-behalf-of-->
+<!--                    CONTRIBUTOR INFORMATION CLASS: Delete aff-alternatives, author-comment, on-behalf-of-->
 
 <!ENTITY % contrib-info.class
-                        "address | aff | email |  etal |
+                        "address | aff | bio | email |  etal |
                          ext-link | role | uri | xref">
 
 <!ENTITY % person-group-info.class
@@ -467,24 +467,24 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "aff"                     > 
 
 <!--                    BIBLIOGRAPHIC REFERENCE (CITATION) CLASS: Delete annotation, collab-annotations, 
-                                                                  gov, issn-l, issue-part, part-title, 
-                                                                  std, string-date, volume-id-->
+                                                                  gov, issue-part, part-title, 
+                                                                  std, string-date, volume-id, size, conf-acronym, conf-sponsor -->
 <!ENTITY % references.class
                         "article-title | chapter-title |
                          collab | comment | 
-                         conf-acronym | conf-date | conf-loc | 
-                         conf-name | conf-sponsor | 
+                         conf-date | conf-loc | 
+                         conf-name | 
                          data-title | date | date-in-citation | 
                          day | edition |  email | elocation-id |  
                          etal | ext-link | fpage |
                          institution | institution-wrap |
-                         isbn | issn | 
+                         isbn | issn | issn-l |
                          issue | issue-id | issue-title |
                          lpage | month | name | name-alternatives |
                          object-id | page-range | patent |
                          person-group | pub-id |
                          publisher-loc | publisher-name | role |
-                         season | series | size | source | 
+                         season | series | source | 
                          string-name | supplement | trans-source | trans-title | uri | version |
                          volume | volume-series | year"  >
 
@@ -522,15 +522,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                          supplementary-material |
                          table-wrap | table-wrap-group"              >                         
 
-<!--                    BACK MATTER CLASS: Delete bio   -->
 
-<!ENTITY % back.class   "ack | app-group | fn-group |
-                         glossary |  ref-list"                       >
-
-
-<!--                    FRONT MATTER CLASS: Delete bio   -->
-
-<!ENTITY % front.class  "ack | fn-group | glossary"            >
 
 <!--                    FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives -->
 
@@ -550,11 +542,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                          mixed-citation"                             >
 
 
-<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete inline-media, inline-supplement-material, private-char -->
+<!--                    ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete nline-supplement-material, private-char -->
 
 <!ENTITY % alternatives-display.class
                         "array | chem-struct | code | graphic |
-                         inline-graphic |
+                         inline-graphic | inline-media |
                          media | preformat |
                          supplementary-material | table | textual-form"                               >
 
@@ -567,11 +559,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % nested-kwd.class    
                         "kwd"                         >
 
-<!--                    CONFERENCE CLASS: Delete conf-num, conf-sponsor, conf-theme  -->
+<!--                    CONFERENCE CLASS: Delete conf-num, conf-sponsor, conf-theme, conf-acronym, string-conf  -->
 <!ENTITY % conference.class
                         "conf-date | conf-name | 
-                         conf-loc |
-                         conf-acronym | string-conf"                 >
+                         conf-loc"                 >
                         
 <!--                    DATE PARTS CLASS ELEMENTS: Delete era   -->
 
@@ -601,32 +592,28 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    FACE MARKUP ELEMENTS: Delete fixed-case, overline, sans-serif, strike  -->
 <!ENTITY % face-markup.class
                         "bold | italic | monospace |
-                         roman | sc | 
-                         underline"                              >
+                         roman | sc | underline"                              >
 
-<!--                    INLINE DISPLAY CLASS ELEMENTS: Delete inline-media, private-char-->
+<!--                    INLINE DISPLAY CLASS ELEMENTS: private-char-->
 <!ENTITY % inline-display.class
-                        "alternatives | inline-graphic"                               >
+                        "alternatives | inline-graphic |inline-media"                               >
 
 
 <!ENTITY % inline-display-noalt.class
-                        "inline-graphic"                >
+                        "inline-graphic | inline-media"                >
 
 
 <!--                    JOURNAL ARTICLE LINK CLASS ELEMENTS: Delete inline-supplement-material -->
 <!ENTITY % article-link.class
-                        "related-article | related-object "           >
+                        "related-article"           >
 
-<!--                    ARTICLE IDENTIFIER CLASS ELEMENTS: Delete issn-l-->
-<!ENTITY % article-identifier.class
-                        "article-id | issn | isbn"          >
 
 
 <!--                    RELATED ARTICLE LINKS CLASS                -->
 <!--                    For using <related-article> at the paragraph, related-object
                         level                                      -->
 <!ENTITY % related-article.class
-                        "related-article | related-object "          >
+                        "related-article "          >
 
 
 
@@ -654,3 +641,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    SIMPLE LINKS/CROSS-REFERENCES CLASS: Delete target -->
 <!ENTITY % simple-link.class
                         "fn | xref"                         >
+
+<!--                    ARTICLE VERSION CLASS ELEMENTS: Delete article-version-alternatives                          -->
+<!ENTITY % article-version.class
+                        "article-version" > 
