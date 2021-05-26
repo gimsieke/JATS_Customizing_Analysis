@@ -570,7 +570,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 
 
-
 <!--                    MODULE TO NAME THE MATHML 3.0 MODULES      -->
 <!--                    Names all DTD-specific external modules    -->
 <!ENTITY % mathml3-modules.ent
@@ -900,8 +899,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!-- Minimal Customization: Delete response-type -->
 <!ENTITY % response-atts
             "%jats-common-atts;                                       
-             response-type
-                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
@@ -930,11 +927,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         sub-articles or responses, but which usually
                         contains neither.
                                                                    -->
-               <!--    Minimal Customization: Delete processing-meta, response    -->
+               <!--    Minimal Customization: Delete processing-meta, response, sub-article    -->
 <!ENTITY % article-full-model
                         "(front, 
-                          body?, back?, floats-group?,
-                          (sub-article*) )"              >
+                          body?, back?, floats-group?)"              >
 
 
 <!--                    ARTICLE                                    -->
@@ -1011,7 +1007,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    Ancillary or supporting material not included
                         as part of the main textual content of a
                         journal article, for example appendices and
-                        acknowledgments.
+                        acknowledgments.xs
                         Details at:
                         http://jats.nlm.nih.gov/publishing/tag-library/1.3d2/index.html?elem=back
                                                                    -->
@@ -1028,12 +1024,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    SUB-ARTICLE MODEL                          -->
 <!--                    Content model for the <sub-article> element
                                                                             -->
-                 <!--    Minimal Customization: Delete front-stub, processing-meta, response    -->  
+                 <!--    Minimal Customization: Delete front-stub, processing-meta, response, sub-article    -->  
                  
 <!ENTITY % sub-article-model
                         "((front), 
-                          body?, back?, floats-group?,
-                          (sub-article*) )"              >
+                          body?, back?, floats-group?)"              >
 
 <!--                    SUB-ARTICLE                                -->
 <!--                    An article that is completely contained
@@ -1052,10 +1047,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         a reduced metadata set for use in
                         sub-articles and responses                 -->
                         
-<!-- Minimal Customization: Delete article-version + article-version-alternatives, pub-history, issue-part, issue-title-group, product, pub-date-not-available, support-group, trans-abstract, volume-id, volume-issue-group-->
+<!-- Minimal Customization: article-version-alternatives, pub-history, issue-part, issue-title-group, product, pub-date-not-available, support-group, trans-abstract, volume-id, volume-issue-group-->
                        
 <!ENTITY % front-stub-model
-                       "(article-id*, article-categories?,
+                       "(article-id*, (%article-version.class;)?, article-categories?,
                          title-group?,
                          ( %contrib-group.class; |
                            %aff-alternatives.class;)*,
@@ -1109,6 +1104,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ELEMENT  response     %article-short-model;                        >
 <!ATTLIST  response
              %response-atts;                                         >
+
 
 
 <!-- ================== End Journal Publishing DTD =============== -->

@@ -1363,11 +1363,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                           label?, title?, subtitle*, alt-title*,
                           (%just-para.class;)+)"                           >
 
-<!--                    ARTICLE METADATA MODEL: Delete article-version + article-version-alternatives, pub-history, 
+<!--                    ARTICLE METADATA MODEL: Deletepub-history, 
                                                 issue-part, product, pub-date-not-available, support-group,trans-abstract,
                                                 volume-id, volume-issue-group  -->
 <!ENTITY % article-meta-model
-                       "(article-id*, 
+                       "(article-id*,  (%article-version.class;)?,
                          article-categories?, title-group?,
                          ( %contrib-group.class; |
                            %aff-alternatives.class;)*,
@@ -1386,23 +1386,24 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                          self-uri*, (%related-article.class;)*, 
                          (%abstract.class;)*,trans-abstract*,
                          (%kwd-group.class;)*, 
-                         funding-group*,   
+                         funding-group*, support-group*,   
                          conference*, counts?, 
                          custom-meta-group?)"                        >
                          
-<!--                    EVENT DESCRIPTION ELEMENTS: Delete article-version + article-version-alternatives, pub-date-not-available -->
+<!--                    EVENT DESCRIPTION ELEMENTS: Delete pub-date-not-available -->
 
 <!ENTITY % event-desc-elements
                         "| %address-link.class; |
-                         %article-identifier.class; |  
+                         %article-identifier.class; | 
+                         %article-version.class; |  
                          %date.class; | %pub-date.class;"                     >
 
-<!--                    EVENT MODEL: Delete article-version + article-version-alternatives, event-desc, issn-l, notes, pub-date-not-available -->
+<!--                    EVENT MODEL: Delete event-desc, notes, pub-date-not-available -->
 
-<!ENTITY % event-model  "(article-id*,
+<!ENTITY % event-model  "(article-id*, (%article-version.class;)?,
                           ( (%pub-date.class;)*),
                           (%date-only.class;)*,
-                          issn*, isbn*, permissions?, self-uri*)"                        >
+                          issn*, issn-l?, isbn*, permissions?, self-uri*)"                        >
                           
 <!--                    AWARD GROUP MODEL: Delete award-desc, principal-investigator, support-source-->
 <!ENTITY % award-group-model
@@ -1440,9 +1441,9 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "((subject)+, subj-group*)"
                                                                      >
  
- <!--                    CONFERENCE MODEL: Delete conf-num, conf-sponsor, conf-theme-->
+ <!--                    CONFERENCE MODEL: Delete conf-num, conf-sponsor, conf-theme, conf-acronym-->
 <!ENTITY % conference-model
-                        "(conf-date, (conf-name | conf-acronym )+,
+                        "(conf-date, (conf-name)+,
                          conf-loc?)"                               >
                          
  <!--                    SUPPORT GROUP MODEL: Delete contributed-resource-group -->
@@ -1485,15 +1486,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "(term)*"       >
 
 
-<!--                    JOURNAL METADATA MODEL: Delete issn-l-->
 
-<!ENTITY % journal-meta-model
-                        "(journal-id*, journal-title-group*,
-                          (%contrib-group.class; |
-                          %aff-alternatives.class;)*,
-                          issn*, isbn*, 
-                          publisher?, notes*, self-uri*,
-                          custom-meta-group?)"                       >
                        
 <!--                    VOLUME ISSUE GROUP: Delete issue-part, issue-title-group, volume-id  -->
 
@@ -1515,10 +1508,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % ref-model    "(label?,
                          (%citation.class;)+ )"       >
 
-<!--                    QUESTION MODEL: Delete option.class, sec-meta   -->
+<!--                    QUESTION MODEL: Delete option.class   -->
 
 <!ENTITY % question-model
-                        "((%id.class;)*,
+                        "((%id.class;)*, sec-meta?,
                          label?, title?, subtitle*, alt-title*,
                          ( (%sec-level;)+ |
                            ( (%para-level;)+, (%sec-level;)* ) ),
@@ -1539,16 +1532,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % contributed-resource-group-model
                         "(award-group*)"                          >
 
-<!--                    CONTENT MODEL FOR A STRUCTURAL SECTION: Delete sec-meta  -->
-<!ENTITY % sec-model    "(label?, title, (%para-level;)*,
-                          (%sec-level;)*,
-                          (%sec-back-matter-mix;)* )"                >
 
-<!--                    CONTENT MODEL FOR AN UNTITLED SECTION: Delete sec-meta-->
-<!ENTITY % sec-opt-title-model
-                        "(label?, title?, (%para-level;)*,
-                          (%sec-level;)*,
-                          (%sec-back-matter-mix;)* )"                >
+
 
 <!--                    ARTICLE CATEGORIES MODEL: Delete series-title, series-text-->
 <!ENTITY % article-categories-model
@@ -1568,10 +1553,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!-- ================== End Publishing Minimal Customization Override ====== -->
 <!-- ================== New Publishing Attribute Overrides for Minimal Customization ===== -->
 
-<!--                    FOOTNOTE TYPE VALUES: Delete abbr, deceased  --> 
+<!--                    FOOTNOTE TYPE VALUES: Delete abbr  --> 
 
 <!ENTITY % fn-types     "coi-statement | com | con |
-                         conflict | corresp | current-aff |
+                         conflict | corresp | current-aff | deceased |
                          edited-by | equal |
                          financial-disclosure | on-leave |
                          participating-researchers |
@@ -1589,19 +1574,21 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
-<!--                    MIGHT LINK XLINK ATTRIBUTES: Delete hreflang, xlink:actuate, xlink:role, xlink:show                -->
+<!--                    MIGHT LINK XLINK ATTRIBUTES: Delete xlink:actuate, xlink:role, xlink:show                -->
 <!ENTITY % might-link-atts
             "xmlns:xlink CDATA                            #IMPLIED
              xlink:type  (simple)                         #IMPLIED
              xlink:href  CDATA                            #IMPLIED
-             xlink:title CDATA                            #IMPLIED"  >
+             xlink:title CDATA                            #IMPLIED
+             hreflang    NMTOKEN                          #IMPLIED"  >
 
-<!--                    XLINK LINK ATTRIBUTES: Delete hreflang, xlink:actuate, xlink:role, xlink:show                     -->
+<!--                    XLINK LINK ATTRIBUTES: Delete xlink:actuate, xlink:role, xlink:show                     -->
 <!ENTITY % link-atts
             "xmlns:xlink CDATA                            #IMPLIED
              xlink:type  (simple)                         #IMPLIED
              xlink:href  CDATA                            #REQUIRED
-             xlink:title CDATA                            #IMPLIED"  >
+             xlink:title CDATA                            #IMPLIED
+             hreflang    NMTOKEN                          #IMPLIED"  >
                                                           
 <!--                    LABEL ATTRIBUTES: Delete alt-->
 <!ENTITY % label-atts
@@ -1644,9 +1631,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
-<!--                    ARTICLE VERSION ATTRIBUTES: Delete article-version-type, assigning-authority  -->
+<!--                    ARTICLE VERSION ATTRIBUTES: Delete assigning-authority  -->
 <!ENTITY % article-version-atts
             "%jats-common-atts;                                       
+             article-version-type
+                        CDATA                             #IMPLIED
              designator CDATA                             #IMPLIED
              vocab      CDATA                             #IMPLIED
              vocab-identifier
@@ -1940,27 +1929,23 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
             "%jats-common-atts;                                       
              %display-atts;" >
 
-<!--                    DEFAULT DEFINITION LIST ATTRIBUTES: Delete prefix-word                   -->
+<!--                    DEFAULT DEFINITION LIST ATTRIBUTES: Delete prefix-word, continued-from                   -->
 <!ENTITY % def-list-atts
             "%jats-common-atts;                                       
              list-type  CDATA                             #IMPLIED
              list-content
                         CDATA                             #IMPLIED
-             continued-from
-                        IDREF                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
 
-<!--                    DEFAULT LIST CLASS ATTRIBUTES: Delete prefix-word                       -->
+<!--                    DEFAULT LIST CLASS ATTRIBUTES: Delete prefix-word, continued-from                       -->
 <!ENTITY % list-atts
             "%jats-common-atts;                                       
              list-type  CDATA                             #IMPLIED
              list-content
                         CDATA                             #IMPLIED
-             continued-from
-                        IDREF                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
@@ -2021,18 +2006,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              %might-link-atts;"                                      >
 
-<!--                    CONTRIBUTOR ATTRIBUTES: contrib-atts       -->
-<!ENTITY % contrib-atts
-            "%jats-common-atts;                                        
-             contrib-type
-                        CDATA                             #IMPLIED
-             corresp    (no | yes)                        #IMPLIED
-             equal-contrib
-                        (no | yes)                        #IMPLIED
-             rid        IDREFS                            #IMPLIED
-             specific-use
-                        CDATA                             #IMPLIED
-             %might-link-atts;"                                      >
 
 <!--                    ROLE ATTRIBUTES: assigning-authority, degree-contribution -->
 <!ENTITY % role-atts
@@ -2069,28 +2042,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              xml:lang   NMTOKEN                           #IMPLIED
              %might-link-atts;"                                      > 
 
-<!--                    RELATED ARTICLE ATTRIBUTES: Delete elocation-id, issue, journal-id, page, vol-->
-<!ENTITY % related-article-atts
-            "%jats-common-atts;                                        
-             related-article-type
-                        CDATA                             #REQUIRED
-             ext-link-type
-                       CDATA                              #IMPLIED
-             journal-id-type
-                        CDATA                             #IMPLIED
-             specific-use
-                       CDATA                              #IMPLIED
-             xml:lang   NMTOKEN                           #IMPLIED
-             %might-link-atts;"                                      >
-
-<!--                    FREE TO READ ATTRIBUTES: Delete end_date, start_date -->
-<!ENTITY % free-to-read-atts
-            "%jats-common-atts;                                        
-             content-type
-                        CDATA                             #IMPLIED
-             specific-use
-                        CDATA                             #IMPLIED
-             %ali.xmlns.attrib;"                                     >
 
 <!--                    PUBLICATION EVENT ATTRIBUTES: Delete event-type         -->
 <!ENTITY % event-atts
@@ -2261,15 +2212,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
 
-<!--                    LICENSE REFERENCE ATTRIBUTES: Delete start_date                -->
-<!ENTITY % license-ref-atts
-            "%jats-common-atts;                                        
-             content-type
-                        CDATA                             #IMPLIED
-             specific-use
-                        CDATA                             #IMPLIED
-             %ali.xmlns.attrib;"                                     >
-
 <!--                    VERSE GROUP ATTRIBUTES: Delete style-detail, style-type-->
 <!ENTITY % verse-group-atts
             "%jats-common-atts;                                       
@@ -2356,3 +2298,18 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
+
+<!--                    SUBSCRIPT ATTRIBUTES: Delete arrange -->
+<!ENTITY % sub-atts
+            "%jats-common-atts;                                       
+             specific-use
+                        CDATA                             #IMPLIED"  >
+
+
+<!--                    SUPERSCRIPT ATTRIBUTES                     -->
+<!--                    Attributes for the superscript <sup>
+                        element                                    -->
+<!ENTITY % sup-atts
+            "%jats-common-atts;                                       
+             specific-use
+                        CDATA                             #IMPLIED"  >

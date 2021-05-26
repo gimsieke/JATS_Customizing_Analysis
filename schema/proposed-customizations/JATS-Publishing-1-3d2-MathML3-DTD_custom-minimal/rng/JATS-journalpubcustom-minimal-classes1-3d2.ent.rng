@@ -450,11 +450,12 @@
       <ref name="styled-content"/>
     </choice>
   </define>
-  <!--                     CONTRIBUTOR INFORMATION CLASS: Delete aff-alternatives, author-comment, bio, on-behalf-of -->
+  <!--                     CONTRIBUTOR INFORMATION CLASS: Delete aff-alternatives, author-comment, on-behalf-of -->
   <define name="contrib-info.class">
     <choice>
       <ref name="address"/>
       <ref name="aff"/>
+      <ref name="bio"/>
       <ref name="email"/>
       <ref name="etal"/>
       <ref name="ext-link"/>
@@ -475,9 +476,9 @@
     <ref name="aff"/>
   </define>
   <!--
-                        BIBLIOGRAPHIC REFERENCE (CITATION) CLASS: Delete annotation, collab-annotations, 
-    gov, issn-l, issue-part, part-title, patent, 
-    std, string-date, trans-source, version, volume-id
+    BIBLIOGRAPHIC REFERENCE (CITATION) CLASS: Delete annotation, collab-annotations, 
+    gov, issue-part, part-title, 
+    std, string-date, volume-id, size, conf-acronym, conf-sponsor
   -->
   <define name="references.class">
     <choice>
@@ -485,11 +486,9 @@
       <ref name="chapter-title"/>
       <ref name="collab"/>
       <ref name="comment"/>
-      <ref name="conf-acronym"/>
       <ref name="conf-date"/>
       <ref name="conf-loc"/>
       <ref name="conf-name"/>
-      <ref name="conf-sponsor"/>
       <ref name="data-title"/>
       <ref name="date"/>
       <ref name="date-in-citation"/>
@@ -504,6 +503,7 @@
       <ref name="institution-wrap"/>
       <ref name="isbn"/>
       <ref name="issn"/>
+      <ref name="issn-l"/>
       <ref name="issue"/>
       <ref name="issue-id"/>
       <ref name="issue-title"/>
@@ -513,6 +513,7 @@
       <ref name="name-alternatives"/>
       <ref name="object-id"/>
       <ref name="page-range"/>
+      <ref name="patent"/>
       <ref name="person-group"/>
       <ref name="pub-id"/>
       <ref name="publisher-loc"/>
@@ -520,11 +521,13 @@
       <ref name="role"/>
       <ref name="season"/>
       <ref name="series"/>
-      <ref name="size"/>
       <ref name="source"/>
       <ref name="string-name"/>
       <ref name="supplement"/>
+      <ref name="trans-source"/>
+      <ref name="trans-title"/>
       <ref name="uri"/>
+      <ref name="version"/>
       <ref name="volume"/>
       <ref name="volume-series"/>
       <ref name="year"/>
@@ -546,12 +549,16 @@
       <ref name="alternatives"/>
       <ref name="array"/>
       <ref name="boxed-text"/>
+      <ref name="chem-struct-wrap"/>
+      <ref name="code"/>
       <ref name="fig"/>
+      <ref name="fig-group"/>
       <ref name="graphic"/>
       <ref name="media"/>
       <ref name="preformat"/>
       <ref name="supplementary-material"/>
       <ref name="table-wrap"/>
+      <ref name="table-wrap-group"/>
     </choice>
   </define>
   <!-- DISPLAY CLASS ELEMENTS MINUS EXPLANATION -->
@@ -561,31 +568,27 @@
       <ref name="alternatives"/>
       <ref name="array"/>
       <ref name="boxed-text"/>
+      <ref name="chem-struct-wrap"/>
+      <ref name="code"/>
       <ref name="fig"/>
+      <ref name="fig-group"/>
       <ref name="graphic"/>
       <ref name="media"/>
       <ref name="preformat"/>
       <ref name="supplementary-material"/>
       <ref name="table-wrap"/>
+      <ref name="table-wrap-group"/>
     </choice>
   </define>
-  <!-- BACK MATTER CLASS: Delete bio -->
-  <define name="back.class">
-    <choice>
-      <ref name="ack"/>
-      <ref name="app-group"/>
-      <ref name="fn-group"/>
-      <ref name="glossary"/>
-      <ref name="ref-list"/>
-    </choice>
-  </define>
-  <!-- FRONT MATTER CLASS: Delete bio -->
-  <!-- FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives, code -->
+  <!-- FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives -->
   <define name="floats-display.class">
     <choice>
       <ref name="alternatives"/>
       <ref name="boxed-text"/>
+      <ref name="chem-struct-wrap"/>
+      <ref name="code"/>
       <ref name="fig"/>
+      <ref name="fig-group"/>
       <ref name="graphic"/>
       <ref name="media"/>
       <ref name="preformat"/>
@@ -598,25 +601,6 @@
   <define name="fig-display.class">
     <ref name="fig"/>
   </define>
-  <!-- SIMPLE TABLE DISPLAY ELEMENTS: Delete chem-struct-wrap -->
-  <define name="simple-intable-display.class">
-    <choice>
-      <ref name="alternatives"/>
-      <ref name="disp-formula"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-    </choice>
-  </define>
-  <!-- INSIDE CHEMICAL STRUCTURE ELEMENTS: Delete chem-struct-wrap, code, textual-form -->
-  <define name="inside-chem-struct-wrap.class">
-    <choice>
-      <ref name="alternatives"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-    </choice>
-  </define>
   <!-- CITATION CLASS ELEMENTS: Delete citation-alternatives -->
   <define name="citation.class">
     <choice>
@@ -624,35 +608,20 @@
       <ref name="mixed-citation"/>
     </choice>
   </define>
-  <!-- SIMPLE DISPLAY ELEMENTS: Delete code -->
-  <define name="simple-display.class">
-    <choice>
-      <ref name="alternatives"/>
-      <ref name="array"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-    </choice>
-  </define>
-  <define name="simple-display-noalt.class">
-    <choice>
-      <ref name="array"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-    </choice>
-  </define>
-  <!-- ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete code, inline-media, inline-supplement-material, private-char, textual-form -->
+  <!-- ALTERNATIVES DISPLAY CLASS ELEMENTS: Delete nline-supplement-material, private-char -->
   <define name="alternatives-display.class">
     <choice>
       <ref name="array"/>
       <ref name="chem-struct"/>
+      <ref name="code"/>
       <ref name="graphic"/>
       <ref name="inline-graphic"/>
+      <ref name="inline-media"/>
       <ref name="media"/>
       <ref name="preformat"/>
       <ref name="supplementary-material"/>
       <ref name="table"/>
+      <ref name="textual-form"/>
     </choice>
   </define>
   <!-- KEYWORD CLASS ELEMENTS: Delete compound-kwd, nested-kwd -->
@@ -663,22 +632,13 @@
   <define name="nested-kwd.class">
     <ref name="kwd"/>
   </define>
-  <!-- CONFERENCE CLASS: Delete conf-num, conf-sponsor, conf-theme -->
+  <!-- CONFERENCE CLASS: Delete conf-num, conf-sponsor, conf-theme, conf-acronym, string-conf -->
   <define name="conference.class">
     <choice>
       <ref name="conf-date"/>
       <ref name="conf-name"/>
       <ref name="conf-loc"/>
-      <ref name="conf-acronym"/>
-      <ref name="string-conf"/>
     </choice>
-  </define>
-  <!--
-    MATHEMATICAL EXPRESSIONS AND FORMULAE
-    CLASS ELEMENTS: Delete disp-formula-group
-  -->
-  <define name="block-math.class">
-    <ref name="disp-formula"/>
   </define>
   <!-- DATE PARTS CLASS ELEMENTS: Delete era -->
   <define name="date-parts.class">
@@ -736,31 +696,23 @@
       <ref name="underline"/>
     </choice>
   </define>
-  <!--                     INLINE DISPLAY CLASS ELEMENTS: Delete inline-media, private-char -->
+  <!--                     INLINE DISPLAY CLASS ELEMENTS: private-char -->
   <define name="inline-display.class">
     <choice>
       <ref name="alternatives"/>
       <ref name="inline-graphic"/>
+      <ref name="inline-media"/>
     </choice>
   </define>
   <define name="inline-display-noalt.class">
-    <ref name="inline-graphic"/>
-  </define>
-  <!-- JOURNAL ARTICLE LINK CLASS ELEMENTS: Delete inline-supplement-material, related-object -->
-  <define name="article-link.class">
-    <ref name="related-article"/>
-  </define>
-  <!--                     ARTICLE IDENTIFIER CLASS ELEMENTS: Delete issn-l -->
-  <define name="article-identifier.class">
     <choice>
-      <ref name="article-id"/>
-      <ref name="issn"/>
-      <ref name="isbn"/>
+      <ref name="inline-graphic"/>
+      <ref name="inline-media"/>
     </choice>
   </define>
-  <!-- ACCESSIBILITY CLASS ELEMENTS: Delete long-desc -->
-  <define name="access.class">
-    <ref name="alt-text"/>
+  <!-- JOURNAL ARTICLE LINK CLASS ELEMENTS: Delete inline-supplement-material -->
+  <define name="article-link.class">
+    <ref name="related-article"/>
   </define>
   <!-- RELATED ARTICLE LINKS CLASS -->
   <!--
@@ -805,6 +757,7 @@
       <ref name="fig"/>
       <ref name="fig-group"/>
       <ref name="table-wrap"/>
+      <ref name="table-wrap-group"/>
     </choice>
   </define>
   <!-- SIMPLE LINKS/CROSS-REFERENCES CLASS: Delete target -->
@@ -813,5 +766,9 @@
       <ref name="fn"/>
       <ref name="xref"/>
     </choice>
+  </define>
+  <!-- ARTICLE VERSION CLASS ELEMENTS: Delete article-version-alternatives -->
+  <define name="article-version.class">
+    <ref name="article-version"/>
   </define>
 </grammar>
