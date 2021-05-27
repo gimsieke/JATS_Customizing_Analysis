@@ -652,6 +652,29 @@
   </define>
   <!-- SUPPORT SOURCE ATTRIBUTES -->
   <!--                     Attributes for the <support-source> element -->
+  <define name="support-source-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="rid">
+        <data type="IDREFS"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="support-type"/>
+    </optional>
+    <optional>
+      <attribute name="country"/>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <optional>
+      <attribute name="xml:lang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <ref name="might-link-atts"/>
+  </define>
   <!-- ============================================================= -->
   <!-- FUNDING ELEMENTS -->
   <!-- ============================================================= -->

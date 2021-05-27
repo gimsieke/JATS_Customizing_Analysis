@@ -2182,16 +2182,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
-
-<!--                    SUPPORT SOURCE ATTRIBUTES: Delete support-type-->
-<!ENTITY % support-source-atts
-            "%jats-common-atts;                                       
-             rid        IDREFS                            #IMPLIED
-             country    CDATA                             #IMPLIED
-             specific-use
-                        CDATA                             #IMPLIED
-             xml:lang   NMTOKEN                           #IMPLIED
-             %might-link-atts;"                                      >
+             
 
 <!--                    COLLABORATION ATTRIBUTES: Delete symbol                   -->
 <!ENTITY % collab-atts
