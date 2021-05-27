@@ -663,15 +663,6 @@
     or corporate names (such as Labs) for
     funded award recipients
   -->
-  <define name="recipient-name.class">
-    <choice>
-      <ref name="name"/>
-      <ref name="name-alternatives"/>
-      <ref name="institution"/>
-      <ref name="institution-wrap"/>
-      <ref name="string-name"/>
-    </choice>
-  </define>
   <!-- ============================================================= -->
   <!-- ARTICLE METADATA CONTRIBUTOR CLASSES; -->
   <!-- ============================================================= -->
@@ -717,18 +708,20 @@
     Collected article identifiers for use in
     various models.
   -->
+  <define name="article-identifier.class">
+    <choice>
+      <ref name="article-id"/>
+      <ref name="issn"/>
+      <ref name="issn-l"/>
+      <ref name="isbn"/>
+    </choice>
+  </define>
   <!-- ARTICLE VERSION CLASS ELEMENTS -->
   <!--
     Making sure that wherever <article-version>
     is allowed, <article-version-alternatives>
     is also allowed.
   -->
-  <define name="article-version.class">
-    <choice>
-      <ref name="article-version"/>
-      <ref name="article-version-alternatives"/>
-    </choice>
-  </define>
   <!-- ABSTRACT CLASS ELEMENTS -->
   <!--
     Potential element components of an address;
@@ -884,6 +877,16 @@
     Ancillary elements, typically used in the
     back matter of an article, section, etc.
   -->
+  <define name="back.class">
+    <choice>
+      <ref name="ack"/>
+      <ref name="app-group"/>
+      <ref name="bio"/>
+      <ref name="fn-group"/>
+      <ref name="glossary"/>
+      <ref name="ref-list"/>
+    </choice>
+  </define>
   <!-- FRONT MATTER CLASS -->
   <!--
     Ancillary elements, typically used in the
@@ -931,6 +934,12 @@
     description of the content or intent of an
     object.
   -->
+  <define name="access.class">
+    <choice>
+      <ref name="alt-text"/>
+      <ref name="long-desc"/>
+    </choice>
+  </define>
   <!-- SMALL ACCESSIBILITY CLASS ELEMENTS -->
   <!--
     Elements added to make it easier to process
@@ -990,8 +999,23 @@
     be used inside the <block-alternatives>
     element.
   -->
+  <define name="block-alternatives.class">
+    <choice>
+      <ref name="boxed-text"/>
+      <ref name="fig"/>
+      <ref name="fig-group"/>
+      <ref name="table-wrap"/>
+      <ref name="table-wrap-group"/>
+    </choice>
+  </define>
   <!-- FIGURE DISPLAY ELEMENTS -->
   <!-- Basic figure display elements -->
+  <define name="fig-display.class">
+    <choice>
+      <ref name="fig"/>
+      <ref name="block-alternatives"/>
+    </choice>
+  </define>
   <!-- INLINE DISPLAY CLASS ELEMENTS -->
   <!--
     Non-block display elements that set or
@@ -1024,6 +1048,25 @@
     Class elements or inside the cell of a
     Table
   -->
+  <define name="simple-display.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="array"/>
+      <ref name="code"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+    </choice>
+  </define>
+  <define name="simple-display-noalt.class">
+    <choice>
+      <ref name="array"/>
+      <ref name="code"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+    </choice>
+  </define>
   <!-- SIMPLE TABLE DISPLAY ELEMENTS -->
   <!--
     Very similar to the simple-display.class, but
@@ -1031,6 +1074,17 @@
     <table>s, <oasis:table>s, etc., not
     arrays.
   -->
+  <define name="simple-intable-display.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="chem-struct-wrap"/>
+      <ref name="code"/>
+      <ref name="disp-formula"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+    </choice>
+  </define>
   <!-- INSIDE CHEMICAL STRUCTURE ELEMENTS -->
   <!--
     Very similar to the simple-display.class, but
@@ -1038,6 +1092,17 @@
     can contain both <chem-struct> and
     <textual-form>
   -->
+  <define name="inside-chem-struct-wrap.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="chem-struct"/>
+      <ref name="code"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+      <ref name="textual-form"/>
+    </choice>
+  </define>
   <!-- ALTERNATIVES DISPLAY CLASS ELEMENTS -->
   <!--
     Display elements that can be alternatives to
@@ -1084,6 +1149,12 @@
     MATHEMATICAL EXPRESSIONS AND FORMULAE
     CLASS ELEMENTS
   -->
+  <define name="block-math.class">
+    <choice>
+      <ref name="disp-formula"/>
+      <ref name="disp-formula-group"/>
+    </choice>
+  </define>
   <!-- CHEMICAL STRUCTURE WRAPPER CLASS -->
   <define name="chem-struct-wrap.class">
     <ref name="chem-struct-wrap"/>

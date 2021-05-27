@@ -478,7 +478,7 @@
   <!--
     BIBLIOGRAPHIC REFERENCE (CITATION) CLASS: Delete annotation, collab-annotations, 
     gov, issue-part, part-title, 
-    std, string-date, volume-id, size, conf-acronym, conf-sponsor
+    std, string-date, volume-id, size, name-alternatives
   -->
   <define name="references.class">
     <choice>
@@ -510,7 +510,6 @@
       <ref name="lpage"/>
       <ref name="month"/>
       <ref name="name"/>
-      <ref name="name-alternatives"/>
       <ref name="object-id"/>
       <ref name="page-range"/>
       <ref name="patent"/>
@@ -533,21 +532,21 @@
       <ref name="year"/>
     </choice>
   </define>
-  <!-- NAMES CLASS: Delete anonymous, collab-alternatives -->
+  <!--                     NAMES CLASS: Delete anonymous, collab-alternatives, name-alternatives -->
   <define name="name.class">
     <choice>
       <ref name="collab"/>
       <ref name="name"/>
-      <ref name="name-alternatives"/>
       <ref name="string-name"/>
     </choice>
   </define>
-  <!-- DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group, table-wrap-group -->
+  <!--                     DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group -->
   <define name="block-display.class">
     <choice>
       <ref name="address"/>
       <ref name="alternatives"/>
       <ref name="array"/>
+      <ref name="block-alternatives"/>
       <ref name="boxed-text"/>
       <ref name="chem-struct-wrap"/>
       <ref name="code"/>
@@ -580,10 +579,11 @@
       <ref name="table-wrap-group"/>
     </choice>
   </define>
-  <!-- FLOATING DISPLAY CLASS ELEMENTS: Delete block-alternatives -->
+  <!-- FLOATING DISPLAY CLASS ELEMENTS: Delete alternatives -->
   <define name="floats-display.class">
     <choice>
       <ref name="alternatives"/>
+      <ref name="block-alternatives"/>
       <ref name="boxed-text"/>
       <ref name="chem-struct-wrap"/>
       <ref name="code"/>
@@ -596,10 +596,6 @@
       <ref name="table-wrap"/>
       <ref name="table-wrap-group"/>
     </choice>
-  </define>
-  <!-- FIGURE DISPLAY ELEMENTS: Delete block-alternatives -->
-  <define name="fig-display.class">
-    <ref name="fig"/>
   </define>
   <!-- CITATION CLASS ELEMENTS: Delete citation-alternatives -->
   <define name="citation.class">
@@ -632,7 +628,7 @@
   <define name="nested-kwd.class">
     <ref name="kwd"/>
   </define>
-  <!-- CONFERENCE CLASS: Delete conf-num, conf-sponsor, conf-theme, conf-acronym, string-conf -->
+  <!-- CONFERENCE CLASS: string-conf, conf-acronym, conf-num, conf-sponsor, conf-theme -->
   <define name="conference.class">
     <choice>
       <ref name="conf-date"/>
@@ -750,16 +746,6 @@
   <define name="date.class">
     <ref name="date"/>
   </define>
-  <!-- BLOCK ALTERNATIVES CLASS ELEMENTS: Delete table-wrap-group -->
-  <define name="block-alternatives.class">
-    <choice>
-      <ref name="boxed-text"/>
-      <ref name="fig"/>
-      <ref name="fig-group"/>
-      <ref name="table-wrap"/>
-      <ref name="table-wrap-group"/>
-    </choice>
-  </define>
   <!-- SIMPLE LINKS/CROSS-REFERENCES CLASS: Delete target -->
   <define name="simple-link.class">
     <choice>
@@ -770,5 +756,14 @@
   <!-- ARTICLE VERSION CLASS ELEMENTS: Delete article-version-alternatives -->
   <define name="article-version.class">
     <ref name="article-version"/>
+  </define>
+  <!-- RECIPIENT NAMES CLASS: Delete name-alternatives -->
+  <define name="recipient-name.class">
+    <choice>
+      <ref name="name"/>
+      <ref name="institution"/>
+      <ref name="institution-wrap"/>
+      <ref name="string-name"/>
+    </choice>
   </define>
 </grammar>

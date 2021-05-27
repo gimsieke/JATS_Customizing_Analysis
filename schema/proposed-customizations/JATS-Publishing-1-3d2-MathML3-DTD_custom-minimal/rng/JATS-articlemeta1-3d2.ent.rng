@@ -940,6 +940,20 @@
   </define>
   <!-- PUBLICATION EVENT ATTRIBUTES -->
   <!-- Attributes for the <event> element -->
+  <define name="event-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="event-type"/>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <optional>
+      <attribute name="xml:lang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+  </define>
   <!-- EVENT DESCRIPTION ATTRIBUTES -->
   <!--
     Attributes used with the <event-desc>
@@ -1009,6 +1023,50 @@
     Attributes for the <processing-meta>
     element
   -->
+  <define name="processing-meta-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="tagset-family">
+        <choice>
+          <value>jats</value>
+          <value>bits</value>
+          <value>sts</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="base-tagset">
+        <choice>
+          <value>publishing</value>
+          <value>archiving</value>
+          <value>authoring</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="table-model">
+        <choice>
+          <value>xhtml</value>
+          <value>oasis</value>
+          <value>both</value>
+          <value>none</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="math-representation">
+        <data type="NMTOKENS"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mathml-version">
+        <choice>
+          <value>2.0</value>
+          <value>3.0</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
   <!-- PRODUCT ATTRIBUTES -->
   <!-- Attributes for the <product> element -->
   <!-- PUBLICATION DATE ATTRIBUTES -->
@@ -2320,6 +2378,21 @@
   <!-- ============================================================= -->
   <!-- TITLE GROUP MODEL -->
   <!--                     Content model for the <title-group> element -->
+  <define name="title-group-model">
+    <ref name="article-title"/>
+    <zeroOrMore>
+      <ref name="subtitle"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="trans-title-group"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="alt-title"/>
+    </zeroOrMore>
+    <optional>
+      <ref name="fn-group"/>
+    </optional>
+  </define>
   <!-- TITLE GROUP -->
   <!--
     Wrapper element to hold the various article
@@ -2471,6 +2544,16 @@
     characters inside the content model of the
     <event-desc> element.
   -->
+  <define name="event-desc-elements">
+    <choice>
+      <ref name="address-link.class"/>
+      <ref name="article-identifier.class"/>
+      <ref name="article-version.class"/>
+      <ref name="date.class"/>
+      <ref name="pub-date.class"/>
+      <ref name="pub-date-not-available"/>
+    </choice>
+  </define>
   <!-- EVENT DESCRIPTION -->
   <!--
     This is a description of an event in the
@@ -2556,6 +2639,15 @@
     Complete content model for the
     <issue-title-group> element
   -->
+  <define name="issue-title-group-model">
+    <ref name="issue-title"/>
+    <zeroOrMore>
+      <ref name="issue-subtitle"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="trans-title-group"/>
+    </zeroOrMore>
+  </define>
   <!-- ISSUE TITLE GROUP -->
   <!--
     Grouping element to associate issue title
@@ -2582,6 +2674,17 @@
     Complete content model for the
     <processing-meta> element
   -->
+  <define name="processing-meta-model">
+    <zeroOrMore>
+      <ref name="restricted-by"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="extended-by"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="custom-meta-group"/>
+    </zeroOrMore>
+  </define>
   <!-- PROCESSING METADATA MODEL -->
   <!--
     Optional container element, used to hold the 

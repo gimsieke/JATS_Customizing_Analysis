@@ -615,39 +615,11 @@
   </define>
   <!-- SUBSCRIPT ATTRIBUTES -->
   <!-- Attributes for the subscript <sub> element -->
-  <define name="sub-atts">
-    <ref name="jats-common-atts"/>
-    <optional>
-      <attribute name="arrange">
-        <choice>
-          <value>stack</value>
-          <value>stagger</value>
-        </choice>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-  </define>
   <!-- SUPERSCRIPT ATTRIBUTES -->
   <!--
     Attributes for the superscript <sup>
     element
   -->
-  <define name="sup-atts">
-    <ref name="jats-common-atts"/>
-    <optional>
-      <attribute name="arrange">
-        <choice>
-          <value>stack</value>
-          <value>stagger</value>
-        </choice>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-  </define>
   <!-- UNDERLINE ATTRIBUTES -->
   <!-- Attributes for the <underline> element -->
   <define name="underline-atts">

@@ -578,6 +578,38 @@
   </define>
   <!-- CODE ATTRIBUTES -->
   <!-- Attributes for the <code> element -->
+  <define name="code-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="code-type"/>
+    </optional>
+    <optional>
+      <attribute name="code-version"/>
+    </optional>
+    <optional>
+      <attribute name="executable">
+        <choice>
+          <value>yes</value>
+          <value>no</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="language"/>
+    </optional>
+    <optional>
+      <attribute name="language-version"/>
+    </optional>
+    <optional>
+      <attribute name="platforms"/>
+    </optional>
+    <ref name="display-atts"/>
+    <optional>
+      <attribute name="xml:space" a:defaultValue="preserve">
+        <value>preserve</value>
+      </attribute>
+    </optional>
+  </define>
   <!-- FIGURE ATTRIBUTES -->
   <!-- Attributes for Figures <fig> -->
   <define name="fig-atts">

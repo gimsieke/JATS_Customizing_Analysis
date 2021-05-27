@@ -915,10 +915,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         is contained in side a journal article.
                                                                    -->
                                                                    
-                <!--    Minimal Customization: Delete front-stub, processing-meta    -->
+                <!--    Minimal Customization: Delete front-stub   -->
 <!ENTITY % article-short-model
-                        "((front),
+                        "(processing-meta?, (front),
                           body?, back?, floats-group?)"              >
+
 
 
 <!--                    ARTICLE MODEL WITH SUB-ARTICLE OR RESPONSE -->
@@ -927,11 +928,11 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         sub-articles or responses, but which usually
                         contains neither.
                                                                    -->
-               <!--    Minimal Customization: Delete processing-meta, response, sub-article    -->
+               <!--    Minimal Customization: Delete response-->
 <!ENTITY % article-full-model
-                        "(front, 
-                          body?, back?, floats-group?)"              >
-
+                        "(processing-meta?, front, 
+                          body?, back?, floats-group?,
+                          (sub-article*) )"              >
 
 <!--                    ARTICLE                                    -->
 <!--                    The complete content of a journal article.
@@ -1024,11 +1025,12 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    SUB-ARTICLE MODEL                          -->
 <!--                    Content model for the <sub-article> element
                                                                             -->
-                 <!--    Minimal Customization: Delete front-stub, processing-meta, response, sub-article    -->  
+                 <!--    Minimal Customization: Delete front-stub, response    -->  
                  
 <!ENTITY % sub-article-model
-                        "((front), 
-                          body?, back?, floats-group?)"              >
+                        "(processing-meta?, (front), 
+                          body?, back?, floats-group?,
+                          (sub-article*) )"              >
 
 <!--                    SUB-ARTICLE                                -->
 <!--                    An article that is completely contained
