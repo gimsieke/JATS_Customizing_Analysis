@@ -471,7 +471,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                                                                   std, string-date, volume-id, size, name-alternatives -->
 <!ENTITY % references.class
                         "article-title | chapter-title |
-                         collab | comment | conf-acronym | conf-sponsor |
+                         collab | comment | 
                          conf-date | conf-loc | 
                          conf-name | 
                          data-title | date | date-in-citation | 
@@ -492,10 +492,10 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % name.class   "collab | 
                          name | string-name"     >
                          
-<!--                    DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group, alternatives-->
+<!--                    DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group-->
 
 <!ENTITY % block-display.class    
-                        "address | array | block-alternatives |
+                        "address | alternatives | array | block-alternatives |
                          boxed-text | chem-struct-wrap | code |
                          fig | fig-group | graphic | media |
                          preformat |
@@ -515,7 +515,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    DISPLAY CLASS ELEMENTS MINUS EXPLANATION   -->
 
 <!ENTITY % block-display-minus-explanation.class
-                        "address | array | 
+                        "address | alternatives | array | 
                          boxed-text | chem-struct-wrap | code |
                          fig | fig-group | graphic | media |
                          preformat |
@@ -527,7 +527,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    FLOATING DISPLAY CLASS ELEMENTS: Delete alternatives -->
 
 <!ENTITY % floats-display.class
-                        "block-alternatives | boxed-text | chem-struct-wrap  | code | fig | fig-group |
+                        "alternatives | block-alternatives | boxed-text | chem-struct-wrap  | code | fig | fig-group |
                          graphic | media | preformat |
                          supplementary-material |
                          table-wrap | table-wrap-group"              >
@@ -556,10 +556,9 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % nested-kwd.class    
                         "kwd"                         >
 
-<!--                    CONFERENCE CLASS: string-conf  -->
+<!--                    CONFERENCE CLASS: string-conf, conf-acronym, conf-num, conf-sponsor, conf-theme   -->
 <!ENTITY % conference.class
-                        "conf-acronym | conf-date | conf-name | conf-num  |
-                         conf-loc | conf-sponsor | conf-theme"                 >
+                        "conf-date | conf-name | conf-loc"                 >
                         
 <!--                    DATE PARTS CLASS ELEMENTS: Delete era   -->
 
@@ -591,9 +590,9 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "bold | italic | monospace |
                          roman | sc | underline"                              >
 
-<!--                    INLINE DISPLAY CLASS ELEMENTS: private-char, alternatives-->
+<!--                    INLINE DISPLAY CLASS ELEMENTS: private-char-->
 <!ENTITY % inline-display.class
-                        "inline-graphic |inline-media"                               >
+                        "alternatives | inline-graphic |inline-media"                               >
 
 
 <!ENTITY % inline-display-noalt.class
@@ -644,21 +643,3 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % recipient-name.class
                         "name | institution |
                          institution-wrap | string-name"             >
-
-<!--                    MOST BASIC DISPLAY ELEMENTS: Delete alternatives -->
-<!ENTITY % just-base-display.class
-                        "graphic | media"             >
-                        
-<!--                    SIMPLE DISPLAY ELEMENTS: Delete alternatives -->
-<!ENTITY % simple-display.class
-                        "array | code | graphic | 
-                         media | preformat"                          >
-
-<!ENTITY % simple-intable-display.class
-                        "chem-struct-wrap | code |
-                         disp-formula | 
-                         graphic | media | preformat"                >
-
-<!ENTITY % inside-chem-struct-wrap.class
-                        "chem-struct | code | graphic |
-                         media | preformat | textual-form"           >

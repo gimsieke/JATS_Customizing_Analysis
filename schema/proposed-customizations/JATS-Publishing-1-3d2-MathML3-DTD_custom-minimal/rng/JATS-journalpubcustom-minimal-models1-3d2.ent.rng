@@ -1096,13 +1096,18 @@
   -->
   <!-- CONFERENCE MODEL -->
   <!--
-                        The content model of the <conference>
-                            element                                    
-    <!ENTITY % conference-model
-                            "(conf-date, (conf-name | conf-acronym )+,
-                             conf-num?, conf-loc?, conf-sponsor*,
-                             conf-theme?)"                               >
+    The content model of the <conference>
+    element
   -->
+  <define name="conference-model">
+    <ref name="conf-date"/>
+    <oneOrMore>
+      <ref name="conf-name"/>
+    </oneOrMore>
+    <optional>
+      <ref name="conf-loc"/>
+    </optional>
+  </define>
   <!-- CONTRIBUTOR MODEL -->
   <!-- Content model for the <contrib> element -->
   <define name="contrib-model">
@@ -1866,16 +1871,6 @@
     <zeroOrMore>
       <ref name="subj-group"/>
     </zeroOrMore>
-  </define>
-  <!--                     CONFERENCE MODEL: Delete conf-num, conf-sponsor, conf-theme, conf-acronym -->
-  <define name="conference-model">
-    <ref name="conf-date"/>
-    <oneOrMore>
-      <ref name="conf-name"/>
-    </oneOrMore>
-    <optional>
-      <ref name="conf-loc"/>
-    </optional>
   </define>
   <!-- DEFINITION LIST MODEL: Delete def-head, term-head -->
   <define name="def-list-model">

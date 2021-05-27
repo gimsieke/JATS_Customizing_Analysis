@@ -993,11 +993,9 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!--                    CONFERENCE MODEL                           -->
 <!--                    The content model of the <conference>
-                        element                                    
+                        element                                    -->
 <!ENTITY % conference-model
-                        "(conf-date, (conf-name | conf-acronym )+,
-                         conf-num?, conf-loc?, conf-sponsor*,
-                         conf-theme?)"                               >-->
+                        "(conf-date, (conf-name)+, conf-loc?)"                               >
 
 
 <!--                    CONTRIBUTOR MODEL                          -->
@@ -1434,15 +1432,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 <!--                    SUBJECT GROUP MODEL: Delete compound-subject  -->
 <!ENTITY % subj-group-model
-                        "((subject)+, subj-group*)"
-                                                                     >
- 
- <!--                    CONFERENCE MODEL: Delete conf-num, conf-sponsor, conf-theme, conf-acronym-->
-<!ENTITY % conference-model
-                        "(conf-date, (conf-name)+,
-                         conf-loc?)"                               >
-                         
-
+                        "((subject)+, subj-group*)">
+                                                                   
 <!--                    DEFINITION LIST MODEL: Delete def-head, term-head   -->
 <!ENTITY % def-list-model
                         "(label?, title?, 

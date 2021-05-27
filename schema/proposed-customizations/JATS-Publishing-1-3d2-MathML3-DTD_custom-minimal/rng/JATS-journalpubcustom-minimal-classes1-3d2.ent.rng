@@ -486,8 +486,6 @@
       <ref name="chapter-title"/>
       <ref name="collab"/>
       <ref name="comment"/>
-      <ref name="conf-acronym"/>
-      <ref name="conf-sponsor"/>
       <ref name="conf-date"/>
       <ref name="conf-loc"/>
       <ref name="conf-name"/>
@@ -542,10 +540,11 @@
       <ref name="string-name"/>
     </choice>
   </define>
-  <!--                     DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group, alternatives -->
+  <!--                     DISPLAY CLASS ELEMENTS: Delete answer, answer-set,  question-wrap, question-wrap-group -->
   <define name="block-display.class">
     <choice>
       <ref name="address"/>
+      <ref name="alternatives"/>
       <ref name="array"/>
       <ref name="block-alternatives"/>
       <ref name="boxed-text"/>
@@ -565,6 +564,7 @@
   <define name="block-display-minus-explanation.class">
     <choice>
       <ref name="address"/>
+      <ref name="alternatives"/>
       <ref name="array"/>
       <ref name="boxed-text"/>
       <ref name="chem-struct-wrap"/>
@@ -582,6 +582,7 @@
   <!-- FLOATING DISPLAY CLASS ELEMENTS: Delete alternatives -->
   <define name="floats-display.class">
     <choice>
+      <ref name="alternatives"/>
       <ref name="block-alternatives"/>
       <ref name="boxed-text"/>
       <ref name="chem-struct-wrap"/>
@@ -627,16 +628,12 @@
   <define name="nested-kwd.class">
     <ref name="kwd"/>
   </define>
-  <!-- CONFERENCE CLASS: string-conf -->
+  <!-- CONFERENCE CLASS: string-conf, conf-acronym, conf-num, conf-sponsor, conf-theme -->
   <define name="conference.class">
     <choice>
-      <ref name="conf-acronym"/>
       <ref name="conf-date"/>
       <ref name="conf-name"/>
-      <ref name="conf-num"/>
       <ref name="conf-loc"/>
-      <ref name="conf-sponsor"/>
-      <ref name="conf-theme"/>
     </choice>
   </define>
   <!-- DATE PARTS CLASS ELEMENTS: Delete era -->
@@ -695,9 +692,10 @@
       <ref name="underline"/>
     </choice>
   </define>
-  <!--                     INLINE DISPLAY CLASS ELEMENTS: private-char, alternatives -->
+  <!--                     INLINE DISPLAY CLASS ELEMENTS: private-char -->
   <define name="inline-display.class">
     <choice>
+      <ref name="alternatives"/>
       <ref name="inline-graphic"/>
       <ref name="inline-media"/>
     </choice>
@@ -766,43 +764,6 @@
       <ref name="institution"/>
       <ref name="institution-wrap"/>
       <ref name="string-name"/>
-    </choice>
-  </define>
-  <!-- MOST BASIC DISPLAY ELEMENTS: Delete alternatives -->
-  <define name="just-base-display.class">
-    <choice>
-      <ref name="graphic"/>
-      <ref name="media"/>
-    </choice>
-  </define>
-  <!-- SIMPLE DISPLAY ELEMENTS: Delete alternatives -->
-  <define name="simple-display.class">
-    <choice>
-      <ref name="array"/>
-      <ref name="code"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-    </choice>
-  </define>
-  <define name="simple-intable-display.class">
-    <choice>
-      <ref name="chem-struct-wrap"/>
-      <ref name="code"/>
-      <ref name="disp-formula"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-    </choice>
-  </define>
-  <define name="inside-chem-struct-wrap.class">
-    <choice>
-      <ref name="chem-struct"/>
-      <ref name="code"/>
-      <ref name="graphic"/>
-      <ref name="media"/>
-      <ref name="preformat"/>
-      <ref name="textual-form"/>
     </choice>
   </define>
 </grammar>

@@ -1027,6 +1027,13 @@
     simple display objects: a picture, a movie,
     a sound file.
   -->
+  <define name="just-base-display.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+    </choice>
+  </define>
   <define name="just-base-display-noalt.class">
     <choice>
       <ref name="graphic"/>
@@ -1041,6 +1048,16 @@
     Class elements or inside the cell of a
     Table
   -->
+  <define name="simple-display.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="array"/>
+      <ref name="code"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+    </choice>
+  </define>
   <define name="simple-display-noalt.class">
     <choice>
       <ref name="array"/>
@@ -1057,6 +1074,17 @@
     <table>s, <oasis:table>s, etc., not
     arrays.
   -->
+  <define name="simple-intable-display.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="chem-struct-wrap"/>
+      <ref name="code"/>
+      <ref name="disp-formula"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+    </choice>
+  </define>
   <!-- INSIDE CHEMICAL STRUCTURE ELEMENTS -->
   <!--
     Very similar to the simple-display.class, but
@@ -1064,6 +1092,17 @@
     can contain both <chem-struct> and
     <textual-form>
   -->
+  <define name="inside-chem-struct-wrap.class">
+    <choice>
+      <ref name="alternatives"/>
+      <ref name="chem-struct"/>
+      <ref name="code"/>
+      <ref name="graphic"/>
+      <ref name="media"/>
+      <ref name="preformat"/>
+      <ref name="textual-form"/>
+    </choice>
+  </define>
   <!-- ALTERNATIVES DISPLAY CLASS ELEMENTS -->
   <!--
     Display elements that can be alternatives to
