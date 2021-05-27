@@ -855,6 +855,24 @@
     section title be present, used for elements
     such as Section and Appendix.
   -->
+  <define name="sec-model">
+    <optional>
+      <ref name="sec-meta"/>
+    </optional>
+    <optional>
+      <ref name="label"/>
+    </optional>
+    <ref name="title"/>
+    <zeroOrMore>
+      <ref name="para-level"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="sec-level"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="sec-back-matter-mix"/>
+    </zeroOrMore>
+  </define>
   <!-- CONTENT MODEL FOR A SECTION METADATA -->
   <!--
     In some works, each section has a different
@@ -889,6 +907,26 @@
     The model for a section-like structure that
     may or may not have an initial title
   -->
+  <define name="sec-opt-title-model">
+    <optional>
+      <ref name="sec-meta"/>
+    </optional>
+    <optional>
+      <ref name="label"/>
+    </optional>
+    <optional>
+      <ref name="title"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="para-level"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="sec-level"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="sec-back-matter-mix"/>
+    </zeroOrMore>
+  </define>
   <!-- ============================================================= -->
   <!-- PARAMETER ENTITIES FOR MIXED CONTENT -->
   <!-- ============================================================= -->
@@ -1291,6 +1329,45 @@
   </define>
   <!-- CONTRIBUTOR ATTRIBUTES -->
   <!-- Attributes for the <contrib> element -->
+  <define name="contrib-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="contrib-type"/>
+    </optional>
+    <optional>
+      <attribute name="corresp">
+        <choice>
+          <value>no</value>
+          <value>yes</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="equal-contrib">
+        <choice>
+          <value>no</value>
+          <value>yes</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="deceased">
+        <choice>
+          <value>no</value>
+          <value>yes</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rid">
+        <data type="IDREFS"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <ref name="might-link-atts"/>
+  </define>
   <!-- CONTRIBUTOR GROUP ATTRIBUTES -->
   <!-- Attributes for the <contrib-group> element -->
   <define name="contrib-group-atts">
@@ -1603,6 +1680,22 @@
     Attributes for the ALI namespaced
     <ali:free_to_read> element
   -->
+  <define name="free-to-read-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="content-type"/>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <optional>
+      <attribute name="end_date"/>
+    </optional>
+    <optional>
+      <attribute name="start_date"/>
+    </optional>
+    <ref name="ali.xmlns.attrib"/>
+  </define>
   <!-- GIVEN NAMES ATTRIBUTES -->
   <!-- Attribute list for the <given-names> element -->
   <!-- INSTITUTION ATTRIBUTES -->
@@ -1858,6 +1951,19 @@
     Attributes for the ALI namespaced
     <ali:license_ref> element
   -->
+  <define name="license-ref-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="content-type"/>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <optional>
+      <attribute name="start_date"/>
+    </optional>
+    <ref name="ali.xmlns.attrib"/>
+  </define>
   <!-- LONG DESCRIPTION ATTRIBUTES -->
   <!-- Attributes for the <long-desc> element -->
   <define name="long-desc-atts">
@@ -2104,6 +2210,40 @@
   </define>
   <!-- RELATED ARTICLE ATTRIBUTES -->
   <!-- Attributes for <related-article> -->
+  <define name="related-article-atts">
+    <ref name="jats-common-atts"/>
+    <attribute name="related-article-type"/>
+    <optional>
+      <attribute name="ext-link-type"/>
+    </optional>
+    <optional>
+      <attribute name="vol"/>
+    </optional>
+    <optional>
+      <attribute name="page"/>
+    </optional>
+    <optional>
+      <attribute name="issue"/>
+    </optional>
+    <optional>
+      <attribute name="elocation-id"/>
+    </optional>
+    <optional>
+      <attribute name="journal-id"/>
+    </optional>
+    <optional>
+      <attribute name="journal-id-type"/>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <optional>
+      <attribute name="xml:lang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <ref name="might-link-atts"/>
+  </define>
   <!-- ROLE ATTRIBUTES -->
   <!-- Attributes for the <role> element -->
   <!-- SEASON ATTRIBUTES -->
@@ -3249,6 +3389,12 @@
     Content model for the element
     <trans-title-group>
   -->
+  <define name="trans-title-group-model">
+    <ref name="trans-title"/>
+    <zeroOrMore>
+      <ref name="trans-subtitle"/>
+    </zeroOrMore>
+  </define>
   <!-- TRANSLATED TITLE GROUP -->
   <!--
     Container element for all translated, and

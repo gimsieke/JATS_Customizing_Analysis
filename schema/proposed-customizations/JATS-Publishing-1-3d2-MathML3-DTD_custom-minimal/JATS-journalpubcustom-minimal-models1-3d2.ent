@@ -1363,18 +1363,18 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                           label?, title?, subtitle*, alt-title*,
                           (%just-para.class;)+)"                           >
 
-<!--                    ARTICLE METADATA MODEL: Deletepub-history, 
-                                                issue-part, product, pub-date-not-available, support-group,trans-abstract,
+<!--                    ARTICLE METADATA MODEL: Delete issue-part, product, 
                                                 volume-id, volume-issue-group  -->
 <!ENTITY % article-meta-model
                        "(article-id*,  (%article-version.class;)?,
                          article-categories?, title-group?,
                          ( %contrib-group.class; |
                            %aff-alternatives.class;)*,
-                         author-notes?,  ( (%pub-date.class;)*), 
+                         author-notes?,  ( (%pub-date.class;)* | 
+                         pub-date-not-available?), 
                          volume*, volume-series?,
                          issue*, issue-id*, 
-                         issue-title*, 
+                         issue-title*, issue-title-group*, 
                          issue-sponsor*, 
                          isbn*,
                          supplement?,
@@ -1382,7 +1382,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                             elocation-id )?,
                          (%address-link.class; | 
                           supplementary-material)*,
-                         history?, permissions?, 
+                         history?, pub-history?, permissions?, 
                          self-uri*, (%related-article.class;)*, 
                          (%abstract.class;)*,trans-abstract*,
                          (%kwd-group.class;)*, 
@@ -1390,26 +1390,22 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                          conference*, counts?, 
                          custom-meta-group?)"                        >
                          
-<!--                    EVENT DESCRIPTION ELEMENTS: Delete pub-date-not-available -->
 
-<!ENTITY % event-desc-elements
-                        "| %address-link.class; |
-                         %article-identifier.class; | 
-                         %article-version.class; |  
-                         %date.class; | %pub-date.class;"                     >
+<!--                    EVENT MODEL: Delete notes-->
 
-<!--                    EVENT MODEL: Delete event-desc, notes, pub-date-not-available -->
-
-<!ENTITY % event-model  "(article-id*, (%article-version.class;)?,
-                          ( (%pub-date.class;)*),
-                          (%date-only.class;)*,
+<!ENTITY % event-model  "(event-desc?, article-id*, 
+                          (%article-version.class;)?,
+                          ( (%pub-date.class;)* | 
+                             pub-date-not-available?),
+                          (%date.class;)*,
                           issn*, issn-l?, isbn*, permissions?, self-uri*)"                        >
                           
 <!--                    AWARD GROUP MODEL: Delete award-desc, principal-investigator, support-source-->
 <!ENTITY % award-group-model
-                        "((funding-source*), 
-                          award-id*, principal-award-recipient*)"                  >
-
+                        "((funding-source* | support-source*), 
+                          award-id*, award-name?, award-desc?,
+                          principal-award-recipient*)"                  >
+                          
 <!--                    DEFAULT TYPE OF CROSS(X)-REFERENCE: Delete bio        -->
 
 <!ENTITY % ref-types    "aff | app | author-notes | award | 
@@ -1446,9 +1442,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         "(conf-date, (conf-name)+,
                          conf-loc?)"                               >
                          
- <!--                    SUPPORT GROUP MODEL: Delete contributed-resource-group -->
-<!ENTITY % support-group-model
-                        "(funding-group*)"              >    
 
 <!--                    DEFINITION LIST MODEL: Delete def-head, term-head   -->
 <!ENTITY % def-list-model
@@ -1471,12 +1464,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                           (%sec-back-matter-mix;)*)"                           >
 
 
-<!--                    PROCESSING METADATA GROUP: Delete extended-by, restricted-by -->
-
-<!ENTITY % processing-meta-model
-                        "(custom-meta-group*)"                       >
-
-
 <!--                    PRIVATE CHARACTER MODE: Delete glyph-data, glyph-ref -->
 <!ENTITY % private-char-model
                         "(inline-graphic*)">
@@ -1488,17 +1475,13 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 
 
                        
-<!--                    VOLUME ISSUE GROUP: Delete issue-part, issue-title-group, volume-id  -->
+<!--                    VOLUME ISSUE GROUP: Delete issue-part, volume-id  -->
 
 <!ENTITY % volume-issue-group-model
                         "(volume*, volume-series?,
                          issue*, issue-id*, 
-                         issue-title*, issue-sponsor*)"               >
+                         issue-title*, issue-title-group*, issue-sponsor*)"               >
                          
-
-<!--                    ISSUE TITLE GROUP: Delete issue-subtitle, trans-title-group  -->
-<!ENTITY % issue-title-group-model
-                        "(issue-title, trans-title-group*)"                       >
 
 <!--                    NESTED KEYWORD MODEL: Delete nested-kwd-->
 <!ENTITY % nested-kwd-model
@@ -1527,12 +1510,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!ENTITY % question-wrap-group-model
                         "((%id.class;)*,
                           label?, title?, subtitle*, alt-title*)"                >
-
-<!--                    CONTRIBUTED RESOURCE GROUP MODEL: Delete resource-group, support-description-->
-<!ENTITY % contributed-resource-group-model
-                        "(award-group*)"                          >
-
-
 
 
 <!--                    ARTICLE CATEGORIES MODEL: Delete series-title, series-text-->
@@ -1821,10 +1798,14 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
-<!--                    AWARD IDENTIFIER ATTRIBUTES: Delete assigning-authority, award-id-type, award-type      -->
+<!--                    AWARD IDENTIFIER ATTRIBUTES: Delete assigning-authority      -->
 <!ENTITY % award-id-atts
             "%jats-common-atts;                                       
              rid        IDREFS                            #IMPLIED
+             award-type
+                        CDATA                             #IMPLIED
+             award-id-type
+                        CDATA                             #IMPLIED
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED
@@ -1853,9 +1834,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              xml:lang   NMTOKEN                           #IMPLIED
              %link-atts;"                                            >
 
-<!--                    PROCESSING METADATA CONTAINER ATTRIBUTES: Delete base-tagset, mathml-version, math-representation, table-model, tagset-family  -->
-<!ENTITY % processing-meta-atts
-            "%jats-common-atts;"  >
 
 <!--                    CONFERENCE DATE ATTRIBUTES: Delete calendar    -->
 <!ENTITY % conf-date-atts
@@ -1923,11 +1901,7 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              specific-use
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
- 
- <!--                   CODE ATTRIBUTES: Delete code-type, code-version, executable, language, language-version, platforms, xml:space           -->
-<!ENTITY % code-atts
-            "%jats-common-atts;                                       
-             %display-atts;" >
+  
 
 <!--                    DEFAULT DEFINITION LIST ATTRIBUTES: Delete prefix-word, continued-from                   -->
 <!ENTITY % def-list-atts
@@ -2042,13 +2016,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
              xml:lang   NMTOKEN                           #IMPLIED
              %might-link-atts;"                                      > 
 
-
-<!--                    PUBLICATION EVENT ATTRIBUTES: Delete event-type         -->
-<!ENTITY % event-atts
-           "%jats-common-atts;
-             specific-use
-                        CDATA                             #IMPLIED
-             xml:lang   NMTOKEN                           #IMPLIED"  >
 
 <!--                    GLYPH DATA ATTRIBUTES: Delete fontchar, fontname, resolution, xml:space                                   -->
 <!ENTITY % glyph-data-atts
@@ -2169,12 +2136,6 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
                         CDATA                             #IMPLIED
              xml:lang   NMTOKEN                           #IMPLIED"  >
 
-<!--                    CONTRIBUTED RESOURCE GROUP ATTRIBUTES: Delete ressource-type      -->
-<!ENTITY % contributed-resource-group-atts
-            "%jats-common-atts;
-             specific-use
-                        CDATA                             #IMPLIED
-             xml:lang   NMTOKEN                           #IMPLIED"  >
 
 <!--                    ELECTRONIC LOCATION IDENTIFIER ATTRIBUTES: Delete seq   -->
 <!ENTITY % elocation-id-atts

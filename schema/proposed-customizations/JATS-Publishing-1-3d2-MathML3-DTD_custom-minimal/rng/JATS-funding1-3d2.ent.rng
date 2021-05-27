@@ -446,6 +446,20 @@
     Attributes for the 
     <contributed-resource-group> element
   -->
+  <define name="contributed-resource-group-atts">
+    <ref name="jats-common-atts"/>
+    <optional>
+      <attribute name="resource-type"/>
+    </optional>
+    <optional>
+      <attribute name="specific-use"/>
+    </optional>
+    <optional>
+      <attribute name="xml:lang">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+  </define>
   <!-- FUNDING GROUP ATTRIBUTES -->
   <!--
     Attributes for the <funding-group>
@@ -752,6 +766,14 @@
   <!-- ============================================================= -->
   <!-- SUPPORT GROUP MODEL -->
   <!-- Model for the <support-group> element -->
+  <define name="support-group-model">
+    <zeroOrMore>
+      <ref name="funding-group"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="contributed-resource-group"/>
+    </zeroOrMore>
+  </define>
   <!-- SUPPORT GROUP -->
   <!--
     Container element for information concerning
@@ -781,6 +803,17 @@
     Model for the <contributed-resource-group> 
     element
   -->
+  <define name="contributed-resource-group-model">
+    <zeroOrMore>
+      <ref name="award-group"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="support-description"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="resource-group"/>
+    </zeroOrMore>
+  </define>
   <!-- CONTRIBUTED RESOURCE GROUP -->
   <!--
     Container element for information concerning

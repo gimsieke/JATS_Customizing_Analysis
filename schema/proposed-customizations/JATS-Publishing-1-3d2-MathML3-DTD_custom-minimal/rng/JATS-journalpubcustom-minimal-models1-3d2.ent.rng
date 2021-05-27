@@ -1607,8 +1607,7 @@
     </oneOrMore>
   </define>
   <!--
-    ARTICLE METADATA MODEL: Deletepub-history, 
-    issue-part, product, pub-date-not-available, support-group,trans-abstract,
+    ARTICLE METADATA MODEL: Delete issue-part, product, 
     volume-id, volume-issue-group
   -->
   <define name="article-meta-model">
@@ -1633,9 +1632,14 @@
     <optional>
       <ref name="author-notes"/>
     </optional>
-    <zeroOrMore>
-      <ref name="pub-date.class"/>
-    </zeroOrMore>
+    <choice>
+      <zeroOrMore>
+        <ref name="pub-date.class"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="pub-date-not-available"/>
+      </optional>
+    </choice>
     <zeroOrMore>
       <ref name="volume"/>
     </zeroOrMore>
@@ -1650,6 +1654,9 @@
     </zeroOrMore>
     <zeroOrMore>
       <ref name="issue-title"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="issue-title-group"/>
     </zeroOrMore>
     <zeroOrMore>
       <ref name="issue-sponsor"/>
@@ -1682,6 +1689,9 @@
     </zeroOrMore>
     <optional>
       <ref name="history"/>
+    </optional>
+    <optional>
+      <ref name="pub-history"/>
     </optional>
     <optional>
       <ref name="permissions"/>
@@ -1717,29 +1727,27 @@
       <ref name="custom-meta-group"/>
     </optional>
   </define>
-  <!-- EVENT DESCRIPTION ELEMENTS: Delete pub-date-not-available -->
-  <define name="event-desc-elements">
-    <choice>
-      <ref name="address-link.class"/>
-      <ref name="article-identifier.class"/>
-      <ref name="article-version.class"/>
-      <ref name="date.class"/>
-      <ref name="pub-date.class"/>
-    </choice>
-  </define>
-  <!-- EVENT MODEL: Delete event-desc, notes, pub-date-not-available -->
+  <!--                     EVENT MODEL: Delete notes -->
   <define name="event-model">
+    <optional>
+      <ref name="event-desc"/>
+    </optional>
     <zeroOrMore>
       <ref name="article-id"/>
     </zeroOrMore>
     <optional>
       <ref name="article-version.class"/>
     </optional>
+    <choice>
+      <zeroOrMore>
+        <ref name="pub-date.class"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="pub-date-not-available"/>
+      </optional>
+    </choice>
     <zeroOrMore>
-      <ref name="pub-date.class"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="date-only.class"/>
+      <ref name="date.class"/>
     </zeroOrMore>
     <zeroOrMore>
       <ref name="issn"/>
@@ -1759,12 +1767,23 @@
   </define>
   <!--                     AWARD GROUP MODEL: Delete award-desc, principal-investigator, support-source -->
   <define name="award-group-model">
-    <zeroOrMore>
-      <ref name="funding-source"/>
-    </zeroOrMore>
+    <choice>
+      <zeroOrMore>
+        <ref name="funding-source"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="support-source"/>
+      </zeroOrMore>
+    </choice>
     <zeroOrMore>
       <ref name="award-id"/>
     </zeroOrMore>
+    <optional>
+      <ref name="award-name"/>
+    </optional>
+    <optional>
+      <ref name="award-desc"/>
+    </optional>
     <zeroOrMore>
       <ref name="principal-award-recipient"/>
     </zeroOrMore>
@@ -1858,12 +1877,6 @@
       <ref name="conf-loc"/>
     </optional>
   </define>
-  <!-- SUPPORT GROUP MODEL: Delete contributed-resource-group -->
-  <define name="support-group-model">
-    <zeroOrMore>
-      <ref name="funding-group"/>
-    </zeroOrMore>
-  </define>
   <!-- DEFINITION LIST MODEL: Delete def-head, term-head -->
   <define name="def-list-model">
     <optional>
@@ -1932,12 +1945,6 @@
       <ref name="sec-back-matter-mix"/>
     </zeroOrMore>
   </define>
-  <!-- PROCESSING METADATA GROUP: Delete extended-by, restricted-by -->
-  <define name="processing-meta-model">
-    <zeroOrMore>
-      <ref name="custom-meta-group"/>
-    </zeroOrMore>
-  </define>
   <!-- PRIVATE CHARACTER MODE: Delete glyph-data, glyph-ref -->
   <define name="private-char-model">
     <zeroOrMore>
@@ -1950,7 +1957,7 @@
       <ref name="term"/>
     </zeroOrMore>
   </define>
-  <!-- VOLUME ISSUE GROUP: Delete issue-part, issue-title-group, volume-id -->
+  <!-- VOLUME ISSUE GROUP: Delete issue-part, volume-id -->
   <define name="volume-issue-group-model">
     <zeroOrMore>
       <ref name="volume"/>
@@ -1968,14 +1975,10 @@
       <ref name="issue-title"/>
     </zeroOrMore>
     <zeroOrMore>
-      <ref name="issue-sponsor"/>
+      <ref name="issue-title-group"/>
     </zeroOrMore>
-  </define>
-  <!-- ISSUE TITLE GROUP: Delete issue-subtitle, trans-title-group -->
-  <define name="issue-title-group-model">
-    <ref name="issue-title"/>
     <zeroOrMore>
-      <ref name="trans-title-group"/>
+      <ref name="issue-sponsor"/>
     </zeroOrMore>
   </define>
   <!--                     NESTED KEYWORD MODEL: Delete nested-kwd -->
@@ -2058,12 +2061,6 @@
     </zeroOrMore>
     <zeroOrMore>
       <ref name="alt-title"/>
-    </zeroOrMore>
-  </define>
-  <!--                     CONTRIBUTED RESOURCE GROUP MODEL: Delete resource-group, support-description -->
-  <define name="contributed-resource-group-model">
-    <zeroOrMore>
-      <ref name="award-group"/>
     </zeroOrMore>
   </define>
   <!--                     ARTICLE CATEGORIES MODEL: Delete series-title, series-text -->
@@ -2566,13 +2563,19 @@
       </attribute>
     </optional>
   </define>
-  <!-- AWARD IDENTIFIER ATTRIBUTES: Delete assigning-authority, award-id-type, award-type -->
+  <!-- AWARD IDENTIFIER ATTRIBUTES: Delete assigning-authority -->
   <define name="award-id-atts">
     <ref name="jats-common-atts"/>
     <optional>
       <attribute name="rid">
         <data type="IDREFS"/>
       </attribute>
+    </optional>
+    <optional>
+      <attribute name="award-type"/>
+    </optional>
+    <optional>
+      <attribute name="award-id-type"/>
     </optional>
     <optional>
       <attribute name="specific-use"/>
@@ -2623,10 +2626,6 @@
       </attribute>
     </optional>
     <ref name="link-atts"/>
-  </define>
-  <!-- PROCESSING METADATA CONTAINER ATTRIBUTES: Delete base-tagset, mathml-version, math-representation, table-model, tagset-family -->
-  <define name="processing-meta-atts">
-    <ref name="jats-common-atts"/>
   </define>
   <!-- CONFERENCE DATE ATTRIBUTES: Delete calendar -->
   <define name="conf-date-atts">
@@ -2728,11 +2727,6 @@
         <data type="NMTOKEN"/>
       </attribute>
     </optional>
-  </define>
-  <!-- CODE ATTRIBUTES: Delete code-type, code-version, executable, language, language-version, platforms, xml:space -->
-  <define name="code-atts">
-    <ref name="jats-common-atts"/>
-    <ref name="display-atts"/>
   </define>
   <!-- DEFAULT DEFINITION LIST ATTRIBUTES: Delete prefix-word, continued-from -->
   <define name="def-list-atts">
@@ -2942,18 +2936,6 @@
     </optional>
     <ref name="might-link-atts"/>
   </define>
-  <!-- PUBLICATION EVENT ATTRIBUTES: Delete event-type -->
-  <define name="event-atts">
-    <ref name="jats-common-atts"/>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-    <optional>
-      <attribute name="xml:lang">
-        <data type="NMTOKEN"/>
-      </attribute>
-    </optional>
-  </define>
   <!-- GLYPH DATA ATTRIBUTES: Delete fontchar, fontname, resolution, xml:space -->
   <define name="glyph-data-atts">
     <ref name="jats-common-atts"/>
@@ -3145,18 +3127,6 @@
     <optional>
       <attribute name="content-type"/>
     </optional>
-    <optional>
-      <attribute name="specific-use"/>
-    </optional>
-    <optional>
-      <attribute name="xml:lang">
-        <data type="NMTOKEN"/>
-      </attribute>
-    </optional>
-  </define>
-  <!-- CONTRIBUTED RESOURCE GROUP ATTRIBUTES: Delete ressource-type -->
-  <define name="contributed-resource-group-atts">
-    <ref name="jats-common-atts"/>
     <optional>
       <attribute name="specific-use"/>
     </optional>

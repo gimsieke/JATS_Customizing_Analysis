@@ -853,8 +853,11 @@
     a short sub-article such as a news brief that
     is contained in side a journal article.
   -->
-  <!-- Minimal Customization: Delete front-stub, processing-meta -->
+  <!-- Minimal Customization: Delete front-stub -->
   <define name="article-short-model">
+    <optional>
+      <ref name="processing-meta"/>
+    </optional>
     <ref name="front"/>
     <optional>
       <ref name="body"/>
@@ -873,8 +876,11 @@
     sub-articles or responses, but which usually
     contains neither.
   -->
-  <!-- Minimal Customization: Delete processing-meta, response, sub-article -->
+  <!--     Minimal Customization: Delete response -->
   <define name="article-full-model">
+    <optional>
+      <ref name="processing-meta"/>
+    </optional>
     <ref name="front"/>
     <optional>
       <ref name="body"/>
@@ -885,6 +891,9 @@
     <optional>
       <ref name="floats-group"/>
     </optional>
+    <zeroOrMore>
+      <ref name="sub-article"/>
+    </zeroOrMore>
   </define>
   <!-- ARTICLE -->
   <!--
@@ -1010,8 +1019,11 @@
   <!-- ============================================================= -->
   <!-- SUB-ARTICLE MODEL -->
   <!-- Content model for the <sub-article> element -->
-  <!-- Minimal Customization: Delete front-stub, processing-meta, response, sub-article -->
+  <!-- Minimal Customization: Delete front-stub, response -->
   <define name="sub-article-model">
+    <optional>
+      <ref name="processing-meta"/>
+    </optional>
     <ref name="front"/>
     <optional>
       <ref name="body"/>
@@ -1022,6 +1034,9 @@
     <optional>
       <ref name="floats-group"/>
     </optional>
+    <zeroOrMore>
+      <ref name="sub-article"/>
+    </zeroOrMore>
   </define>
   <!-- SUB-ARTICLE -->
   <!--
