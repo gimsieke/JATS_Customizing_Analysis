@@ -2127,6 +2127,8 @@ Version  Reason/Occasion                   (who) vx.x (yyyy-mm-dd)
 <!--                    RESOURCE IDENTIFIER ATTRIBUTES: Delete ressource-id-type, assigning-authority           -->
 <!ENTITY % resource-id-atts
             "%jats-common-atts;                                        
+             resource-id-type
+                        CDATA                             #IMPLIED
              vocab      CDATA                             #IMPLIED
              vocab-identifier
                         CDATA                             #IMPLIED

@@ -3119,6 +3119,9 @@
   <define name="resource-id-atts">
     <ref name="jats-common-atts"/>
     <optional>
+      <attribute name="resource-id-type"/>
+    </optional>
+    <optional>
       <attribute name="vocab"/>
     </optional>
     <optional>
