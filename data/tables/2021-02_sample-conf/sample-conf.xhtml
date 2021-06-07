@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>RNG List</title>
+      <meta charset="utf-8" />
+      <style>
+body {
+  font-family: sans-serif;
+}
+tr &gt; th {
+  width: 20em;
+  height: 2em;
+}
+tr.colheads &gt; th { 
+  transform: rotate(-90deg);
+
+  transform-origin: 6em 12em;
+  width:6em;
+  height:20em;
+}
+tr.colheads &gt; th.origin {
+  transform: none;
+}
+td {
+  width:6em;
+  height:2em;
+}
+table {
+  border-collapse:collapse;
+  table-layout:fixed;
+  width:100%;
+}
+table.summary {
+  table-layout: auto;
+}
+table.summary p {
+  margin: 0 0 0 0.3em;
+}
+td, th {
+  border: 1px solid black;
+}
+ul {
+  margin-top:0;
+  margin-bottom:0;
+}
+details &gt; details {
+  margin-left: 1em;
+}
+.max {
+  background-color: #9f9;
+}
+.average {
+  text-decoration: overline;
+}
+tr.summary &gt; * {
+  border-top: 3px solid black;
+}
+.non-bold {
+  font-weight: normal;
+}
+          </style>
+   </head>
+   <body>
+      <p><a href="sample-conf.details.xhtml">detailed table</a></p>
+      <table class="summary">
+         <tr>
+            <th>Customization name</th>
+            <th>Best starting point <br />for this customization</th>
+            <th>Modifications wrt <br />best starting point</th>
+            <th>Item count</th>
+            <th>Average supersetticity <br /><span class="non-bold">(2.0 is highest)</span></th>
+            <th>Average supersetticity <br />only for collections</th>
+            <th>Average percentage of aptness <br />as a starting point <br /><span class="non-bold">relative to the best 
+                  starting <br />point’s aptness, which is 100</span></th>
+         </tr>
+         <tr>
+            <th class="schema" id="Blue">Blue<span xmlns="" class="non-bold"> (schema)</span></th>
+            <td>
+               <p><a href="#Green">Green</a></p>
+               <p>s5=2.0</p>
+               <p>q5=22.2222</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (8)
+                        </summary>
+                     <ul>
+                        <li>overline-end</li>
+                        <li>overline-start</li>
+                        <li>rp</li>
+                        <li>string-conf</li>
+                        <li>underline-end</li>
+                        <li>underline-start</li>
+                        <li>unstructured-kwd-group</li>
+                        <li>x</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (1)
+                        </summary>
+                     <ul>
+                        <li>@disp-level</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>755</p>
+            </td>
+            <td>
+               <p>1.72</p>
+            </td>
+            <td>
+               <p>1.79</p>
+            </td>
+            <td>
+               <p>17.16</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="schema" id="Green">Green<span xmlns="" class="non-bold"> (schema)</span></th>
+            <td>
+               <p><a href="#Blue">Blue</a></p>
+               <p>s5=.1</p>
+               <p>q5=1.1111</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Additions</summary>
+                  <details>
+                     <summary>elements (8)
+                        </summary>
+                     <ul>
+                        <li>overline-end</li>
+                        <li>overline-start</li>
+                        <li>rp</li>
+                        <li>string-conf</li>
+                        <li>underline-end</li>
+                        <li>underline-start</li>
+                        <li>unstructured-kwd-group</li>
+                        <li>x</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (1)
+                        </summary>
+                     <ul>
+                        <li>@disp-level</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>764</p>
+            </td>
+            <td>
+               <p class="max">2.0</p>
+            </td>
+            <td>
+               <p class="max">2.0</p>
+            </td>
+            <td>
+               <p>18.96</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="schema" id="Pumpkin">Pumpkin<span xmlns="" class="non-bold"> (schema)</span></th>
+            <td>
+               <p><a href="#Blue">Blue</a></p>
+               <p>s5=2.0</p>
+               <p>q5=3.3898</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (50)
+                        </summary>
+                     <ul>
+                        <li>abbrev-journal-title</li>
+                        <li>article-categories</li>
+                        <li>article-id</li>
+                        <li>article-version-alternatives</li>
+                        <li>author-notes</li>
+                        <li>block-alternatives</li>
+                        <li>corresp</li>
+                        <li>count</li>
+                        <li>counts</li>
+                        <li>custom-meta</li>
+                        <li>custom-meta-group</li>
+                        <li>equation-count</li>
+                        <li>event</li>
+                        <li>event-desc</li>
+                        <li>fig-count</li>
+                        <li>fig-group</li>
+                        <li>floats-group</li>
+                        <li>front-stub</li>
+                        <li>history</li>
+                        <li>issue-sponsor</li>
+                        <li>journal-meta</li>
+                        <li>journal-subtitle</li>
+                        <li>journal-title</li>
+                        <li>journal-title-group</li>
+                        <li>meta-name</li>
+                        <li>meta-value</li>
+                        <li>milestone-end</li>
+                        <li>milestone-start</li>
+                        <li>note</li>
+                        <li>notes</li>
+                        <li>pub-date</li>
+                        <li>pub-date-not-available</li>
+                        <li>pub-history</li>
+                        <li>publisher</li>
+                        <li>ref-count</li>
+                        <li>response</li>
+                        <li>series-text</li>
+                        <li>series-title</li>
+                        <li>sig</li>
+                        <li>sig-block</li>
+                        <li>string-date</li>
+                        <li>sub-article</li>
+                        <li>table-count</li>
+                        <li>table-wrap-group</li>
+                        <li>tex-math</li>
+                        <li>trans-abstract</li>
+                        <li>trans-subtitle</li>
+                        <li>trans-title-group</li>
+                        <li>volume-issue-group</li>
+                        <li>word-count</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (9)
+                        </summary>
+                     <ul>
+                        <li>@abbrev-type</li>
+                        <li>@count-type</li>
+                        <li>@event-type</li>
+                        <li>@notes-type</li>
+                        <li>@rationale</li>
+                        <li>@response-type</li>
+                        <li>@symbol</li>
+                        <li>@underline-style</li>
+                        <li>@version</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>696</p>
+            </td>
+            <td>
+               <p>.12</p>
+            </td>
+            <td>
+               <p>.13</p>
+            </td>
+            <td>
+               <p>.63</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterBiomedEng">DeGruyterBiomedEng<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyterOpenCompSci">DeGruyterOpenCompSci</a></p>
+               <p>s5=2.0</p>
+               <p>q5=13.3333</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (11)
+                        </summary>
+                     <ul>
+                        <li>addr-line</li>
+                        <li>back</li>
+                        <li>contrib-id</li>
+                        <li>date</li>
+                        <li>ext-link</li>
+                        <li>history</li>
+                        <li>italic</li>
+                        <li>mixed-citation</li>
+                        <li>ref</li>
+                        <li>ref-list</li>
+                        <li>state</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (4)
+                        </summary>
+                     <ul>
+                        <li>@content-type</li>
+                        <li>@contrib-id-type</li>
+                        <li>@date-type</li>
+                        <li>@ext-link-type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p class="max">66</p>
+            </td>
+            <td>
+               <p>.02</p>
+            </td>
+            <td>
+               <p>.03</p>
+            </td>
+            <td>
+               <p>1.16</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterNanoPhot">DeGruyterNanoPhot<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyter">DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=4.2553</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (24)
+                        </summary>
+                     <ul>
+                        <li>app</li>
+                        <li>app-group</li>
+                        <li>array</li>
+                        <li>attrib</li>
+                        <li>def</li>
+                        <li>def-item</li>
+                        <li>def-list</li>
+                        <li>disp-quote</li>
+                        <li>floats-group</li>
+                        <li>funding-statement</li>
+                        <li>glossary</li>
+                        <li>hr</li>
+                        <li>mml:menclose</li>
+                        <li>mml:mpadded</li>
+                        <li>mml:mphantom</li>
+                        <li>mml:mroot</li>
+                        <li>monospace</li>
+                        <li>overline</li>
+                        <li>pub-id</li>
+                        <li>sc</li>
+                        <li>statement</li>
+                        <li>strike</li>
+                        <li>term</li>
+                        <li>underline</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (23)
+                        </summary>
+                     <ul>
+                        <li>@class</li>
+                        <li>@columnlines</li>
+                        <li>@columnspacing</li>
+                        <li>@depth</li>
+                        <li>@fence</li>
+                        <li>@form</li>
+                        <li>@height</li>
+                        <li>@kwd-group-type</li>
+                        <li>@linethickness</li>
+                        <li>@lspace</li>
+                        <li>@mathcolor</li>
+                        <li>@mathsize</li>
+                        <li>@maxsize</li>
+                        <li>@minsize</li>
+                        <li>@movablelimits</li>
+                        <li>@notation</li>
+                        <li>@orientation</li>
+                        <li>@publication-format</li>
+                        <li>@rowlines</li>
+                        <li>@rowspacing</li>
+                        <li>@rules</li>
+                        <li>@scriptlevel</li>
+                        <li>@valign</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>176</p>
+            </td>
+            <td>
+               <p>.44</p>
+            </td>
+            <td>
+               <p>.51</p>
+            </td>
+            <td>
+               <p>6.28</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterNewCryst">DeGruyterNewCryst<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyter">DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=1.9802</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (62)
+                        </summary>
+                     <ul>
+                        <li>alternatives</li>
+                        <li>app</li>
+                        <li>app-group</li>
+                        <li>array</li>
+                        <li>attrib</li>
+                        <li>author-notes</li>
+                        <li>break</li>
+                        <li>chapter-title</li>
+                        <li>corresp</li>
+                        <li>def</li>
+                        <li>def-item</li>
+                        <li>def-list</li>
+                        <li>disp-formula</li>
+                        <li>disp-quote</li>
+                        <li>edition</li>
+                        <li>etal</li>
+                        <li>fig</li>
+                        <li>fig-count</li>
+                        <li>floats-group</li>
+                        <li>glossary</li>
+                        <li>hr</li>
+                        <li>inline-formula</li>
+                        <li>inline-graphic</li>
+                        <li>list</li>
+                        <li>list-item</li>
+                        <li>mml:math</li>
+                        <li>mml:menclose</li>
+                        <li>mml:mfenced</li>
+                        <li>mml:mfrac</li>
+                        <li>mml:mi</li>
+                        <li>mml:mn</li>
+                        <li>mml:mo</li>
+                        <li>mml:mover</li>
+                        <li>mml:mpadded</li>
+                        <li>mml:mphantom</li>
+                        <li>mml:mroot</li>
+                        <li>mml:mrow</li>
+                        <li>mml:mspace</li>
+                        <li>mml:msqrt</li>
+                        <li>mml:mstyle</li>
+                        <li>mml:msub</li>
+                        <li>mml:msubsup</li>
+                        <li>mml:msup</li>
+                        <li>mml:mtable</li>
+                        <li>mml:mtd</li>
+                        <li>mml:mtext</li>
+                        <li>mml:mtr</li>
+                        <li>mml:munder</li>
+                        <li>mml:munderover</li>
+                        <li>monospace</li>
+                        <li>notes</li>
+                        <li>overline</li>
+                        <li>ref-count</li>
+                        <li>sc</li>
+                        <li>state</li>
+                        <li>statement</li>
+                        <li>strike</li>
+                        <li>subtitle</li>
+                        <li>table-count</li>
+                        <li>term</li>
+                        <li>tex-math</li>
+                        <li>underline</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (39)
+                        </summary>
+                     <ul>
+                        <li>@accent</li>
+                        <li>@authenticated</li>
+                        <li>@award-type</li>
+                        <li>@class</li>
+                        <li>@close</li>
+                        <li>@colspan</li>
+                        <li>@columnalign</li>
+                        <li>@columnlines</li>
+                        <li>@columnspacing</li>
+                        <li>@depth</li>
+                        <li>@display</li>
+                        <li>@displaystyle</li>
+                        <li>@fence</li>
+                        <li>@fig-type</li>
+                        <li>@fn-type</li>
+                        <li>@form</li>
+                        <li>@frame</li>
+                        <li>@height</li>
+                        <li>@kwd-group-type</li>
+                        <li>@linethickness</li>
+                        <li>@list-type</li>
+                        <li>@lspace</li>
+                        <li>@mathcolor</li>
+                        <li>@mathsize</li>
+                        <li>@mathvariant</li>
+                        <li>@maxsize</li>
+                        <li>@minsize</li>
+                        <li>@movablelimits</li>
+                        <li>@notation</li>
+                        <li>@notes-type</li>
+                        <li>@open</li>
+                        <li>@overflow</li>
+                        <li>@rowlines</li>
+                        <li>@rowspacing</li>
+                        <li>@rowspan</li>
+                        <li>@rules</li>
+                        <li>@scriptlevel</li>
+                        <li>@stretchy</li>
+                        <li>@symbol</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>122</p>
+            </td>
+            <td>
+               <p>.35</p>
+            </td>
+            <td>
+               <p>.41</p>
+            </td>
+            <td>
+               <p>5.16</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterOpenArch">DeGruyterOpenArch<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyterOpenPsych">DeGruyterOpenPsych</a></p>
+               <p>s5=.1667</p>
+               <p>q5=3.3333</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Additions</summary>
+                  <details>
+                     <summary>elements (5)
+                        </summary>
+                     <ul>
+                        <li>def</li>
+                        <li>def-item</li>
+                        <li>def-list</li>
+                        <li>glossary</li>
+                        <li>term</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>82</p>
+            </td>
+            <td>
+               <p>.25</p>
+            </td>
+            <td>
+               <p>.29</p>
+            </td>
+            <td>
+               <p>9.33</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterOpenCompSci">DeGruyterOpenCompSci<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyterOpenPsych">DeGruyterOpenPsych</a></p>
+               <p>s5=.2</p>
+               <p>q5=5.0</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Additions</summary>
+                  <details>
+                     <summary>elements (3)
+                        </summary>
+                     <ul>
+                        <li>contrib-id</li>
+                        <li>state</li>
+                        <li>sub</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (1)
+                        </summary>
+                     <ul>
+                        <li>@contrib-id-type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>81</p>
+            </td>
+            <td>
+               <p>.29</p>
+            </td>
+            <td>
+               <p>.34</p>
+            </td>
+            <td>
+               <p>13.47</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterOpenMath">DeGruyterOpenMath<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyter">DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=6.0606</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (26)
+                        </summary>
+                     <ul>
+                        <li>attrib</li>
+                        <li>award-group</li>
+                        <li>award-id</li>
+                        <li>break</li>
+                        <li>col</li>
+                        <li>colgroup</li>
+                        <li>contrib-id</li>
+                        <li>def</li>
+                        <li>def-item</li>
+                        <li>def-list</li>
+                        <li>disp-quote</li>
+                        <li>fig-count</li>
+                        <li>floats-group</li>
+                        <li>funding-group</li>
+                        <li>funding-source</li>
+                        <li>funding-statement</li>
+                        <li>glossary</li>
+                        <li>monospace</li>
+                        <li>person-group</li>
+                        <li>ref-count</li>
+                        <li>sc</li>
+                        <li>state</li>
+                        <li>strike</li>
+                        <li>subtitle</li>
+                        <li>table-count</li>
+                        <li>term</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (7)
+                        </summary>
+                     <ul>
+                        <li>@authenticated</li>
+                        <li>@award-type</li>
+                        <li>@contrib-id-type</li>
+                        <li>@form</li>
+                        <li>@overflow</li>
+                        <li>@person-group-type</li>
+                        <li>@subj-group-type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>190</p>
+            </td>
+            <td>
+               <p>.47</p>
+            </td>
+            <td>
+               <p>.54</p>
+            </td>
+            <td>
+               <p>4.67</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="DeGruyterOpenPsych">DeGruyterOpenPsych<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#DeGruyterOpenEcon">DeGruyterOpenEcon</a></p>
+               <p>s5=2.0</p>
+               <p>q5=200.0</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>attributes (1)
+                        </summary>
+                     <ul>
+                        <li>@kwd-group-type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>77</p>
+            </td>
+            <td>
+               <p>.12</p>
+            </td>
+            <td>
+               <p>.14</p>
+            </td>
+            <td>
+               <p>21.93</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="SO_Medicine">SO_Medicine<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#ScienceOpen">ScienceOpen</a></p>
+               <p>s5=2.0</p>
+               <p>q5=5.2632</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (23)
+                        </summary>
+                     <ul>
+                        <li>abbrev-journal-title</li>
+                        <li>attrib</li>
+                        <li>conf-date</li>
+                        <li>conf-loc</li>
+                        <li>conf-name</li>
+                        <li>data-title</li>
+                        <li>disp-quote</li>
+                        <li>edition</li>
+                        <li>inline-graphic</li>
+                        <li>issue-title</li>
+                        <li>mml:mover</li>
+                        <li>mml:mspace</li>
+                        <li>mml:msqrt</li>
+                        <li>mml:mtable</li>
+                        <li>mml:mtd</li>
+                        <li>mml:mtext</li>
+                        <li>mml:mtr</li>
+                        <li>phone</li>
+                        <li>postal-code</li>
+                        <li>sc</li>
+                        <li>series</li>
+                        <li>state</li>
+                        <li>trans-title</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (15)
+                        </summary>
+                     <ul>
+                        <li>@abbrev-type</li>
+                        <li>@accent</li>
+                        <li>@altimg</li>
+                        <li>@border</li>
+                        <li>@columnalign</li>
+                        <li>@continued-from</li>
+                        <li>@disp-level</li>
+                        <li>@displaystyle</li>
+                        <li>@linebreak</li>
+                        <li>@linebreakstyle</li>
+                        <li>@mime-subtype</li>
+                        <li>@mimetype</li>
+                        <li>@toggle</li>
+                        <li>@xlink:show</li>
+                        <li>@xlink:title</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>227</p>
+            </td>
+            <td>
+               <p>.33</p>
+            </td>
+            <td>
+               <p>.39</p>
+            </td>
+            <td>
+               <p>4.37</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="SO_Science">SO_Science<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#ScienceOpen">ScienceOpen</a></p>
+               <p>s5=2.0</p>
+               <p>q5=4.7619</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (28)
+                        </summary>
+                     <ul>
+                        <li>abbrev-journal-title</li>
+                        <li>array</li>
+                        <li>attrib</li>
+                        <li>boxed-text</li>
+                        <li>colgroup</li>
+                        <li>conf-date</li>
+                        <li>conf-loc</li>
+                        <li>date-in-citation</li>
+                        <li>equation-count</li>
+                        <li>floats-group</li>
+                        <li>front-stub</li>
+                        <li>funding-statement</li>
+                        <li>issue-title</li>
+                        <li>long-desc</li>
+                        <li>mml:mtable</li>
+                        <li>mml:mtd</li>
+                        <li>mml:mtr</li>
+                        <li>object-id</li>
+                        <li>page-range</li>
+                        <li>postal-code</li>
+                        <li>ref-count</li>
+                        <li>related-article</li>
+                        <li>role</li>
+                        <li>series</li>
+                        <li>sub-article</li>
+                        <li>subtitle</li>
+                        <li>target</li>
+                        <li>trans-title</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (14)
+                        </summary>
+                     <ul>
+                        <li>@abbrev-type</li>
+                        <li>@award-type</li>
+                        <li>@border</li>
+                        <li>@collab-type</li>
+                        <li>@columnalign</li>
+                        <li>@continued-from</li>
+                        <li>@displaystyle</li>
+                        <li>@issue</li>
+                        <li>@list-content</li>
+                        <li>@page</li>
+                        <li>@related-article-type</li>
+                        <li>@seq</li>
+                        <li>@target-type</li>
+                        <li>@vol</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>223</p>
+            </td>
+            <td>
+               <p>.19</p>
+            </td>
+            <td>
+               <p>.22</p>
+            </td>
+            <td>
+               <p>2.96</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="STEM" id="STEM">STEM<span xmlns="" class="non-bold"> (STEM)</span></th>
+            <td>
+               <p><a href="#SO_plus_DeGruyter">SO_plus_DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=14.2857</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (10)
+                        </summary>
+                     <ul>
+                        <li>abbrev-journal-title</li>
+                        <li>attrib</li>
+                        <li>conf-date</li>
+                        <li>conf-loc</li>
+                        <li>issue-title</li>
+                        <li>monospace</li>
+                        <li>postal-code</li>
+                        <li>series</li>
+                        <li>strike</li>
+                        <li>trans-title</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (4)
+                        </summary>
+                     <ul>
+                        <li>@abbrev-type</li>
+                        <li>@border</li>
+                        <li>@continued-from</li>
+                        <li>@form</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>283</p>
+            </td>
+            <td>
+               <p>1.14</p>
+            </td>
+            <td>
+               <p>1.33</p>
+            </td>
+            <td>
+               <p>24.02</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="HUM" id="DeGruyterOpenLing">DeGruyterOpenLing<span xmlns="" class="non-bold"> (HUM)</span></th>
+            <td>
+               <p><a href="#DeGruyter">DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=3.3333</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (30)
+                        </summary>
+                     <ul>
+                        <li>array</li>
+                        <li>attrib</li>
+                        <li>award-group</li>
+                        <li>award-id</li>
+                        <li>col</li>
+                        <li>colgroup</li>
+                        <li>fig-count</li>
+                        <li>funding-group</li>
+                        <li>funding-source</li>
+                        <li>funding-statement</li>
+                        <li>glossary</li>
+                        <li>hr</li>
+                        <li>mml:menclose</li>
+                        <li>mml:mfenced</li>
+                        <li>mml:mover</li>
+                        <li>mml:mpadded</li>
+                        <li>mml:mphantom</li>
+                        <li>mml:mroot</li>
+                        <li>mml:msqrt</li>
+                        <li>mml:mstyle</li>
+                        <li>mml:msubsup</li>
+                        <li>mml:munder</li>
+                        <li>mml:munderover</li>
+                        <li>notes</li>
+                        <li>overline</li>
+                        <li>person-group</li>
+                        <li>ref-count</li>
+                        <li>state</li>
+                        <li>statement</li>
+                        <li>table-count</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (30)
+                        </summary>
+                     <ul>
+                        <li>@accent</li>
+                        <li>@authenticated</li>
+                        <li>@award-type</li>
+                        <li>@class</li>
+                        <li>@close</li>
+                        <li>@columnlines</li>
+                        <li>@depth</li>
+                        <li>@displaystyle</li>
+                        <li>@fence</li>
+                        <li>@height</li>
+                        <li>@kwd-group-type</li>
+                        <li>@linethickness</li>
+                        <li>@lspace</li>
+                        <li>@mathcolor</li>
+                        <li>@mathsize</li>
+                        <li>@maxsize</li>
+                        <li>@minsize</li>
+                        <li>@movablelimits</li>
+                        <li>@notation</li>
+                        <li>@notes-type</li>
+                        <li>@open</li>
+                        <li>@orientation</li>
+                        <li>@overflow</li>
+                        <li>@person-group-type</li>
+                        <li>@publication-format</li>
+                        <li>@rowlines</li>
+                        <li>@rowspacing</li>
+                        <li>@scriptlevel</li>
+                        <li>@subj-group-type</li>
+                        <li>@valign</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>163</p>
+            </td>
+            <td>
+               <p>.4</p>
+            </td>
+            <td>
+               <p>.47</p>
+            </td>
+            <td>
+               <p>5.69</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="HUM" id="DeGruyterOpenPhilos">DeGruyterOpenPhilos<span xmlns="" class="non-bold"> (HUM)</span></th>
+            <td>
+               <p><a href="#DeGruyter">DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=2.5316</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (47)
+                        </summary>
+                     <ul>
+                        <li>app</li>
+                        <li>app-group</li>
+                        <li>array</li>
+                        <li>award-group</li>
+                        <li>award-id</li>
+                        <li>break</li>
+                        <li>col</li>
+                        <li>colgroup</li>
+                        <li>contrib-id</li>
+                        <li>def</li>
+                        <li>def-item</li>
+                        <li>def-list</li>
+                        <li>fig-count</li>
+                        <li>floats-group</li>
+                        <li>funding-group</li>
+                        <li>funding-source</li>
+                        <li>funding-statement</li>
+                        <li>glossary</li>
+                        <li>hr</li>
+                        <li>mml:menclose</li>
+                        <li>mml:mover</li>
+                        <li>mml:mpadded</li>
+                        <li>mml:mphantom</li>
+                        <li>mml:mroot</li>
+                        <li>mml:mspace</li>
+                        <li>mml:mstyle</li>
+                        <li>mml:mtable</li>
+                        <li>mml:mtd</li>
+                        <li>mml:mtr</li>
+                        <li>mml:munder</li>
+                        <li>mml:munderover</li>
+                        <li>monospace</li>
+                        <li>notes</li>
+                        <li>overline</li>
+                        <li>person-group</li>
+                        <li>ref-count</li>
+                        <li>sc</li>
+                        <li>state</li>
+                        <li>statement</li>
+                        <li>strike</li>
+                        <li>subtitle</li>
+                        <li>table-count</li>
+                        <li>table-wrap-foot</li>
+                        <li>term</li>
+                        <li>th</li>
+                        <li>thead</li>
+                        <li>underline</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (32)
+                        </summary>
+                     <ul>
+                        <li>@authenticated</li>
+                        <li>@award-type</li>
+                        <li>@colspan</li>
+                        <li>@columnalign</li>
+                        <li>@columnlines</li>
+                        <li>@columnspacing</li>
+                        <li>@contrib-id-type</li>
+                        <li>@depth</li>
+                        <li>@displaystyle</li>
+                        <li>@fence</li>
+                        <li>@height</li>
+                        <li>@kwd-group-type</li>
+                        <li>@linethickness</li>
+                        <li>@lspace</li>
+                        <li>@mathcolor</li>
+                        <li>@mathsize</li>
+                        <li>@maxsize</li>
+                        <li>@minsize</li>
+                        <li>@movablelimits</li>
+                        <li>@notation</li>
+                        <li>@notes-type</li>
+                        <li>@orientation</li>
+                        <li>@overflow</li>
+                        <li>@person-group-type</li>
+                        <li>@publication-format</li>
+                        <li>@rowlines</li>
+                        <li>@rowspacing</li>
+                        <li>@rowspan</li>
+                        <li>@scriptlevel</li>
+                        <li>@subj-group-type</li>
+                        <li>@valign</li>
+                        <li>@width</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>144</p>
+            </td>
+            <td>
+               <p>.34</p>
+            </td>
+            <td>
+               <p>.39</p>
+            </td>
+            <td>
+               <p>3.32</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="HUM" id="HUM">HUM<span xmlns="" class="non-bold"> (HUM)</span></th>
+            <td>
+               <p><a href="#SO_plus_DeGruyter">SO_plus_DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=3.8462</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (17)
+                        </summary>
+                     <ul>
+                        <li>data-title</li>
+                        <li>date-in-citation</li>
+                        <li>equation-count</li>
+                        <li>hr</li>
+                        <li>long-desc</li>
+                        <li>mml:menclose</li>
+                        <li>mml:mpadded</li>
+                        <li>mml:mphantom</li>
+                        <li>mml:mroot</li>
+                        <li>mml:mstyle</li>
+                        <li>mml:munder</li>
+                        <li>overline</li>
+                        <li>page-range</li>
+                        <li>phone</li>
+                        <li>statement</li>
+                        <li>styled-content</li>
+                        <li>target</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (35)
+                        </summary>
+                     <ul>
+                        <li>@altimg</li>
+                        <li>@award-type</li>
+                        <li>@columnlines</li>
+                        <li>@depth</li>
+                        <li>@disp-level</li>
+                        <li>@equal-contrib</li>
+                        <li>@fence</li>
+                        <li>@height</li>
+                        <li>@iso-8601-date</li>
+                        <li>@issue</li>
+                        <li>@linebreak</li>
+                        <li>@linebreakstyle</li>
+                        <li>@linethickness</li>
+                        <li>@list-content</li>
+                        <li>@lspace</li>
+                        <li>@mathcolor</li>
+                        <li>@mathsize</li>
+                        <li>@maxsize</li>
+                        <li>@mime-subtype</li>
+                        <li>@minsize</li>
+                        <li>@movablelimits</li>
+                        <li>@notation</li>
+                        <li>@overflow</li>
+                        <li>@page</li>
+                        <li>@publication-format</li>
+                        <li>@rowlines</li>
+                        <li>@rowspacing</li>
+                        <li>@scope</li>
+                        <li>@scriptlevel</li>
+                        <li>@seq</li>
+                        <li>@start_date</li>
+                        <li>@target-type</li>
+                        <li>@toggle</li>
+                        <li>@vol</li>
+                        <li>@xlink:type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>245</p>
+            </td>
+            <td>
+               <p>.94</p>
+            </td>
+            <td>
+               <p>1.1</p>
+            </td>
+            <td>
+               <p>19.02</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="HUM" id="SO_Humanities_SocialSciences">SO_Humanities_SocialSciences<span xmlns="" class="non-bold"> (HUM)</span></th>
+            <td>
+               <p><a href="#HUM">HUM</a></p>
+               <p>s5=2.0</p>
+               <p>q5=11.1111</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (9)
+                        </summary>
+                     <ul>
+                        <li>floats-group</li>
+                        <li>mml:mtext</li>
+                        <li>monospace</li>
+                        <li>strike</li>
+                        <li>subtitle</li>
+                        <li>tex-math</li>
+                        <li>underline</li>
+                        <li>mml:mfenced</li>
+                        <li>mml:msubsup</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (9)
+                        </summary>
+                     <ul>
+                        <li>@columnspacing</li>
+                        <li>@display</li>
+                        <li>@dtd-version</li>
+                        <li>@form</li>
+                        <li>@stretchy</li>
+                        <li>@symbol</li>
+                        <li>@class</li>
+                        <li>@close</li>
+                        <li>@open</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>227</p>
+            </td>
+            <td>
+               <p>.35</p>
+            </td>
+            <td>
+               <p>.41</p>
+            </td>
+            <td>
+               <p>4.96</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="ECON" id="DeGruyterOpenEcon">DeGruyterOpenEcon<span xmlns="" class="non-bold"> (ECON)</span></th>
+            <td>
+               <p><a href="#DeGruyterOpenPsych">DeGruyterOpenPsych</a></p>
+               <p>s5=.5</p>
+               <p>q5=50.0</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Additions</summary>
+                  <details>
+                     <summary>attributes (1)
+                        </summary>
+                     <ul>
+                        <li>@kwd-group-type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>78</p>
+            </td>
+            <td>
+               <p>.18</p>
+            </td>
+            <td>
+               <p>.21</p>
+            </td>
+            <td>
+               <p>17.5</p>
+            </td>
+         </tr>
+         <tr>
+            <th class="ECON" id="ECON">ECON<span xmlns="" class="non-bold"> (ECON)</span></th>
+            <td>
+               <p><a href="#DeGruyterOpenPsych">DeGruyterOpenPsych</a></p>
+               <p>s5=.5</p>
+               <p>q5=50.0</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Additions</summary>
+                  <details>
+                     <summary>attributes (1)
+                        </summary>
+                     <ul>
+                        <li>@kwd-group-type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>78</p>
+            </td>
+            <td>
+               <p>.18</p>
+            </td>
+            <td>
+               <p>.21</p>
+            </td>
+            <td>
+               <p>17.5</p>
+            </td>
+         </tr>
+         <tr>
+            <th id="DeGruyter">DeGruyter</th>
+            <td>
+               <p><a href="#SO_plus_DeGruyter">SO_plus_DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=2.7027</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (42)
+                        </summary>
+                     <ul>
+                        <li>abbrev-journal-title</li>
+                        <li>address</li>
+                        <li>ali:license_ref</li>
+                        <li>alt-title</li>
+                        <li>boxed-text</li>
+                        <li>conf-date</li>
+                        <li>conf-loc</li>
+                        <li>conf-name</li>
+                        <li>custom-meta</li>
+                        <li>custom-meta-group</li>
+                        <li>data-title</li>
+                        <li>date-in-citation</li>
+                        <li>degrees</li>
+                        <li>elocation-id</li>
+                        <li>equation-count</li>
+                        <li>front-stub</li>
+                        <li>institution-id</li>
+                        <li>institution-wrap</li>
+                        <li>issue-id</li>
+                        <li>issue-title</li>
+                        <li>long-desc</li>
+                        <li>media</li>
+                        <li>meta-name</li>
+                        <li>meta-value</li>
+                        <li>named-content</li>
+                        <li>object-id</li>
+                        <li>page-range</li>
+                        <li>phone</li>
+                        <li>postal-code</li>
+                        <li>principal-award-recipient</li>
+                        <li>role</li>
+                        <li>self-uri</li>
+                        <li>series</li>
+                        <li>string-name</li>
+                        <li>styled-content</li>
+                        <li>sub-article</li>
+                        <li>suffix</li>
+                        <li>supplementary-material</li>
+                        <li>target</li>
+                        <li>trans-title</li>
+                        <li>uri</li>
+                        <li>word-count</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (32)
+                        </summary>
+                     <ul>
+                        <li>@abbrev-type</li>
+                        <li>@abstract-type</li>
+                        <li>@alt-title-type</li>
+                        <li>@altimg</li>
+                        <li>@border</li>
+                        <li>@char</li>
+                        <li>@collab-type</li>
+                        <li>@continued-from</li>
+                        <li>@disp-level</li>
+                        <li>@equal-contrib</li>
+                        <li>@institution-id-type</li>
+                        <li>@iso-8601-date</li>
+                        <li>@issue</li>
+                        <li>@linebreak</li>
+                        <li>@linebreakstyle</li>
+                        <li>@list-content</li>
+                        <li>@mime-subtype</li>
+                        <li>@mimetype</li>
+                        <li>@name-style</li>
+                        <li>@page</li>
+                        <li>@scope</li>
+                        <li>@sec-type</li>
+                        <li>@seq</li>
+                        <li>@span</li>
+                        <li>@start_date</li>
+                        <li>@style</li>
+                        <li>@target-type</li>
+                        <li>@toggle</li>
+                        <li>@vol</li>
+                        <li>@xlink:show</li>
+                        <li>@xlink:title</li>
+                        <li>@xlink:type</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>223</p>
+            </td>
+            <td>
+               <p>1.06</p>
+            </td>
+            <td>
+               <p>1.23</p>
+            </td>
+            <td>
+               <p>28.25</p>
+            </td>
+         </tr>
+         <tr>
+            <th id="SO_plus_DeGruyter">SO_plus_DeGruyter</th>
+            <td>
+               <p><a href="#STEM">STEM</a></p>
+               <p>s5=.0667</p>
+               <p>q5=.4762</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Additions</summary>
+                  <details>
+                     <summary>elements (10)
+                        </summary>
+                     <ul>
+                        <li>abbrev-journal-title</li>
+                        <li>attrib</li>
+                        <li>conf-date</li>
+                        <li>conf-loc</li>
+                        <li>issue-title</li>
+                        <li>monospace</li>
+                        <li>postal-code</li>
+                        <li>series</li>
+                        <li>strike</li>
+                        <li>trans-title</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (4)
+                        </summary>
+                     <ul>
+                        <li>@abbrev-type</li>
+                        <li>@border</li>
+                        <li>@continued-from</li>
+                        <li>@form</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>297</p>
+            </td>
+            <td>
+               <p>1.71</p>
+            </td>
+            <td>
+               <p class="max">2.0</p>
+            </td>
+            <td>
+               <p class="max">38.94</p>
+            </td>
+         </tr>
+         <tr>
+            <th id="ScienceOpen">ScienceOpen</th>
+            <td>
+               <p><a href="#SO_plus_DeGruyter">SO_plus_DeGruyter</a></p>
+               <p>s5=2.0</p>
+               <p>q5=6.25</p>
+            </td>
+            <td>
+               <details open="true">
+                  <summary>Deletions</summary>
+                  <details>
+                     <summary>elements (10)
+                        </summary>
+                     <ul>
+                        <li>mml:menclose</li>
+                        <li>mml:mpadded</li>
+                        <li>mml:mphantom</li>
+                        <li>mml:mroot</li>
+                        <li>mml:mstyle</li>
+                        <li>mml:munder</li>
+                        <li>monospace</li>
+                        <li>overline</li>
+                        <li>statement</li>
+                        <li>strike</li>
+                     </ul>
+                  </details>
+                  <details>
+                     <summary>attributes (22)
+                        </summary>
+                     <ul>
+                        <li>@class</li>
+                        <li>@columnlines</li>
+                        <li>@columnspacing</li>
+                        <li>@depth</li>
+                        <li>@dtd-version</li>
+                        <li>@fence</li>
+                        <li>@form</li>
+                        <li>@height</li>
+                        <li>@linethickness</li>
+                        <li>@lspace</li>
+                        <li>@mathcolor</li>
+                        <li>@mathsize</li>
+                        <li>@maxsize</li>
+                        <li>@minsize</li>
+                        <li>@movablelimits</li>
+                        <li>@notation</li>
+                        <li>@overflow</li>
+                        <li>@publication-format</li>
+                        <li>@rowlines</li>
+                        <li>@rowspacing</li>
+                        <li>@scriptlevel</li>
+                        <li>@symbol</li>
+                     </ul>
+                  </details>
+               </details>
+            </td>
+            <td>
+               <p>265</p>
+            </td>
+            <td>
+               <p>.67</p>
+            </td>
+            <td>
+               <p>.78</p>
+            </td>
+            <td>
+               <p>17.65</p>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>
