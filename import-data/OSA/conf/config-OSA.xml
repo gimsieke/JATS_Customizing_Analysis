@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customization-stats>
+	<rng uri="schema/JATS/1.3d1/Blue/rng/JATS-journalpublishing1-mathml3.rng" name="Blue"/>
+	<rng uri="schema/JATS/1.3d1/Green/rng/JATS-archivearticle1-mathml3.rng" name="Green"/>
+	<rng uri="schema/JATS/1.3d1/Pumpkin/rng/JATS-articleauthoring1-mathml3.rng"
+		name="Pumpkin"/>
+
+	<collection uri="AO-vol-59" name="OSA-AO"/>
+	<collection uri="AOP-vol-11" name="OSA-AOP"/>
+	<collection uri="BOE-vol-11" name="OSA-BOE"/>
+	<collection uri="JOCN-vol-12" name="OSA-JOCN"/>
+	<collection uri="JOSAA-vol-37" name="OSA-JOSAA"/>
+	<collection uri="JOSAB-vol-37" name="OSA-JOSAB"/>
+	<collection uri="JOT-vol-86/" name="OSA-JOT"/>
+	<collection uri="OE-vol-28" name="OSA-OE"/>
+	<collection uri="OL-vol-45" name="OSA-OL"/>
+	<collection uri="OME-vol-10" name="OSA-OME"/>
+	<collection uri="OPTICA-vol-7" name="OSA-OPTICA"/>
+	<collection uri="OSAC-vol-3" name="OSA-OSAC"/>
+	<collection uri="PRJ-vol-8" name="OSA-PRJ"/>
+</customization-stats>
